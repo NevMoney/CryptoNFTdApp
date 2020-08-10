@@ -3219,4 +3219,4 @@ y.cors = !!Xt && "withCredentials" in Xt, y.ajax = Xt = !!Xt, k.ajaxTransport(fu
         return k.noConflict = function(e) {
           return C.$ === k && (C.$ = Jt), e && C.jQuery === k && (C.jQuery = Qt), k
     }, e || (C.jQuery = C.$ = k), k
-  }
+  });
