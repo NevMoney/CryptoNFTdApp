@@ -3180,3 +3180,40 @@
                                                                                                                                                                       }, s, n ? e : void 0, n)
                                                                                                                                                                   }
                                                                                                                                                               })
+                                                                                                                                                            }), k.each("blur focus focusin focusout resize scroll click dblclick mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit keydown keypress keyup contextmenu".split(" "), function(e, n) {
+                                                                                                                                                                k.fn[n] = function(e, t) {
+                                                                                                                                                                    return 0 < arguments.length ? this.on(n, null, e, t) : this.trigger(n)
+                                                                                                                                                                }
+                                                                                                                                                            }), k.fn.extend({
+                                                                                                                                                                hover: function(e, t) {
+                                                                                                                                                                    return this.mouseenter(e).mouseleave(t || e)
+                                                                                                                                                                }
+                                                                                                                                                            }), k.fn.extend({
+                                                                                                                                                                bind: function(e, t, n) {
+                                                                                                                                                                    return this.on(e, null, t, n)
+                                                                                                                                                                },
+                                                                                                                                                                unbind: function(e, t) {
+                                                                                                                                                                    return this.off(e, null, t)
+                                                                                                                                                                },
+                                                                                                                                                                delegate: function(e, t, n, r) {
+                                                                                                                                                                    return this.on(t, e, n, r)
+                                                                                                                                                                },
+                                                                                                                                                                undelegate: function(e, t, n) {
+                                                                                                                                                                      return 1 === arguments.length ? this.off(e, "**") : this.off(t, e || "**", n)
+                                                                                                                                                                  }
+                                                                                                                                                              }), k.proxy = function(e, t) {
+                                                                                                                                                                  var n, r, i;
+                                                                                                                                                                  if ("string" == typeof t && (n = e[t], t = e, e = n), m(e)) return r = s.call(arguments, 2), (i = function() {
+                                                                                                                                                                      return e.apply(t || this, r.concat(s.call(arguments)))
+                                                                                                                                                                  }).guid = e.guid = e.guid || k.guid++, i
+                                                                                                                                                              }, k.holdReady = function(e) {
+                                                                                                                                                                e ? k.readyWait++ : k.ready(!0)
+                                                                                                                                                                  }, k.isArray = Array.isArray, k.parseJSON = JSON.parse, k.nodeName = A, k.isFunction = m, k.isWindow = x, k.camelCase = V, k.type = w, k.now = Date.now, k.isNumeric = function(e) {
+                                                                                                                                                                      var t = k.type(e);
+                                                                                                                                                                      return ("number" === t || "string" === t) && !isNaN(e - parseFloat(e))
+                                                                                                                                                                  }, "function" == typeof define && define.amd && define("jquery", [], function() {
+                                                                                                                                                                      return k
+                                                                                                                                                                  });
+                                                                                                                                                                  var Qt = C.jQuery,
+                                                                                                                                                                      Jt = C.$;
+                                                                                                                                                                  return k.noConflict = function(e) {
