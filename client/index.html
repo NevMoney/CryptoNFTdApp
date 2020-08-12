@@ -9,7 +9,6 @@
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="assets/css/mystyle.css" />
-    <link rel="stylesheet" href="assets/css/cats.css" />
     <link rel="stylesheet" href="assets/css/colors.css" />
     <link rel="stylesheet" href="assets/css/factory.css" />
     <link rel="stylesheet" href="assets/css/frontend.css" />
@@ -20,10 +19,15 @@
     <div class="container p-5" style="margin-top: 12vh; margin-bottom: 10vh;">
       <div align="center">
         <h1 class="c-white">DigiCat Factory</h1>
-        <p class="c-white">Create your custom DigiCat</p>
+        <h3 class="c-white">Create your custom DigiCat</h3>
+        <br />
+        <p class="c-white">
+          Move the sliders left and right to find your perfect kitty. Once you
+          do, click the button to claim it.
+        </p>
       </div>
       <div class="row">
-        <div class="col-lg-4 catBox m-2 light-b-shadow">
+        <div class="col-lg-5 catBox m-2 light-b-shadow">
           <div class="cat">
             <div class="ears">
               <div id="leftEar" class="left-ear">
@@ -34,7 +38,25 @@
               </div>
             </div>
 
+            <div class="body">
+              <div class="cat_body"></div>
+
+              <div class="belly"></div>
+
+              <div class="paws">
+                <div class="paws-front-left"></div>
+                <div class="paws-front-right"></div>
+                <div class="paws-back-left"></div>
+                <div class="paws-back-right"></div>
+              </div>
+            </div>
+
             <div id="head" class="head">
+              <div id="midDot" class="cat__head-dots">
+                <div id="leftDot" class="cat__head-dots_first"></div>
+                <div id="rightDot" class="cat__head-dots_second"></div>
+              </div>
+
               <div class="mask"></div>
 
               <div class="whiskers">
@@ -62,53 +84,80 @@
                 </div>
               </div>
             </div>
-
-            <div class="body">
-              <div class="cat_body"></div>
-              <div class="belly"></div>
-              <div class="paws">
-                <div class="paws-front-left"></div>
-                <div class="paws-front-right"></div>
-                <div class="paws-back-left"></div>
-                <div class="paws-back-right"></div>
-                <div id="tail" class="cat__tail"></div>
-              </div>
-            </div>
           </div>
           <br />
           <div class="dnaDiv" id="catDNA">
             <b>
               DNA:
               <!-- Colors -->
-              <span id="dnaBody"></span>
-              <span id="dnaMouth"></span>
-              <span id="dnaEyes"></span>
-              <span id="dnaEars"></span>
+              <span id="dnabody"></span>
+              <span id="dnamouth"></span>
+              <span id="dnaeyes"></span>
+              <span id="dnaears"></span>
 
               <!-- Cattributes -->
-              <span id="dnaShape"></span>
-              <span id="dnaDecoration"></span>
-              <span id="dnaDecorationMid"></span>
-              <span id="dnaDecorationSides"></span>
-              <span id="dnadAnimation"></span>
-              <span id="dnaSpecial"></span>
+              <span id="dnashape"></span>
+              <span id="dnadecoration"></span>
+              <span id="dnadecorationMid"></span>
+              <span id="dnadecorationSides"></span>
+              <span id="dnadanimation"></span>
+              <span id="dnaspecial"></span>
             </b>
           </div>
         </div>
-        <div class="col-lg-7 cattributes m-2 light-b-shadow">
+        <div class="col-lg-6 cattributes m-2 light-b-shadow">
           <!-- Cat colors -->
           <div id="catColors">
             <div class="form-group">
               <label for="formControlRange">
-                <b>Head and body</b>
-                <span class="badge badge-dark ml-2" id="headcode"></span
+                <b>Body</b>
+                <span class="badge badge-dark ml-2" id="bodycode"></span
               ></label>
               <input
                 type="range"
-                min="10"
+                min="1"
                 max="98"
                 class="form-control-range"
                 id="bodycolor"
+              />
+            </div>
+            <div class="form-group">
+              <label for="formControlRange">
+                <b>Mouth, Ears, and Nose</b>
+                <span class="badge badge-dark ml-2" id="mouthcode"></span
+              ></label>
+              <input
+                type="range"
+                min="1"
+                max="98"
+                class="form-control-range"
+                id="mouthcolor"
+              />
+            </div>
+            <div class="form-group">
+              <label for="formControlRange">
+                <b>Eyes</b>
+                <span class="badge badge-dark ml-2" id="eyecode"></span
+              ></label>
+              <input
+                type="range"
+                min="1"
+                max="98"
+                class="form-control-range"
+                id="eyescolor"
+              />
+            </div>
+            <div class="form-group">
+              <label for="formControlRange">
+                <b>Head and Paws</b>
+                <span class="badge badge-dark ml-2" id="earcode"></span
+              ></label>
+              <input
+                type="range"
+                min="1"
+                max="98"
+                class="form-control-range"
+                id="earscolor"
               />
             </div>
           </div>
