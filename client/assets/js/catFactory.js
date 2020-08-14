@@ -27,7 +27,7 @@ function mouthColor(color, code) {
 }
 
 function eyeColor(color, code) {
-  $(".eye").css("background", "#" + color);
+  $(".pupil-left, .pupil-right").css("background", "#" + color);
   $("#eyecode").html("code: " + code);
   $("#dnaeyes").html(code);
 }
@@ -59,27 +59,27 @@ function eyeVariation(num) {
       break;
     case 3:
       normalEyes();
-      $("#eyeName").html("Chill");
+      $("#eyeName").html("Hunt");
       return eyesType2();
       break;
     case 4:
       normalEyes();
-      $("#eyeName").html("Chill");
+      $("#eyeName").html("Silly");
       return eyesType3();
       break;
     case 5:
       normalEyes();
-      $("#eyeName").html("Chill");
+      $("#eyeName").html("Love");
       return eyesType4();
       break;
     case 6:
       normalEyes();
-      $("#eyeName").html("Chill");
+      $("#eyeName").html("Angry");
       return eyesType5();
       break;
     case 7:
       normalEyes();
-      $("#eyeName").html("Chill");
+      $("#eyeName").html("Sleepy");
       return eyesType6();
       break;
 
@@ -101,13 +101,13 @@ function decorationVariation(num) {
 
 async function normalEyes() {
   //used in function eyeVariation --> see line 46
-  await $(".eyes").find("span").css("border", "none"); //find class you want to change, find all spans within that and then change css; border none is standard
+  await $(".eyes").find("span").css(""); //find class you want to change, find all spans within that and then change css; border none is standard
 }
 
 //after normalEyes, we have to set different types:
-function eyesType1() {
-  $(".eyes").find("span").css("border-top", "15px solid"); //in parenthesis set the eye type you want --> currently using Filip's code
-}
+// function eyesType1() {
+//   $(".eyes").find("span").css("#left-eye"("border-radius", "50%")); //in parenthesis set the eye type you want --> currently using Filip's code
+// }
 
 async function normaldecoration() {
   //Remove all style from other decorations
