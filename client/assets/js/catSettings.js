@@ -21,12 +21,12 @@ $(document).ready(function () {
   $("#dnaeyes").html(defaultDNA.eyesColor);
   $("#dnaears").html(defaultDNA.earsColor);
 
-  //   $('#dnashape').html(defaultDNA.eyesShape)
-  //   $('#dnadecoration').html(defaultDNA.decorationPattern)
-  //   $('#dnadecorationMid').html(defaultDNA.decorationMidcolor)
-  //   $('#dnadecorationSides').html(defaultDNA.decorationSidescolor)
-  //   $('#dnaanimation').html(defaultDNA.animation)
-  //   $('#dnaspecial').html(defaultDNA.lastNum)
+  $("#dnashape").html(defaultDNA.eyesShape);
+  $("#dnadecoration").html(defaultDNA.decorationPattern);
+  $("#dnadecorationMid").html(defaultDNA.decorationMidcolor);
+  $("#dnadecorationSides").html(defaultDNA.decorationSidescolor);
+  $("#dnaanimation").html(defaultDNA.animation);
+  $("#dnaspecial").html(defaultDNA.lastNum);
 
   renderCat(defaultDNA);
 });
@@ -77,4 +77,9 @@ $("#eyescolor").change(() => {
 $("#earscolor").change(() => {
   var colorVal = $("#earscolor").val();
   pawsColor(colors[colorVal], colorVal);
+});
+
+$("#eyeshape").change(() => {
+  var shape = parseInt($("#eyeshape").val()); //value between 1 and 7
+  eyeVariation(shape);
 });
