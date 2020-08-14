@@ -55,31 +55,31 @@ function eyeVariation(num) {
     case 2:
       normalEyes();
       $("#eyeName").html("Chill");
-      return eyesType1();
+      eyesType1();
       break;
     case 3:
       normalEyes();
-      $("#eyeName").html("Hunt");
-      return eyesType2();
+      $("#eyeName").html("Bored");
+      eyesType2();
       break;
     case 4:
       normalEyes();
-      $("#eyeName").html("Silly");
-      return eyesType3();
+      $("#eyeName").html("The Pirate");
+      eyesType3();
       break;
     case 5:
       normalEyes();
-      $("#eyeName").html("Love");
+      $("#eyeName").html("Panda Eyes");
       return eyesType4();
       break;
     case 6:
       normalEyes();
-      $("#eyeName").html("Angry");
+      $("#eyeName").html("Look Right");
       return eyesType5();
       break;
     case 7:
       normalEyes();
-      $("#eyeName").html("Sleepy");
+      $("#eyeName").html("Look Left");
       return eyesType6();
       break;
 
@@ -101,13 +101,33 @@ function decorationVariation(num) {
 
 async function normalEyes() {
   //used in function eyeVariation --> see line 46
-  await $(".eyes").find("span").css(""); //find class you want to change, find all spans within that and then change css; border none is standard
+  await $(".cat__eye").find("span").css("border", "none");
 }
 
 //after normalEyes, we have to set different types:
-// function eyesType1() {
-//   $(".eyes").find("span").css("#left-eye"("border-radius", "50%")); //in parenthesis set the eye type you want --> currently using Filip's code
-// }
+function eyesType1() {
+  $(".cat__eye").find("span").css("border-top", "15px solid"); //in parenthesis set the eye type you want --> currently using Filip's code
+}
+
+function eyesType2() {
+  $(".cat__eye").find("span").css("border-bottom", "15px solid");
+}
+
+function eyesType3() {
+  $(".cat__eye--left").find("span").css("border", "21px solid black");
+}
+
+function eyesType4() {
+  $(".cat__eye").find("span").css("border", "10px solid");
+}
+
+function eyesType5() {
+  $(".cat__eye").find("span").css("border-left", "15px solid black");
+}
+
+function eyesType6() {
+  $(".cat__eye").find("span").css("border-right", "15px solid black");
+}
 
 async function normaldecoration() {
   //Remove all style from other decorations

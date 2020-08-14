@@ -56,6 +56,8 @@ function renderCat(dna) {
   $("#eyecolor").val(dna.eyesColor);
   pawsColor(colors[dna.earsColor], dna.earsColor);
   $("#earcolor").val(dna.earsColor);
+  eyeVariation(shape[dna.eyesShape], dna.eyesShape);
+  $("#eyeshape").val(dna.eyesShape);
 }
 
 // Changing cat colors
@@ -79,6 +81,7 @@ $("#earscolor").change(() => {
   pawsColor(colors[colorVal], colorVal);
 });
 
+// Changing different characteristics
 $("#eyeshape").change(() => {
   var shape = parseInt($("#eyeshape").val()); //value between 1 and 7
   eyeVariation(shape);
