@@ -57,6 +57,32 @@ function eyeVariation(num) {
       $("#eyeName").html("Chill");
       return eyesType1();
       break;
+    case 3:
+      normalEyes();
+      $("#eyeName").html("Chill");
+      return eyesType2();
+      break;
+    case 4:
+      normalEyes();
+      $("#eyeName").html("Chill");
+      return eyesType3();
+      break;
+    case 5:
+      normalEyes();
+      $("#eyeName").html("Chill");
+      return eyesType4();
+      break;
+    case 6:
+      normalEyes();
+      $("#eyeName").html("Chill");
+      return eyesType5();
+      break;
+    case 7:
+      normalEyes();
+      $("#eyeName").html("Chill");
+      return eyesType6();
+      break;
+
     //could create "default" state by stating
     //default:
     //put your default here (don't need break for default)
