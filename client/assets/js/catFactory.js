@@ -13,7 +13,7 @@ function genColors() {
   return colors;
 }
 
-//This function code needs to modified so that it works with Your cat code.
+//Color variations
 function headColor(color, code) {
   $(".cat_body").css("background", "#" + color); //This changes the color of the cat
   $("#bodycode").html("code: " + code); //This updates text of the badge next to the slider
@@ -40,14 +40,26 @@ function pawsColor(color, code) {
   $("#dnaears").html(code);
 }
 
-//###################################################
-//Functions below will be used later on in the project
-//###################################################
+function midDotColor(color, code) {
+  $(".cat__head-dots").css("background", "#" + color);
+  $("#midDotcode").html("code: " + code);
+  $("#dnadecorationMid").html(code);
+}
+
+function sideDotColor(color, code) {
+  $(".cat__head-dots_first, .cat__head-dots_second").css(
+    "background",
+    "#" + color
+  );
+  $("#sideDotcode").html("code: " + code);
+  $("#dnadecorationSides").html(code);
+}
+
+//shape variations
+
 function eyeVariation(num) {
   $("#dnashape").html(num);
-  switch (
-    num //switch statement is like a simple "if" statement... if 1 do this, if 2 do this, if 3 do that...
-  ) {
+  switch (num) {
     case 1:
       normalEyes(); //calling norrmalEyes function --> see line 72 (for now... scroll down)
       $("#eyeName").html("Basic"); //set the badge on slider
@@ -59,7 +71,7 @@ function eyeVariation(num) {
       break;
     case 3:
       normalEyes();
-      $("#eyeName").html("Bored");
+      $("#eyeName").html("Zen");
       eyesType2();
       break;
     case 4:
@@ -70,22 +82,18 @@ function eyeVariation(num) {
     case 5:
       normalEyes();
       $("#eyeName").html("Panda Eyes");
-      return eyesType4();
+      eyesType4();
       break;
     case 6:
       normalEyes();
       $("#eyeName").html("Look Right");
-      return eyesType5();
+      eyesType5();
       break;
     case 7:
       normalEyes();
       $("#eyeName").html("Look Left");
-      return eyesType6();
+      eyesType6();
       break;
-
-    //could create "default" state by stating
-    //default:
-    //put your default here (don't need break for default)
   }
 }
 
@@ -95,6 +103,36 @@ function decorationVariation(num) {
     case 1:
       $("#decorationName").html("Basic");
       normaldecoration();
+      break;
+    case 2:
+      normaldecoration();
+      $("#decorationName").html("Brushed Left");
+      decorationType1();
+      break;
+    case 3:
+      normaldecoration();
+      $("#decorationName").html("Brushed Right");
+      decorationType2();
+      break;
+    case 4:
+      normaldecoration();
+      $("#decorationName").html("Messy");
+      decorationType3();
+      break;
+    case 5:
+      normaldecoration();
+      $("#decorationName").html("Small");
+      decorationType4();
+      break;
+    case 6:
+      normaldecoration();
+      $("#decorationName").html("Spikey");
+      decorationType5();
+      break;
+    case 7:
+      normaldecoration();
+      $("#decorationName").html("Long");
+      decorationType6();
       break;
   }
 }
@@ -152,5 +190,149 @@ async function normaldecoration() {
     width: "14px",
     top: "1px",
     "border-radius": "0 50% 50% 50%",
+  });
+}
+
+function decorationType1() {
+  $(".cat__head-dots").css({
+    transform: "rotate(30deg)",
+    height: "35px",
+    width: "14px",
+    top: "1px",
+    "border-radius": "0 50% 50% 50%",
+  });
+  $(".cat__head-dots_first").css({
+    transform: "rotate(30deg)",
+    height: "35px",
+    width: "14px",
+    top: "1px",
+    "border-radius": "50% 0 50% 50%",
+  });
+  $(".cat__head-dots_second").css({
+    transform: "rotate(15deg)",
+    height: "35px",
+    width: "14px",
+    top: "-10px",
+    "border-radius": "0 50% 50% 50%",
+  });
+}
+
+function decorationType2() {
+  $(".cat__head-dots").css({
+    transform: "rotate(-30deg)",
+    height: "35px",
+    width: "14px",
+    top: "1px",
+    "border-radius": "50% 0 50% 50%",
+  });
+  $(".cat__head-dots_first").css({
+    transform: "rotate(-30deg)",
+    height: "35px",
+    width: "14px",
+    top: "-5px",
+    "border-radius": "50% 0 50% 50%",
+  });
+  $(".cat__head-dots_second").css({
+    transform: "rotate(-30deg)",
+    height: "35px",
+    width: "14px",
+    top: "1px",
+    "border-radius": "0 50% 50% 50%",
+  });
+}
+
+function decorationType3() {
+  $(".cat__head-dots").css({
+    transform: "rotate(-15deg)",
+    height: "35px",
+    width: "14px",
+    top: "1px",
+    "border-radius": "50% 0 50% 50%",
+  });
+  $(".cat__head-dots_first").css({
+    transform: "rotate(-30deg)",
+    height: "45px",
+    width: "14px",
+    top: "-5px",
+    "border-radius": "50% 0 50% 50%",
+  });
+  $(".cat__head-dots_second").css({
+    transform: "rotate(45deg)",
+    height: "45px",
+    width: "14px",
+    top: "10px",
+    "border-radius": "0 50% 50% 50%",
+  });
+}
+
+function decorationType4() {
+  $(".cat__head-dots").css({
+    transform: "rotate(0deg)",
+    height: "15px",
+    width: "14px",
+    top: "5px",
+    "border-radius": "50% 50% 50% 50%",
+  });
+  $(".cat__head-dots_first").css({
+    transform: "rotate(0deg)",
+    height: "10px",
+    width: "14px",
+    top: "5px",
+    "border-radius": "50% 50% 50% 50%",
+  });
+  $(".cat__head-dots_second").css({
+    transform: "rotate(0deg)",
+    height: "10px",
+    width: "14px",
+    top: "5px",
+    "border-radius": "50% 50% 50% 50%",
+  });
+}
+
+function decorationType5() {
+  $(".cat__head-dots").css({
+    transform: "rotate(0deg)",
+    height: "35px",
+    width: "10px",
+    top: "-15px",
+    "border-radius": "50% 50% 50% 50%",
+  });
+  $(".cat__head-dots_first").css({
+    transform: "rotate(-20deg)",
+    height: "40px",
+    width: "10px",
+    top: "1px",
+    "border-radius": "50% 50% 50% 50%",
+  });
+  $(".cat__head-dots_second").css({
+    transform: "rotate(20deg)",
+    height: "40px",
+    width: "10px",
+    top: "1px",
+    "border-radius": "50% 50% 50% 50%",
+  });
+}
+
+function decorationType6() {
+  $(".cat__head-dots").css({
+    transform: "rotate(0deg)",
+    height: "65px",
+    width: "10px",
+    top: "1px",
+    "border-radius": "50% 50% 50% 50%",
+  });
+  $(".cat__head-dots_first").css({
+    transform: "rotate(15deg)",
+    height: "60px",
+    width: "10px",
+    top: "1px",
+    "border-radius": "50% 50% 50% 50%",
+  });
+  $(".cat__head-dots_second").css({
+    transform: "rotate(-15deg)",
+    height: "60px",
+    width: "10px",
+    top: "1px",
+    "border-radius": "50% 50% 50% 50%",
   });
 }
