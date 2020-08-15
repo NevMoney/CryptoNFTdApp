@@ -3,7 +3,7 @@ var colors = Object.values(allColors());
 var defaultDNA = {
   headColor: 11,
   mouthColor: 80,
-  eyesColor: 96,
+  eyesColor: 98,
   earsColor: 17,
   //Cattributes
   eyesShape: 1,
@@ -56,6 +56,14 @@ function renderCat(dna) {
   $("#eyecolor").val(dna.eyesColor);
   pawsColor(colors[dna.earsColor], dna.earsColor);
   $("#earcolor").val(dna.earsColor);
+  eyeVariation(shape[dna.eyesShape], dna.eyesShape);
+  $("#eyeshape").val(dna.eyesShape);
+  decorationVariation(shape[dna.decorationPattern], dna.decorationPattern);
+  $("#dotshape").val(dna.decorationPattern);
+  midDotColor(colors[dna.decorationMidcolor], dna.decorationMidcolor);
+  $("#midDotcolor").val(dna.decorationMidcolor);
+  sideDotColor(colors[dna.decorationSidescolor], dna.decorationSidescolor);
+  $("#sideDotcolor").val(dna.decorationSidescolor);
 }
 
 // Changing cat colors
@@ -79,7 +87,23 @@ $("#earscolor").change(() => {
   pawsColor(colors[colorVal], colorVal);
 });
 
+// Changing different characteristics: eye shape, head dot shape,
 $("#eyeshape").change(() => {
   var shape = parseInt($("#eyeshape").val()); //value between 1 and 7
   eyeVariation(shape);
+});
+
+$("#dotshape").change(() => {
+  var shape = parseInt($("#dotshape").val()); //value between 1 and 7
+  decorationVariation(shape);
+});
+
+$("#midDotcolor").change(() => {
+  var colorVal = $("#midDotcolor").val();
+  midDotColor(colors[colorVal], colorVal);
+});
+
+$("#sideDotcolor").change(() => {
+  var colorVal = $("#sideDotcolor").val();
+  sideDotColor(colors[colorVal], colorVal);
 });

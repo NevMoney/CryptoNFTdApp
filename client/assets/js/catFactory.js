@@ -13,41 +13,53 @@ function genColors() {
   return colors;
 }
 
-//This function code needs to modified so that it works with Your cat code.
+//Color variations
 function headColor(color, code) {
-  $(".cat_body, .head").css("background", "#" + color); //This changes the color of the cat
+  $(".cat_body").css("background", "#" + color); //This changes the color of the cat
   $("#bodycode").html("code: " + code); //This updates text of the badge next to the slider
   $("#dnabody").html(code); //This updates the body color part of the DNA that is displayed below the cat
 }
 
 function mouthColor(color, code) {
-  $(".mouth, .nose").css("background", "#" + color);
+  $(".left-ear, .right-ear, .mouth, .nose").css("background", "#" + color);
   $("#mouthcode").html("code: " + code);
   $("#dnamouth").html(code);
 }
 
 function eyeColor(color, code) {
-  $(".eye").css("background", "#" + color);
+  $(".pupil-left, .pupil-right").css("background", "#" + color);
   $("#eyecode").html("code: " + code);
   $("#dnaeyes").html(code);
 }
 
 function pawsColor(color, code) {
   $(
-    ".left-ear, .right-ear, .paws-back-left, .paws-back-right, .paws-front-right, .paws-front-left"
+    ".head, .paws-back-left, .paws-back-right, .paws-front-right, .paws-front-left"
   ).css("background", "#" + color);
   $("#earcode").html("code: " + code);
   $("#dnaears").html(code);
 }
 
-//###################################################
-//Functions below will be used later on in the project
-//###################################################
+function midDotColor(color, code) {
+  $(".cat__head-dots").css("background", "#" + color);
+  $("#midDotcode").html("code: " + code);
+  $("#dnadecorationMid").html(code);
+}
+
+function sideDotColor(color, code) {
+  $(".cat__head-dots_first, .cat__head-dots_second").css(
+    "background",
+    "#" + color
+  );
+  $("#sideDotcode").html("code: " + code);
+  $("#dnadecorationSides").html(code);
+}
+
+//shape variations
+
 function eyeVariation(num) {
   $("#dnashape").html(num);
-  switch (
-    num //switch statement is like a simple "if" statement... if 1 do this, if 2 do this, if 3 do that...
-  ) {
+  switch (num) {
     case 1:
       normalEyes(); //calling norrmalEyes function --> see line 72 (for now... scroll down)
       $("#eyeName").html("Basic"); //set the badge on slider
@@ -55,11 +67,33 @@ function eyeVariation(num) {
     case 2:
       normalEyes();
       $("#eyeName").html("Chill");
-      return eyesType1();
+      eyesType1();
       break;
-    //could create "default" state by stating
-    //default:
-    //put your default here (don't need break for default)
+    case 3:
+      normalEyes();
+      $("#eyeName").html("Zen");
+      eyesType2();
+      break;
+    case 4:
+      normalEyes();
+      $("#eyeName").html("The Pirate");
+      eyesType3();
+      break;
+    case 5:
+      normalEyes();
+      $("#eyeName").html("Panda Eyes");
+      eyesType4();
+      break;
+    case 6:
+      normalEyes();
+      $("#eyeName").html("Look Right");
+      eyesType5();
+      break;
+    case 7:
+      normalEyes();
+      $("#eyeName").html("Look Left");
+      eyesType6();
+      break;
   }
 }
 
@@ -70,17 +104,67 @@ function decorationVariation(num) {
       $("#decorationName").html("Basic");
       normaldecoration();
       break;
+    case 2:
+      normaldecoration();
+      $("#decorationName").html("Brushed Left");
+      decorationType1();
+      break;
+    case 3:
+      normaldecoration();
+      $("#decorationName").html("Brushed Right");
+      decorationType2();
+      break;
+    case 4:
+      normaldecoration();
+      $("#decorationName").html("Messy");
+      decorationType3();
+      break;
+    case 5:
+      normaldecoration();
+      $("#decorationName").html("Small");
+      decorationType4();
+      break;
+    case 6:
+      normaldecoration();
+      $("#decorationName").html("Spikey");
+      decorationType5();
+      break;
+    case 7:
+      normaldecoration();
+      $("#decorationName").html("Long");
+      decorationType6();
+      break;
   }
 }
 
 async function normalEyes() {
   //used in function eyeVariation --> see line 46
-  await $(".eyes").find("span").css("border", "none"); //find class you want to change, find all spans within that and then change css; border none is standard
+  await $(".cat__eye").find("span").css("border", "none");
 }
 
 //after normalEyes, we have to set different types:
 function eyesType1() {
-  $(".eyes").find("span").css("border-top", "15px solid"); //in parenthesis set the eye type you want --> currently using Filip's code
+  $(".cat__eye").find("span").css("border-top", "15px solid"); //in parenthesis set the eye type you want --> currently using Filip's code
+}
+
+function eyesType2() {
+  $(".cat__eye").find("span").css("border-bottom", "15px solid");
+}
+
+function eyesType3() {
+  $(".cat__eye--left").find("span").css("border", "21px solid black");
+}
+
+function eyesType4() {
+  $(".cat__eye").find("span").css("border", "10px solid");
+}
+
+function eyesType5() {
+  $(".cat__eye").find("span").css("border-left", "15px solid black");
+}
+
+function eyesType6() {
+  $(".cat__eye").find("span").css("border-right", "15px solid black");
 }
 
 async function normaldecoration() {
@@ -106,5 +190,149 @@ async function normaldecoration() {
     width: "14px",
     top: "1px",
     "border-radius": "0 50% 50% 50%",
+  });
+}
+
+function decorationType1() {
+  $(".cat__head-dots").css({
+    transform: "rotate(30deg)",
+    height: "35px",
+    width: "14px",
+    top: "1px",
+    "border-radius": "0 50% 50% 50%",
+  });
+  $(".cat__head-dots_first").css({
+    transform: "rotate(30deg)",
+    height: "35px",
+    width: "14px",
+    top: "1px",
+    "border-radius": "50% 0 50% 50%",
+  });
+  $(".cat__head-dots_second").css({
+    transform: "rotate(15deg)",
+    height: "35px",
+    width: "14px",
+    top: "-10px",
+    "border-radius": "0 50% 50% 50%",
+  });
+}
+
+function decorationType2() {
+  $(".cat__head-dots").css({
+    transform: "rotate(-30deg)",
+    height: "35px",
+    width: "14px",
+    top: "1px",
+    "border-radius": "50% 0 50% 50%",
+  });
+  $(".cat__head-dots_first").css({
+    transform: "rotate(-30deg)",
+    height: "35px",
+    width: "14px",
+    top: "-5px",
+    "border-radius": "50% 0 50% 50%",
+  });
+  $(".cat__head-dots_second").css({
+    transform: "rotate(-30deg)",
+    height: "35px",
+    width: "14px",
+    top: "1px",
+    "border-radius": "0 50% 50% 50%",
+  });
+}
+
+function decorationType3() {
+  $(".cat__head-dots").css({
+    transform: "rotate(-15deg)",
+    height: "35px",
+    width: "14px",
+    top: "1px",
+    "border-radius": "50% 0 50% 50%",
+  });
+  $(".cat__head-dots_first").css({
+    transform: "rotate(-30deg)",
+    height: "45px",
+    width: "14px",
+    top: "-5px",
+    "border-radius": "50% 0 50% 50%",
+  });
+  $(".cat__head-dots_second").css({
+    transform: "rotate(45deg)",
+    height: "45px",
+    width: "14px",
+    top: "10px",
+    "border-radius": "0 50% 50% 50%",
+  });
+}
+
+function decorationType4() {
+  $(".cat__head-dots").css({
+    transform: "rotate(0deg)",
+    height: "15px",
+    width: "14px",
+    top: "5px",
+    "border-radius": "50% 50% 50% 50%",
+  });
+  $(".cat__head-dots_first").css({
+    transform: "rotate(0deg)",
+    height: "10px",
+    width: "14px",
+    top: "5px",
+    "border-radius": "50% 50% 50% 50%",
+  });
+  $(".cat__head-dots_second").css({
+    transform: "rotate(0deg)",
+    height: "10px",
+    width: "14px",
+    top: "5px",
+    "border-radius": "50% 50% 50% 50%",
+  });
+}
+
+function decorationType5() {
+  $(".cat__head-dots").css({
+    transform: "rotate(0deg)",
+    height: "35px",
+    width: "10px",
+    top: "-15px",
+    "border-radius": "50% 50% 50% 50%",
+  });
+  $(".cat__head-dots_first").css({
+    transform: "rotate(-20deg)",
+    height: "40px",
+    width: "10px",
+    top: "1px",
+    "border-radius": "50% 50% 50% 50%",
+  });
+  $(".cat__head-dots_second").css({
+    transform: "rotate(20deg)",
+    height: "40px",
+    width: "10px",
+    top: "1px",
+    "border-radius": "50% 50% 50% 50%",
+  });
+}
+
+function decorationType6() {
+  $(".cat__head-dots").css({
+    transform: "rotate(0deg)",
+    height: "65px",
+    width: "10px",
+    top: "1px",
+    "border-radius": "50% 50% 50% 50%",
+  });
+  $(".cat__head-dots_first").css({
+    transform: "rotate(15deg)",
+    height: "60px",
+    width: "10px",
+    top: "1px",
+    "border-radius": "50% 50% 50% 50%",
+  });
+  $(".cat__head-dots_second").css({
+    transform: "rotate(-15deg)",
+    height: "60px",
+    width: "10px",
+    top: "1px",
+    "border-radius": "50% 50% 50% 50%",
   });
 }

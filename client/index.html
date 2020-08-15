@@ -57,7 +57,20 @@
                 <div id="rightDot" class="cat__head-dots_second"></div>
               </div>
 
-              <div class="mask"></div>
+              <div class="cat__eye">
+                <div class="cat__eye--left">
+                  <span class="pupil-left"></span>
+                </div>
+                <div class="cat__eye--right">
+                  <span class="pupil-right"></span>
+                </div>
+              </div>
+
+              <div class="nose"></div>
+
+              <div class="cat__mouth-contour"></div>
+              <div class="cat__mouth-left"></div>
+              <div class="cat__mouth-right"></div>
 
               <div class="whiskers">
                 <div class="whisker-l1"></div>
@@ -66,24 +79,6 @@
                 <div class="whisker-r1"></div>
                 <div class="whisker-r2"></div>
                 <div class="whisker-r3"></div>
-              </div>
-
-              <div class="nose"></div>
-              <div class="cat__mouth-contour"></div>
-              <div class="cat__mouth-left"></div>
-              <div class="cat__mouth-right"></div>
-
-              <div class="eyes">
-                <div id="left-eye" class="eye">
-                  <div class="pupils">
-                    <div class="reflection"></div>
-                  </div>
-                </div>
-                <div id="right-eye" class="eye">
-                  <div class="pupils">
-                    <div class="reflection"></div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -173,6 +168,45 @@
                 max="7"
                 class="form-control-range"
                 id="eyeshape"
+              />
+            </div>
+            <div class="form-group">
+              <label for="formControlRange">
+                <b>Head Dots Shape</b>
+                <span class="badge badge-dark ml-2" id="decorationName"></span
+              ></label>
+              <input
+                type="range"
+                min="1"
+                max="7"
+                class="form-control-range"
+                id="dotshape"
+              />
+            </div>
+            <div class="form-group">
+              <label for="formControlRange">
+                <b>Middle Dot Color</b>
+                <span class="badge badge-dark ml-2" id="midDotcode"></span
+              ></label>
+              <input
+                type="range"
+                min="1"
+                max="98"
+                class="form-control-range"
+                id="midDotcolor"
+              />
+            </div>
+            <div class="form-group">
+              <label for="formControlRange">
+                <b>Side Dots Color</b>
+                <span class="badge badge-dark ml-2" id="sideDotcode"></span
+              ></label>
+              <input
+                type="range"
+                min="1"
+                max="98"
+                class="form-control-range"
+                id="sideDotcolor"
               />
             </div>
           </div>
