@@ -76,7 +76,7 @@ function eyeVariation(num) {
       break;
     case 4:
       normalEyes();
-      $("#eyeName").html("The Pirate");
+      $("#eyeName").html("Night Eyes");
       eyesType3();
       break;
     case 5:
@@ -131,7 +131,7 @@ function decorationVariation(num) {
       break;
     case 7:
       normaldecoration();
-      $("#decorationName").html("Long");
+      $("#decorationName").html("Rocket");
       decorationType6();
       break;
   }
@@ -152,7 +152,8 @@ function eyesType2() {
 }
 
 function eyesType3() {
-  $(".cat__eye--left").find("span").css("border", "21px solid black");
+  $(".cat__eye").find("span").css("border-left", "15px solid");
+  $(".cat__eye").find("span").css("border-right", "15px solid");
 }
 
 function eyesType4() {
@@ -325,14 +326,14 @@ function decorationType6() {
     transform: "rotate(15deg)",
     height: "60px",
     width: "10px",
-    top: "1px",
+    top: "20px",
     "border-radius": "50% 50% 50% 50%",
   });
   $(".cat__head-dots_second").css({
     transform: "rotate(-15deg)",
     height: "60px",
     width: "10px",
-    top: "1px",
+    top: "20px",
     "border-radius": "50% 50% 50% 50%",
   });
 }
