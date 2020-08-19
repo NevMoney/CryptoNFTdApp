@@ -1,0 +1,118 @@
+/* specify what body part is moving then call the keyframes*/
+.movingHead {
+  animation: moveHead 3s infinite;
+}
+
+.movingEarsLeft {
+  animation: moveEarsLeft 3s infinite;
+}
+
+.movingEarsRight {
+  animation: moveEarsRight 3s infinite;
+}
+
+.wiggleEarsLeft {
+  animation: wiggleLeftEar 5s infinite;
+}
+
+.wiggleEarsRight {
+  animation: wiggleRightEar 5s infinite;
+}
+
+.tiredEyes {
+  animation: sleepyEyes 5s infinite;
+}
+
+/*keyframes identify what movement is happening*/
+@keyframes moveHead {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(5deg);
+  }
+  75% {
+    transform: rotate(-5deg);
+  }
+}
+
+@keyframes moveEarsRight {
+  0%,
+  100% {
+    transform: rotate(170deg);
+  }
+  25% {
+    transform: rotate(1755deg);
+  }
+  75% {
+    transform: rotate(-175deg);
+  }
+}
+
+@keyframes moveEarsLeft {
+  0%,
+  100% {
+    transform: scale(-1, 1) rotate(170deg);
+  }
+  25% {
+    transform: scale(-1, 1) rotate(175deg);
+  }
+  75% {
+    transform: scale(-1, 1) rotate(-175deg);
+  }
+}
+
+@keyframes wiggleLeftEar {
+  0% {
+    transform: translate(0%, 0%);
+  }
+  25% {
+    transform: translate(10%, 10%);
+  }
+  75% {
+    transform: translate(-10%, -10%);
+  }
+  100% {
+    transform: translate(0%, 0%);
+  }
+}
+
+@keyframes wiggleRightEar {
+  0% {
+    transform: translate(0%, 0%);
+  }
+  25% {
+    transform: translate(10%, 10%);
+  }
+  75% {
+    transform: translate(-10%, -10%);
+  }
+  100% {
+    transform: translate(0%, 0%);
+  }
+}
+
+@keyframes sleepyEyes {
+  0% {
+    border: none;
+  }
+  15% {
+    border-top: 5px solid;
+  }
+  30% {
+    border-top: 10px solid;
+  }
+  45% {
+    border-top: 15px solid;
+  }
+  60% {
+    border-top: 10px solid;
+  }
+  75% {
+    border-top: 20px solid;
+  }
+  100% {
+    border: none;
+  }
+}
