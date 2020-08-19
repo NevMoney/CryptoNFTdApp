@@ -69,11 +69,11 @@ function animationVariation(num) {
       break;
     case 3:
       animationType3();
-      $("#animationName").html("Ear Wiggle");
+      $("#animationName").html("Move Ears");
       break;
     case 3:
       animationType4();
-      $("#animationName").html("Eye Movement");
+      $("#animationName").html("Move Eyes");
       break;
     case 4:
       animationType5();
@@ -100,25 +100,26 @@ function animationType1() {
 
 function animationType2() {
   resetAnimation();
-  $("#head, #left-ear, #right-ear").addClass(
-    "movingHead, movingEarsLeft, movingEarsRight"
-  );
+  $("#head").addClass("movingHead");
+  $("#left-ear").addClass("movingEarsLeft");
+  $("#right-ear").addClass("movingEarsRight");
 }
 
 function animationType3() {
   resetAnimation();
-  $("#left-ear, #right-ear").addClass("movingEars");
+  $("#left-ear, #right-ear").addClass("movingEarsLeft, movingEarsRight");
 }
 
 function animationType4() {
   resetAnimation();
-  $("#cat__eye").addClass("tiredEyes");
+  $("#cat__eye--left").addClass("movingEyes");
+  $("#cat__eye--right").addClass("movingEyes");
 }
 
 function resetAnimation() {
   $("#head").removeClass("movingHead");
-  $("#left-ear, #right-ear").removeClass("movingEars");
-  $("#cat__eye").removeClass("tiredEyes");
+  $("#left-ear, #right-ear").removeClass("movingEarsLeft, movingEarsRight");
+  $("#cat__eye--left, cat__eye--right").removeClass("movingEyes");
   //continue to add any animation created
 }
 
