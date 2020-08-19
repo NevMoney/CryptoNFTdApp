@@ -3,30 +3,9 @@
   animation: moveHead 3s infinite;
 }
 
-.movingEarsLeft {
-  animation: moveEarsLeft 3s infinite;
-}
-
-.movingEarsRight {
-  animation: moveEarsRight 3s infinite;
-}
-
-.wiggleEarsLeft {
-  animation: wiggleLeftEar 5s infinite;
-}
-
-.wiggleEarsRight {
-  animation: wiggleRightEar 5s infinite;
-}
-
-.tiredEyes {
-  animation: sleepyEyes 5s infinite;
-}
-
 /*keyframes identify what movement is happening*/
 @keyframes moveHead {
-  0%,
-  100% {
+  0% {
     transform: rotate(0deg);
   }
   25% {
@@ -35,6 +14,30 @@
   75% {
     transform: rotate(-5deg);
   }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.movingEarsLeft {
+  animation: moveEarsLeft 3s infinite;
+}
+
+@keyframes moveEarsLeft {
+  0%,
+  100% {
+    transform: scale(-1, 1) rotate(170deg);
+  }
+  25% {
+    transform: scale(-1, 1) rotate(175deg);
+  }
+  75% {
+    transform: scale(-1, 1) rotate(-175deg);
+  }
+}
+
+.movingEarsRight {
+  animation: moveEarsRight 3s infinite;
 }
 
 @keyframes moveEarsRight {
@@ -50,17 +53,8 @@
   }
 }
 
-@keyframes moveEarsLeft {
-  0%,
-  100% {
-    transform: scale(-1, 1) rotate(170deg);
-  }
-  25% {
-    transform: scale(-1, 1) rotate(175deg);
-  }
-  75% {
-    transform: scale(-1, 1) rotate(-175deg);
-  }
+.wiggleEarsLeft {
+  animation: wiggleLeftEar 5s infinite;
 }
 
 @keyframes wiggleLeftEar {
@@ -78,6 +72,10 @@
   }
 }
 
+.wiggleEarsRight {
+  animation: wiggleRightEar 5s infinite;
+}
+
 @keyframes wiggleRightEar {
   0% {
     transform: translate(0%, 0%);
@@ -93,24 +91,22 @@
   }
 }
 
-@keyframes sleepyEyes {
+.movingEyes {
+  animation: moveEyes 5s infinite;
+}
+
+@keyframes moveEyes {
   0% {
     border: none;
   }
-  15% {
-    border-top: 5px solid;
+  25% {
+    border-left: 15px solid;
   }
-  30% {
-    border-top: 10px solid;
-  }
-  45% {
-    border-top: 15px solid;
-  }
-  60% {
-    border-top: 10px solid;
+  50% {
+    border: none;
   }
   75% {
-    border-top: 20px solid;
+    border-right: 15px solid;
   }
   100% {
     border: none;
