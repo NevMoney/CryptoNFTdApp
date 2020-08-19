@@ -31,6 +31,10 @@ $(document).ready(function () {
   renderCat(defaultDNA);
 });
 
+function defaultCat() {
+  renderCat(defaultDNA);
+}
+
 function getDna() {
   var dna = "";
   dna += $("#dnabody").html();
@@ -64,6 +68,8 @@ function renderCat(dna) {
   $("#midDotcolor").val(dna.decorationMidcolor);
   sideDotColor(colors[dna.decorationSidescolor], dna.decorationSidescolor);
   $("#sideDotcolor").val(dna.decorationSidescolor);
+  animationVariation(dna.animation);
+  $("#animation").val(dna.animation);
 }
 
 // Changing cat colors
@@ -94,7 +100,7 @@ $("#eyeshape").change(() => {
 });
 
 $("#dotshape").change(() => {
-  var shape = parseInt($("#dotshape").val()); //value between 1 and 7
+  var shape = parseInt($("#dotshape").val());
   decorationVariation(shape);
 });
 
@@ -106,4 +112,10 @@ $("#midDotcolor").change(() => {
 $("#sideDotcolor").change(() => {
   var colorVal = $("#sideDotcolor").val();
   sideDotColor(colors[colorVal], colorVal);
+});
+
+//animation
+$("#animation").change(() => {
+  var animationVal = parseInt($("#animation").val());
+  animationVariation(animationVal);
 });

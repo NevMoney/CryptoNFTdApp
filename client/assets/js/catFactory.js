@@ -55,8 +55,74 @@ function sideDotColor(color, code) {
   $("#dnadecorationSides").html(code);
 }
 
-//shape variations
+//animation function
+function animationVariation(num) {
+  $("dnaanimation").html(num);
+  switch (num) {
+    case 1:
+      animationType1();
+      $("#animationName").html("Still");
+      break;
+    case 2:
+      animationType2();
+      $("#animationName").html("Head Tilt");
+      break;
+    case 3:
+      animationType3();
+      $("#animationName").html("Ear Wiggle");
+      break;
+    case 3:
+      animationType4();
+      $("#animationName").html("Eye Movement");
+      break;
+    case 4:
+      animationType5();
+      $("#animationName").html("Nose Wiggle");
+      break;
+    case 5:
+      animationType5();
+      $("#animationName").html("Head Up and Down");
+      break;
+    case 6:
+      animationType6();
+      $("#animationName").html("You Talkin' To Me?");
+      break;
+    case 7:
+      animationType7();
+      $("#animationName").html("Blink Means I Love You!");
+      break;
+  }
+}
 
+function animationType1() {
+  resetAnimation();
+}
+
+function animationType2() {
+  resetAnimation();
+  $("#head, #left-ear, #right-ear").addClass(
+    "movingHead, movingEarsLeft, movingEarsRight"
+  );
+}
+
+function animationType3() {
+  resetAnimation();
+  $("#left-ear, #right-ear").addClass("movingEars");
+}
+
+function animationType4() {
+  resetAnimation();
+  $("#cat__eye").addClass("tiredEyes");
+}
+
+function resetAnimation() {
+  $("#head").removeClass("movingHead");
+  $("#left-ear, #right-ear").removeClass("movingEars");
+  $("#cat__eye").removeClass("tiredEyes");
+  //continue to add any animation created
+}
+
+//shape variations
 function eyeVariation(num) {
   $("#dnashape").html(num);
   switch (num) {
