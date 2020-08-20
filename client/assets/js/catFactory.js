@@ -6,7 +6,7 @@ function getColor() {
 
 function genColors() {
   var colors = [];
-  for (var i = 10; i < 99; i++) {
+  for (var i = 1; i < 99; i++) {
     var color = getColor();
     colors[i] = color;
   }
@@ -92,6 +92,8 @@ function animationVariation(num) {
       $("#animationName").html("Blink Means I Love You!");
       break;
   }
+  $("#animationName").html("code: " + code);
+  $("#dnadanimation").html(code);
 }
 
 function animationType1() {
@@ -162,6 +164,8 @@ function eyeVariation(num) {
       eyesType6();
       break;
   }
+  $("#eyeName").html("code: " + code);
+  $("#dnashape").html(code);
 }
 
 function decorationVariation(num) {
@@ -202,6 +206,8 @@ function decorationVariation(num) {
       decorationType6();
       break;
   }
+  $("#decorationName").html("code: " + code);
+  $("#dnadecoration").html(code);
 }
 
 async function normalEyes() {
