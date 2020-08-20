@@ -28,7 +28,7 @@
         </p>
       </div>
       <div class="row">
-        <div class="col-lg-5 catBox m-2 light-b-shadow">
+        <div class="col-lg-4 catBox m-2 light-b-shadow">
           <div class="cat">
             <div class="ears">
               <div id="leftEar" class="left-ear">
@@ -103,9 +103,21 @@
             </b>
           </div>
         </div>
-        <div class="col-lg-6 cattributes m-2 light-b-shadow">
+
+        <div class="col-lg-7 cattributes m-2 light-b-shadow">
+          <ul class="nav nav-tabs large">
+            <li class="nav-item">
+              <a class="nav-link active" id="catColorTab" href="#"
+                >Cat Colors</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="cattributesTab" href="#">Cattributes</a>
+            </li>
+          </ul>
+
           <!-- Cat colors -->
-          <div id="catColors">
+          <div id="catColors" id="bodyColorRange">
             <div class="form-group">
               <label for="formControlRange">
                 <b>Body</b>
@@ -119,7 +131,7 @@
                 id="bodycolor"
               />
             </div>
-            <div class="form-group">
+            <div class="form-group" id="earColorRange">
               <label for="formControlRange">
                 <b>Ears | Nose</b>
                 <span class="badge badge-dark ml-2" id="mouthcode"></span
@@ -132,7 +144,7 @@
                 id="mouthcolor"
               />
             </div>
-            <div class="form-group">
+            <div class="form-group" id="eyeColorRange">
               <label for="formControlRange">
                 <b>Eyes</b>
                 <span class="badge badge-dark ml-2" id="eyecode"></span
@@ -145,7 +157,7 @@
                 id="eyescolor"
               />
             </div>
-            <div class="form-group">
+            <div class="form-group" id="headColorRange">
               <label for="formControlRange">
                 <b>Head | Paws</b>
                 <span class="badge badge-dark ml-2" id="earcode"></span
@@ -158,7 +170,9 @@
                 id="earscolor"
               />
             </div>
-            <div class="form-group">
+
+            <!-- cattributes items -->
+            <div class="form-group" id="eyeShapeRange">
               <label for="formControlRange">
                 <b>Eye Shape</b>
                 <span class="badge badge-dark ml-2" id="eyeName"></span
@@ -171,7 +185,7 @@
                 id="eyeshape"
               />
             </div>
-            <div class="form-group">
+            <div class="form-group" id="decorationRange">
               <label for="formControlRange">
                 <b>Decorartion Pattern</b>
                 <span class="badge badge-dark sm-2" id="decorationName"></span
@@ -185,7 +199,7 @@
               />
             </div>
 
-            <div class="form-group">
+            <div class="form-group" id="midColorRange">
               <label for="formControlRange">
                 <b>Middle Color</b>
                 <span class="badge badge-dark sm-2" id="midDotcode"></span
@@ -198,7 +212,7 @@
                 id="midDotcolor"
               />
             </div>
-            <div class="form-group">
+            <div class="form-group" id="sideColorRange">
               <label for="formControlRange">
                 <b>Sides Color</b>
                 <span class="badge badge-dark ml-2" id="sideDotcode"></span
@@ -211,7 +225,7 @@
                 id="sideDotcolor"
               />
             </div>
-            <div class="form-group">
+            <div class="form-group" id="animationRange">
               <label for="formControlRange">
                 <b>Animation</b>
                 <span class="badge badge-dark ml-2" id="animationName"></span
@@ -228,6 +242,29 @@
         </div>
       </div>
       <br />
+      <div class="text-center">
+        <button
+          type="button"
+          class="btn btn-lg btn-danger light-b-shadow"
+          id="randomBtn"
+        >
+          Get Random Kitty
+        </button>
+        <button
+          type="button"
+          class="btn btn-lg btn-danger light-b-shadow"
+          id="defaultBtn"
+        >
+          Get Default Kitty
+        </button>
+        <button
+          type="button"
+          class="btn btn-lg btn-danger light-b-shadow"
+          id="catCreateBtn"
+        >
+          Create Kitty
+        </button>
+      </div>
     </div>
 
     <footer align="center">
@@ -241,4 +278,5 @@
   <script src="assets/js/colors.js"></script>
   <script src="assets/js/catSettings.js"></script>
   <script src="assets/js/catFactory.js"></script>
+  <script src="assets/js/indexFunctionality.js"></script>
 </html>
