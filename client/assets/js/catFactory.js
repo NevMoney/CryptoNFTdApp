@@ -1,18 +1,3 @@
-//Random color
-function getColor() {
-  var randomColor = Math.floor(Math.random() * 16777215).toString(16);
-  return randomColor;
-}
-
-function genColors() {
-  var colors = [];
-  for (var i = 1; i < 99; i++) {
-    var color = getColor();
-    colors[i] = color;
-  }
-  return colors;
-}
-
 //Color variations
 function headColor(color, code) {
   $(".cat_body").css("background", "#" + color); //This changes the color of the cat
@@ -56,9 +41,10 @@ function sideDotColor(color, code) {
 }
 
 //animation function
-function animationVariation(num) {
-  $("dnaanimation").html(num);
-  switch (num) {
+function animationVariation(code) {
+  //when i keep NUM it gives me correct name bud doesn't know what code it, when i put CODE gives correct scale wrong name
+  $("dnaanimation").html(code);
+  switch (code) {
     case 1:
       animationType1();
       $("#animationName").html("Still");
@@ -69,27 +55,23 @@ function animationVariation(num) {
       break;
     case 3:
       animationType3();
-      $("#animationName").html("Move Left Ear");
-      break;
-    case 3:
-      animationType4();
-      $("#animationName").html("Move Right Ear");
+      $("#animationName").html("Left Ear Wave");
       break;
     case 4:
-      animationType5();
-      $("#animationName").html("Move Eyes");
+      animationType4();
+      $("#animationName").html("Right Ear Wave");
       break;
     case 5:
       animationType5();
-      $("#animationName").html("Head Up and Down");
+      $("#animationName").html("Whisker Twitch");
       break;
     case 6:
       animationType6();
-      $("#animationName").html("You Talkin' To Me?");
+      $("#animationName").html("Paw Move");
       break;
     case 7:
       animationType7();
-      $("#animationName").html("Blink Means I Love You!");
+      $("#animationName").html("Move Eyes");
       break;
   }
   $("#animationName").html("code: " + code);
@@ -117,22 +99,36 @@ function animationType4() {
 
 function animationType5() {
   resetAnimation();
-  $("#cat__eye--left").addClass("movingEyes");
-  $("#cat__eye--right").addClass("movingEyes");
+  $(".whisker-l1, .whisker-l2, .whisker-l3").addClass(
+    "movingL1Whiskers, movingL2Whiskers, movingL3Whiskers"
+  );
+}
+
+function animationType6() {
+  resetAnimation();
+  $(".paws-front-right").addClass("movingFrontPaw");
+}
+
+function animationType7() {
+  resetAnimation();
+  $(".pupil-right, .pupil-left").addClass("movingEyes");
 }
 
 function resetAnimation() {
   $("#head").removeClass("movingHead");
   $("#leftEar").removeClass("movingEarsLeft");
   $("#rightEar").removeClass("movingEarsRight");
-  $("#cat__eye--left, cat__eye--right").removeClass("movingEyes");
-  //continue to add any animation created
+  $(".whisker-l1, .whisker-l2, .whisker-l3").removeClass(
+    "movingL1Whiskers, movingL2Whiskers, movingL3Whiskers"
+  );
+  $(".paws-front-right").removeClass("movingFrontPaw");
+  $(".pupil-right, .pupil-left").removeClass("movingEyes");
 }
 
 //shape variations
-function eyeVariation(num) {
-  $("#dnashape").html(num);
-  switch (num) {
+function eyeVariation(code) {
+  $("#dnashape").html(code);
+  switch (code) {
     case 1:
       normalEyes(); //calling norrmalEyes function --> see line 72 (for now... scroll down)
       $("#eyeName").html("Basic"); //set the badge on slider
@@ -172,9 +168,9 @@ function eyeVariation(num) {
   $("#dnashape").html(code);
 }
 
-function decorationVariation(num) {
-  $("#dnadecoration").html(num);
-  switch (num) {
+function decorationVariation(code) {
+  $("#dnadecoration").html(code);
+  switch (code) {
     case 1:
       $("#decorationName").html("Basic");
       normaldecoration();

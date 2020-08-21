@@ -34,8 +34,6 @@ $("#cattributesTab").click(function (e) {
 
 //random cat creation - code needs to be written to generate random Cat
 $("#randomBtn").click(function () {
-  getColor();
-  genColors();
-
+  renderCat(randomDNA);
   console.log("random button clicked");
 });
