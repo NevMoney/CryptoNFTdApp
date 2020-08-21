@@ -1,23 +1,17 @@
 $("#catColorTab").click(function () {
-  $(
-    "#animationRange, #sideColorRange, #midColorRange, #decorationRange, #eyeShapeRange"
-  ).hide();
-  $("#bodyColorRange, #earColorRange, #eyeColorRange, #headColorRange").show();
+  $("#cattributesDiv").hide();
+  $("#catColors").show();
   console.log("tab clicked");
 });
 
 $("#cattributesTab").click(function () {
-  $("#bodyColorRange, #earColorRange, #eyeColorRange, #headColorRange").hide();
-  $(
-    "#animationRange, #sideColorRange, #midColorRange, #decorationRange, #eyeShapeRange"
-  ).show();
+  $("#catColors").hide();
+  $("#cattributesDiv").show();
   console.log("tab clicked");
 });
 
 $(document).ready(function () {
-  $(
-    "#animationRange, #sideColorRange, #midColorRange, #decorationRange, #eyeShapeRange, #bodyColorRange, #earColorRange, #eyeColorRange, #headColorRange"
-  ).hide();
+  $("#cattributesDiv").hide();
 });
 
 $("#defaultBtn").click(function () {
@@ -38,6 +32,7 @@ $("#cattributesTab").click(function (e) {
   $(this).tab("show");
 });
 
+//random cat creation - code needs to be written to generate random Cat
 $("#randomBtn").click(function () {
   getColor();
   genColors();

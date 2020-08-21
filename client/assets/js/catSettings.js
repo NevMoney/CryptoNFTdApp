@@ -60,9 +60,9 @@ function renderCat(dna) {
   $("#eyecolor").val(dna.eyesColor);
   pawsColor(colors[dna.earsColor], dna.earsColor);
   $("#earcolor").val(dna.earsColor);
-  eyeVariation(shape[dna.eyesShape], dna.eyesShape);
+  eyeVariation(dna.eyesShape);
   $("#eyeshape").val(dna.eyesShape);
-  decorationVariation(shape[dna.decorationPattern], dna.decorationPattern);
+  decorationVariation(dna.decorationPattern);
   $("#dotshape").val(dna.decorationPattern);
   midDotColor(colors[dna.decorationMidcolor], dna.decorationMidcolor);
   $("#midDotcolor").val(dna.decorationMidcolor);
