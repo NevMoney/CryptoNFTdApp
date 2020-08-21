@@ -20,95 +20,77 @@
 }
 
 .movingEarsLeft {
-  animation: moveEarsLeft 3s infinite;
+  animation: moveEarsLeft 1s infinite;
 }
 
 @keyframes moveEarsLeft {
-  0%,
-  100% {
-    transform: scale(-1, 1) rotate(170deg);
-  }
-  25% {
-    transform: scale(-1, 1) rotate(175deg);
-  }
-  75% {
-    transform: scale(-1, 1) rotate(-175deg);
+  50% {
+    transform: scale(-1, 1) rotate(185deg);
   }
 }
 
 .movingEarsRight {
-  animation: moveEarsRight 3s infinite;
+  animation: moveEarsRight 2s infinite;
 }
 
 @keyframes moveEarsRight {
-  0%,
-  100% {
-    transform: rotate(170deg);
+  50% {
+    transform: rotate(185deg);
   }
+}
+
+.movingL1Whiskers {
+  animation: moveL1Whisker 1s;
+}
+
+@keyframes moveL1Whisker {
+  50% {
+    transform: translateX(-40%) translateY(2300%) rotate(10deg);
+  }
+}
+
+.movingL2Whiskers {
+  animation: moveL2Whisker 1s;
+}
+
+@keyframes moveL2Whisker {
+  50% {
+    transform: translateX(-43%) translateY(2650%) rotate(-5deg);
+  }
+}
+
+.movingL32Whiskers {
+  animation: moveL3Whisker 1s;
+}
+
+@keyframes moveL3Whisker {
+  50% {
+    transform: translateX(-40%) translateY(3000%) rotate(-20deg);
+  }
+}
+
+.movingFrontPaw {
+  animation: moveRightPaw 1s infinite;
+}
+
+@keyframes moveRightPaw {
   25% {
-    transform: rotate(1755deg);
+    transform: translateX(360%) translateY(150%) rotate(5deg);
   }
   75% {
-    transform: rotate(-175deg);
-  }
-}
-
-.wiggleEarsLeft {
-  animation: wiggleLeftEar 5s infinite;
-}
-
-@keyframes wiggleLeftEar {
-  0% {
-    transform: translate(0%, 0%);
-  }
-  25% {
-    transform: translate(10%, 10%);
-  }
-  75% {
-    transform: translate(-10%, -10%);
-  }
-  100% {
-    transform: translate(0%, 0%);
-  }
-}
-
-.wiggleEarsRight {
-  animation: wiggleRightEar 5s infinite;
-}
-
-@keyframes wiggleRightEar {
-  0% {
-    transform: translate(0%, 0%);
-  }
-  25% {
-    transform: translate(10%, 10%);
-  }
-  75% {
-    transform: translate(-10%, -10%);
-  }
-  100% {
-    transform: translate(0%, 0%);
+    transform: translateX(360%) translateY(150%) rotate(-5deg);
   }
 }
 
 .movingEyes {
-  animation: moveEyes 5s infinite;
+  animation: moveEye 2s infinite;
 }
 
-@keyframes moveEyes {
-  0% {
-    border: none;
-  }
+@keyframes moveEye {
   25% {
     border-left: 15px solid;
   }
-  50% {
-    border: none;
-  }
   75% {
     border-right: 15px solid;
-  }
-  100% {
-    border: none;
   }
 }
