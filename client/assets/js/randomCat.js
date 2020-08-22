@@ -1,7 +1,7 @@
-function randomNumber(max) {
+function randomNumber(min, max) {
   var randomNum = Math.floor(Math.random() * max) + 1;
-  return randomNum;
   console.log(randomNum);
+  return randomNum;
 }
 
 //Random color
@@ -17,32 +17,4 @@ function genColors() {
     colors[i] = color;
   }
   return colors;
-}
-
-var randomDNA = {
-  headColor: randomNumber(97),
-  mouthColor: randomNumber(97),
-  eyesColor: randomNumber(97),
-  earsColor: randomNumber(97),
-  eyesShape: randomNumber(6),
-  decorationPattern: randomNumber(6),
-  decorationMidcolor: randomNumber(97),
-  decorationSidescolor: randomNumber(97),
-  animation: randomNumber(6),
-  lastNum: 1,
-};
-
-function getRandomCat() {
-  $("#dnabody").html(randomDNA.headColor);
-  $("#dnamouth").html(randomDNA.mouthColor);
-  $("#dnaeyes").html(randomDNA.eyesColor);
-  $("#dnaears").html(randomDNA.earsColor);
-  $("#dnashape").html(randomDNA.eyesShape);
-  $("#dnadecoration").html(randomDNA.decorationPattern);
-  $("#dnadecorationMid").html(randomDNA.decorationMidcolor);
-  $("#dnadecorationSides").html(randomDNA.decorationSidescolor);
-  $("#dnaanimation").html(randomDNA.animation);
-  $("#dnaspecial").html(randomDNA.lastNum);
-
-  getRandomCat(randomDNA);
 }

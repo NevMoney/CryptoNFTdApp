@@ -28,7 +28,7 @@ $(document).ready(function () {
   $("#dnaanimation").html(defaultDNA.animation);
   $("#dnaspecial").html(defaultDNA.lastNum);
 
-  renderCat(defaultDNA);
+renderCat(defaultDNA);
 });
 
 function defaultCat() {
@@ -57,9 +57,9 @@ function renderCat(dna) {
   mouthColor(colors[dna.mouthColor], dna.mouthColor);
   $("#mouthcolor").val(dna.mouthColor);
   eyeColor(colors[dna.eyesColor], dna.eyesColor);
-  $("#eyecolor").val(dna.eyesColor);
+  $("#eyescolor").val(dna.eyesColor);
   pawsColor(colors[dna.earsColor], dna.earsColor);
-  $("#earcolor").val(dna.earsColor);
+  $("#earscolor").val(dna.earsColor);
   eyeVariation(dna.eyesShape);
   $("#eyeshape").val(dna.eyesShape);
   decorationVariation(dna.decorationPattern);
