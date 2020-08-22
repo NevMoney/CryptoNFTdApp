@@ -41,17 +41,17 @@ function sideDotColor(color, code) {
 }
 
 //animation function
-function animationVariation(code) {
+function animationVariation(num) {
   //when i keep NUM it gives me correct name bud doesn't know what code it, when i put CODE gives correct scale wrong name
-  $("dnaanimation").html(code);
-  switch (code) {
+  $("#dnaanimation").html(num); //puts animation number into the dnacode
+  switch (num) {
     case 1:
       animationType1();
       $("#animationName").html("Still");
       break;
     case 2:
       animationType2();
-      $("#animationName").html("Head Tilt");
+      $("#animationName").html("Head Movement");
       break;
     case 3:
       animationType3();
@@ -63,7 +63,7 @@ function animationVariation(code) {
       break;
     case 5:
       animationType5();
-      $("#animationName").html("Whisker Twitch");
+      $("#animationName").html("Sleepy Kitty");
       break;
     case 6:
       animationType6();
@@ -74,8 +74,6 @@ function animationVariation(code) {
       $("#animationName").html("Move Eyes");
       break;
   }
-  $("#animationName").html("code: " + code);
-  $("#dnadanimation").html(code);
 }
 
 function animationType1() {
@@ -99,9 +97,7 @@ function animationType4() {
 
 function animationType5() {
   resetAnimation();
-  $(".whisker-l1, .whisker-l2, .whisker-l3").addClass(
-    "movingL1Whiskers, movingL2Whiskers, movingL3Whiskers"
-  );
+  $(".pupil-right, .pupil-left").addClass("sleepingKitty");
 }
 
 function animationType6() {
@@ -118,9 +114,7 @@ function resetAnimation() {
   $("#head").removeClass("movingHead");
   $("#leftEar").removeClass("movingEarsLeft");
   $("#rightEar").removeClass("movingEarsRight");
-  $(".whisker-l1, .whisker-l2, .whisker-l3").removeClass(
-    "movingL1Whiskers, movingL2Whiskers, movingL3Whiskers"
-  );
+  $(".pupil-right, .pupil-left").removeClass("sleepingKitty");
   $(".paws-front-right").removeClass("movingFrontPaw");
   $(".pupil-right, .pupil-left").removeClass("movingEyes");
 }
@@ -164,8 +158,6 @@ function eyeVariation(code) {
       eyesType6();
       break;
   }
-  $("#eyeName").html("code: " + code);
-  $("#dnashape").html(code);
 }
 
 function decorationVariation(code) {
@@ -206,8 +198,6 @@ function decorationVariation(code) {
       decorationType6();
       break;
   }
-  $("#decorationName").html("code: " + code);
-  $("#dnadecoration").html(code);
 }
 
 async function normalEyes() {

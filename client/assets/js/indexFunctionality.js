@@ -34,6 +34,18 @@ $("#cattributesTab").click(function (e) {
 
 //random cat creation - code needs to be written to generate random Cat
 $("#randomBtn").click(function () {
+  var randomDNA = {
+    headColor: randomNumber(9, 97),
+    mouthColor: randomNumber(9, 97),
+    eyesColor: randomNumber(9, 97),
+    earsColor: randomNumber(9, 97),
+    eyesShape: randomNumber(0, 6),
+    decorationPattern: randomNumber(0, 6),
+    decorationMidcolor: randomNumber(9, 97),
+    decorationSidescolor: randomNumber(9, 97),
+    animation: randomNumber(0, 6),
+    lastNum: 1,
+  };
   renderCat(randomDNA);
   console.log("random button clicked");
 });

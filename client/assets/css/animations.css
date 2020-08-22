@@ -39,33 +39,28 @@
   }
 }
 
-.movingL1Whiskers {
-  animation: moveL1Whisker 1s;
+.sleepingKitty {
+  animation: sleepyCat 5s infinite;
 }
 
-@keyframes moveL1Whisker {
-  50% {
-    transform: translateX(-40%) translateY(2300%) rotate(10deg);
+@keyframes sleepyCat {
+  10% {
+    border-top: 10px solid;
   }
-}
-
-.movingL2Whiskers {
-  animation: moveL2Whisker 1s;
-}
-
-@keyframes moveL2Whisker {
-  50% {
-    transform: translateX(-43%) translateY(2650%) rotate(-5deg);
+  30% {
+    border-top: 15px solid;
   }
-}
-
-.movingL32Whiskers {
-  animation: moveL3Whisker 1s;
-}
-
-@keyframes moveL3Whisker {
   50% {
-    transform: translateX(-40%) translateY(3000%) rotate(-20deg);
+    border-top: 5px solid;
+  }
+  65% {
+    border-top: 15px solid;
+  }
+  75% {
+    border-top: 18px solid;
+  }
+  90% {
+    border-top: none;
   }
 }
 
@@ -75,20 +70,23 @@
 
 @keyframes moveRightPaw {
   25% {
-    transform: translateX(360%) translateY(150%) rotate(5deg);
+    transform: translateX(360%) translateY(150%) rotate(10deg);
   }
   75% {
-    transform: translateX(360%) translateY(150%) rotate(-5deg);
+    transform: translateX(360%) translateY(150%) rotate(-10deg);
   }
 }
 
 .movingEyes {
-  animation: moveEye 2s infinite;
+  animation: moveEye 3s infinite;
 }
 
 @keyframes moveEye {
   25% {
     border-left: 15px solid;
+  }
+  50% {
+    border: none;
   }
   75% {
     border-right: 15px solid;
