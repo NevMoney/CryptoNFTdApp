@@ -114,7 +114,7 @@ $("#sideDotcolor").change(() => {
   sideDotColor(colors[colorVal], colorVal);
 });
 
-//animation
+//animation 
 $("#animation").change(() => {
   var animationVal = parseInt($("#animation").val());
   animationVariation(animationVal);
