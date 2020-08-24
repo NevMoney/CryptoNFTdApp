@@ -42,7 +42,6 @@ function sideDotColor(color, code) {
 
 //animation function
 function animationVariation(num) {
-  //when i keep NUM it gives me correct name bud doesn't know what code it, when i put CODE gives correct scale wrong name
   $("#dnaanimation").html(num); //puts animation number into the dnacode
   switch (num) {
     case 1:
@@ -120,9 +119,9 @@ function resetAnimation() {
 }
 
 //shape variations
-function eyeVariation(code) {
-  $("#dnashape").html(code);
-  switch (code) {
+function eyeVariation(num) {
+  $("#dnashape").html(num);
+  switch (num) {
     case 1:
       normalEyes(); //calling norrmalEyes function --> see line 72 (for now... scroll down)
       $("#eyeName").html("Basic"); //set the badge on slider
