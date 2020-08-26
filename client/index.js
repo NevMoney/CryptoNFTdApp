@@ -5,7 +5,7 @@ var web3 = new Web3(Web3.givenProvider);
 //need to identify a few variables
 var instance;
 var user;
-var contractAddress = "0x6c3753924d8Aa45C68A71e6bfA6bf0De52Be6a0F";
+var contractAddress = "0xed59863A4124a6289713D737f16C33A6fa7f5e53";
 
 //when document loads, we'll have a function to connect to ethereum + connect our JS to contract
 //abi - application binary interface --> specification to pass onto MetaMask, basically, a 
@@ -26,19 +26,23 @@ $(document).ready(function(){
             let dadId = event.returnValues.dadId;
             let genes = event.returnValues.genes;
             $("#catCreateBtn").css("display", "block");
-            $("#catCreateBtn").text("Owner: " + owner + ", kittenId: " + kittenId + ", momId: " + momId + ", dadId: " + dadId + ", genes: " + genes)
+            $("#catCreateBtn").text("Meow For Joy! You have just created your own DigiCat! Congrats! Owner: " + owner 
+                                    + ", kittenId: " + kittenId 
+                                    + ", momId: " + momId 
+                                    + ", dadId: " + dadId 
+                                    + ", genes: " + genes)
         })
         .on("error", console.error);
 
     });
-    
+   
 });
 
 function createKitty(){
     var dnaStr = getDna();
     instance.methods.createKittyGen0(dnaStr).send({}, function(error, txHash){
-        if(err)
-            console.log(err);
+        if(error)
+            console.log(error);
         else
             console.log(txHash);
     });
