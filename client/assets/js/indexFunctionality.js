@@ -49,3 +49,8 @@ $("#randomBtn").click(function () {
   renderCat(randomDNA);
   console.log("random button clicked");
 });
+
+$("#catCreateBtn").click(function () {
+  createKitty();
+  console.log("create button clicked");
+});
