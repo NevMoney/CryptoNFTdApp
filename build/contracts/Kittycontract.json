@@ -9137,12 +9137,12 @@
         }
       },
       "links": {},
-      "address": "0xed59863A4124a6289713D737f16C33A6fa7f5e53",
-      "transactionHash": "0x608c3bbd05f663ce091f40d7811f5237d9af98d929f1c6d7f671c3828f2bf676"
+      "address": "0xCA9b6671550278f4eB8c8E198D576C69340CD4Ad",
+      "transactionHash": "0x3611932dfd01a376e79a67e2b6c6f4720b3705bd027478461ee642c15efae35f"
     }
   },
   "schemaVersion": "3.2.0",
-  "updatedAt": "2020-08-26T21:12:12.058Z",
+  "updatedAt": "2020-08-27T20:58:28.735Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}
