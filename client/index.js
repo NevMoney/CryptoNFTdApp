@@ -5,7 +5,7 @@ var web3 = new Web3(Web3.givenProvider);
 //need to identify a few variables
 var instance;
 var user;
-var contractAddress = "0xCA9b6671550278f4eB8c8E198D576C69340CD4Ad";
+var contractAddress = "0x7F518FfBD1c403e553177E8502fEAEeD51201a87";
 
 //when document loads, we'll have a function to connect to ethereum + connect our JS to contract
 //abi - application binary interface --> specification to pass onto MetaMask, basically, a 
@@ -15,6 +15,8 @@ $(document).ready(function(){
     window.ethereum.enable().then(function(accounts){
         instance = new web3.eth.Contract(abi, contractAddress, {from: accounts[0]});
         user = accounts[0];
+
+        console.log(accounts);
 
         console.log(instance);
 

@@ -54,3 +54,8 @@ $("#catCreateBtn").click(function () {
   createKitty();
   console.log("create button clicked");
 });
+
+$("#factoryPageBtn").click(function() {
+  $(".factory").show();
+  $(".home").hide();
+})
