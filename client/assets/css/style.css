@@ -349,5 +349,6 @@ h3 {
 }
 
 .home {
-  background-color: rgba(255, 94, 0, 0.733);
+  background: linear-gradient(#FF7300, #FFD500);
+  border-radius: 0 0 60% 60% / 0 0 20% 20%;
 }
