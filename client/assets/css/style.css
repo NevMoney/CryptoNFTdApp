@@ -323,3 +323,91 @@ h3 {
   left: 20px;
   border-radius: 0 50% 50% 50%;
 }
+
+.img-fluid {
+  width: 75%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.homebox {
+  position: relative;
+  background-color: #fff;
+  border-radius: 10px;
+  opacity: 0.55;
+  padding-top: 45px;
+  padding-bottom: 65px;
+  transform: translateY(-35%);
+}
+
+#makeKittyBtn {
+  position: absolute;
+  transform: translate(-50%, -350%);
+}
+
+.home-top {
+  background: linear-gradient(#FF7300, #FFD500);
+  border-radius: 0 0 60% 60% / 0 0 20% 20%;
+  margin-bottom: 30px;
+}
+
+iframe {
+  margin-top: 10px;
+  border-radius: 5%;
+  border-color: yellowgreen;
+}
+
+.home-bottom {
+  margin-bottom: 80px;
+  margin-top: 50px;
+}
+
+.navbar {
+  cursor: pointer;
+}
+
+.button, .form {
+  cursor: pointer;
+}
+
+.marketplace-top {
+  padding-bottom: 50px;
+  padding-top: 50px;
+  background: linear-gradient(#FF7300, #fbff00);
+}
+
+.marketplace-bottom {
+  background: white;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.catalog-top {
+  padding-bottom: 50px;
+  padding-top: 50px;
+  background: linear-gradient(#fbff00, #48ff00);
+}
+
+.catalog-bottom {
+  background: white;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.card-deck {
+  margin-top: 5px;
+  margin-bottom: 80px;
+  margin-left: 60px;
+  margin-right: 60px;
+  padding: 80px;
+}
+
+.catDisplay {
+  background: white;
+  border-radius: 10px;
+  display: flex;
+}
+
