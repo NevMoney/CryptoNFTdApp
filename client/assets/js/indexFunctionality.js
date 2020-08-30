@@ -58,4 +58,70 @@ $("#catCreateBtn").click(function () {
 $("#factoryPageBtn").click(function() {
   $(".factory").show();
   $(".home").hide();
+  $("#factoryPageBtn").hide();
+  $(".marketplace").hide();
+})
+
+$("#factoryPage").click(function() {
+  $(".factory").show();
+  $(".home").hide();
+  $("#factoryPageBtn").hide();
+  $(".marketplace").hide();
+  $(".catalog").hide();
+})
+
+$("#makeKittyBtn").click(function() {
+  $(".factory").show();
+  $(".home").hide();
+  $("#factoryPageBtn").hide();
+  $(".marketplace").hide();
+  $(".catalog").hide();
+})
+
+$("#homePage").click(function() {
+  $(".factory").hide();
+  $(".home").show();
+  $("#factoryPageBtn").show();
+  $(".marketplace").hide();
+  $(".catalog").hide();
+})
+
+$("#marketplacePage").click(function() {
+  $(".factory").hide();
+  $(".home").hide();
+  $(".marketplace").show();
+  $("#factoryPageBtn").show();
+  $(".catalog").hide();
+})
+
+$("#catalogPage").click(function() {
+  $(".factory").hide();
+  $(".home").hide();
+  $(".marketplace").hide();
+  $("#factoryPageBtn").show();
+  $(".catalog").show();
+})
+
+$(".buyACatBtn").click(function() {
+  $(".factory").hide();
+  $(".home").hide();
+  $(".marketplace").show();
+  $("#factoryPageBtn").show();
+  $(".catalog").hide();
+})
+
+$("#makeAcatBtn").click(function() {
+  $(".factory").show();
+  $(".home").hide();
+  $("#factoryPageBtn").hide();
+  $(".marketplace").hide();
+  $(".catalog").hide();
+})
+
+$("#noKittyMakeOne").click(function() {
+  $(".factory").show();
+  $(".home").hide();
+  $("#factoryPageBtn").hide();
+  $(".marketplace").hide();
+  $(".catalog").hide();
 })

@@ -51,3 +51,23 @@ function createKitty(){
 }
 
 
+//displaying kitty based on user address
+$(document).ready(function(){
+    function displayMyKitty(){
+        var catContract = getKitty();
+        var ownerContract = ownerOf();
+        for(let i=0; i<Kitty.length; i++);
+            var elementToDisplay = Kitty[i];
+            var htmlString = `<div id="Kitty` + i + `">` + Kitty.genes +`</div>`;
+            $("#catalogContainer").append(htmlString);
+            if(Kitty.id == ownerContract) {
+                $("#Kitty" + i).addClass(catDisplay);
+                $("h4").hide();
+                $("#noKittyMakeOne").hide();
+            }
+            else {
+                $("h4").show();
+                $("#noKittyMakeOne").show();
+            }
+    }
+});
