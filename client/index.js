@@ -52,22 +52,21 @@ function createKitty(){
 
 
 //displaying kitty based on user address
-$(document).ready(function(){
-    function displayMyKitty(){
-        var catContract = getKitty();
-        var ownerContract = ownerOf();
-        for(let i=0; i<Kitty.length; i++);
-            var elementToDisplay = Kitty[i];
-            var htmlString = `<div id="Kitty` + i + `">` + Kitty.genes +`</div>`;
-            $("#catalogContainer").append(htmlString);
-            if(Kitty.id == ownerContract) {
-                $("#Kitty" + i).addClass(catDisplay);
-                $("h4").hide();
-                $("#noKittyMakeOne").hide();
-            }
-            else {
-                $("h4").show();
-                $("#noKittyMakeOne").show();
-            }
+//once page is loaded you run getKitties function
+async function getKitties(){
+
+    var arrayId;
+    var kitty;
+    
+    try {
+        arrayId = await instance.methods.getKittyByOwner(user).call();
     }
-});
+    catch(err){
+        console.log(err);
+    }
+    for (i = 0; i < arrayId.length; i++){
+        kitty = await instance.methods.getKitty(arrayId[i]).call();
+        appendCat(kitty[0], i);
+    }
+    console.log(kitty);
+}

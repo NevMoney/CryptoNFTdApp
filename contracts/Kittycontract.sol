@@ -67,6 +67,18 @@ contract Kittycontract is IERC721, Ownable {
         return newKittenId;
     }
 
+    function getKittyByOwner(address _owner) external view returns(uint[] memory){
+        uint[] memory result = new uint[](ownershipTokenCount[_owner]);
+        uint counter = 0;
+        for (uint i = 0; i < kitties.length; i++) {
+            if (kittyIndexToOwner[i] == _owner) {
+                result[counter] = i;
+                counter++;
+            }
+        }
+        return result;
+    }
+
     function getKitty(uint256 _id) external view returns(
         uint256 genes, 
         uint256 birthTime, 
