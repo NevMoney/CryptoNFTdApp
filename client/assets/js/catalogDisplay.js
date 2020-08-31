@@ -54,9 +54,6 @@ function catBox(id){
                       <span class="pupil-right"></span>
                     </div>
                 </div>
-               
-               
-                
 
                 <div class="ears">
                     <div id="leftEar"` + id + `" class="leftEar">
@@ -113,4 +110,13 @@ function catBox(id){
               </div>
             </div>
             <div class="dnaDiv" id="catDNA` + id + `"></div>
-`}
+
+            <ul class="ml-5 cattributes">
+              <li><span id="eyeName` + id + `"></span> eyes</li>
+              <li><span id="decorationName` + id + `"></span> decoration</li>
+              <li><span id="animationName` + id + `"></span></li>
+            </ul>
+          </div>`
+
+          $("#catsDiv").append(catDiv)
+}
