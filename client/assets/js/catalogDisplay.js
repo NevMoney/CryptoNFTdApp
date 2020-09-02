@@ -10,10 +10,26 @@ function appendCat(dna, id){
     //and then renter the cat CSS style depending on the string
     renderCat(KittyDna, id);
     $("#catDNA" + id).html(`
-    
+    <span class="badge badge-light"><h4 class="tsp-2 m-0"><b>GEN:</b>0</h4></span>
+    <br>
+    <span class="badge badge-ligh"><h4 class="tsp-2 m-0"><b>DNA:</b>` + dna + `"</h4></span>
     `)
 }
 
+//apply cat CSS from buildCat.js
+function renderCat(dna, id) {
+  headColor(dna/headcolor, id)
+  mouthAndBelly(dna.mouthColor, id)
+  eyeColor(dna.eyesColor, id)
+  earsAndPaw(dna.earsColor, id)
+  eyeVariation(dna.eyesShape, id)
+  decorationVariation(dna.decorationPattern, id)
+  midColor(dna.decorationMidcolor, id)
+  sidesColor(dna.decorationSidescolor, id)
+  animationVariation(dna.animation, id)
+}
+
+//splitting DNA to use it in redering the cat
 function catDna(dnaStr){
 
     var dna = {
@@ -40,21 +56,6 @@ function catBox(id){
     var catDiv = `<div class="col-lg-4 pointer fit-content">
                 <div class="featureBox catDiv">
 
-                <div id="head"` + id + `" class="cat__head">
-                    <div id="midDot` + id + `" class="cat__head-dots">
-                    <div id"rightDot` + id + `" class="cat__head-dots_first">
-                    <div id"leftDot` + id + `" class="cat__head-dots_second">
-                </div>
-               
-                <div id="catEye"` + id + `" class="cat__eye">
-                    <div class="cat__eye--left">
-                        <span class="pupil-left"></span>
-                    </div>
-                    <div class="cat__eye--right">
-                      <span class="pupil-right"></span>
-                    </div>
-                </div>
-
                 <div class="ears">
                     <div id="leftEar"` + id + `" class="leftEar">
                         <div class="inner-ear-left"></div>
@@ -64,35 +65,36 @@ function catBox(id){
                     </div>
                 </div>
 
-              <div class="body">
-                <div class="cat_body"></div>
+                <div class="body">
+                  <div id="catBody"` + id + `" class="cat_body"></div>
 
-                <div class="belly"></div>
+                  <div id="catBelly"` + id + `" class="belly"></div>
 
-                <div class="paws">
-                  <div class="paws-front-left"></div>
-                  <div class="paws-front-right"></div>
-                  <div class="paws-back-left"></div>
-                  <div class="paws-back-right"></div>
-                </div>
-              </div>
-
-              <div id="head" class="head">
-                <div id="midDot" class="cat__head-dots">
-                  <div id="leftDot" class="cat__head-dots_first"></div>
-                  <div id="rightDot" class="cat__head-dots_second"></div>
-                </div>
-
-                <div class="cat__eye">
-                  <div class="cat__eye--left">
-                    <span class="pupil-left"></span>
-                  </div>
-                  <div class="cat__eye--right">
-                    <span class="pupil-right"></span>
+                  <div class="paws">
+                    <div id="fLpaw"` + id + `" class="paws-front-left"></div>
+                    <div id="fRpaw"` + id + `" class="paws-front-right"></div>
+                    <div id="bLpaw"` + id + `" class="paws-back-left"></div>
+                    <div id="bRpaw"` + id + `" class="paws-back-right"></div>
                   </div>
                 </div>
+                
+                <div id="head"` + id + `" class="head">
+                    <div id="midDot` + id + `" class="cat__head-dots">
+                    <div id"rightDot` + id + `" class="cat__head-dots_first">
+                    <div id"leftDot` + id + `" class="cat__head-dots_second">
+                </div>
 
-                <div class="nose"></div>
+                
+                <div id="catEye"` + id + `" class="cat__eye">
+                    <div class="cat__eye--left">
+                        <span class="pupil-left"></span>
+                    </div>
+                    <div class="cat__eye--right">
+                      <span class="pupil-right"></span>
+                    </div>
+                </div>
+             
+                <div id="catNose"` + id + `" class="nose"></div>
 
                 <div id="mouth-contour"` + id + `" class="cat__mouth-contour">
                     <div class="cat__mouth-left"></div>
