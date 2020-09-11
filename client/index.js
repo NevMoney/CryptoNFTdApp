@@ -5,7 +5,7 @@ var web3 = new Web3(Web3.givenProvider);
 //need to identify a few variables
 var instance;
 var user;
-var contractAddress = "0xCF7a79DabBF521fEe89334AD2fC6Cc23D34fc07f";
+var contractAddress = "0xDe6adDA65BC617A82A875eFA099c11612591d75E";
 
 //when document loads, we'll have a function to connect to ethereum + connect our JS to contract
 //abi - application binary interface --> specification to pass onto MetaMask, basically, a 
@@ -19,6 +19,8 @@ $(document).ready(function(){
         console.log(accounts);
 
         console.log(instance);
+
+        getKitties();
 
         instance.events.Birth().on("data", function(event){
             console.log(event);
@@ -60,13 +62,16 @@ async function getKitties(){
     
     try {
         arrayId = await instance.methods.getKittyByOwner(user).call();
+
+        console.log("arrayId", arrayId);
     }
     catch(err){
         console.log(err);
     }
     for (i = 0; i < arrayId.length; i++){
         kitty = await instance.methods.getKitty(arrayId[i]).call();
-        appendCat(kitty[0], i);
+        console.log("kitty info:", kitty);
+        appendCat(kitty.genes, i);
     }
-    console.log(kitty);
+   
 }

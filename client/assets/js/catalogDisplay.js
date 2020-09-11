@@ -18,7 +18,7 @@ function appendCat(dna, id){
 
 //apply cat CSS from buildCat.js
 function renderCat(dna, id) {
-  headColor(dna/headcolor, id)
+  headColor(dna.headcolor, id)
   mouthAndBelly(dna.mouthColor, id)
   eyeColor(dna.eyesColor, id)
   earsAndPaw(dna.earsColor, id)
