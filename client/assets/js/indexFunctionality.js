@@ -128,10 +128,3 @@ $("#makeAcatBtn").click(function() {
   $(".catalog").hide();
 })
 
-$("#noKittyMakeOne").click(function() {
-  $(".factory").show();
-  $(".home").hide();
-  $("#factoryPageBtn").hide();
-  $(".marketplace").hide();
-  $(".catalog").hide();
-})

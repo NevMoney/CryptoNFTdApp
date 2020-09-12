@@ -11,11 +11,7 @@ function appendCat(dna, id){
 
     //and then renter the cat CSS style depending on the string
     renderBlockchainCat(KittyDna, id);
-    $("#catDNA" + id).html(`
-    <span class="badge badge-light"><h4 class="tsp-2 m-0"><b>GEN:</b>0</h4></span>
-    <br>
-    <span class="badge badge-ligh"><h4 class="tsp-2 m-0"><b>DNA:</b>` + dna + `"</h4></span>
-    `)
+    $("#catDNA" + id).html();
 }
 
 //apply cat CSS from buildCat.js
@@ -80,11 +76,10 @@ function catBox(id){
                         </div>
                       </div>
                       
-                      <div id="head" class="head">
-                      <div id="head" class="head">
-                          <div id="midDot${id}" class="cat__head-dots">
-                          <div id"rightDot${id}" class="cat__head-dots_first">
-                          <div id"leftDot${id}" class="cat__head-dots_second">
+                      <div id="head$${id}" class="head">
+                          <div id="midDot${id}" class="cat__head-dots"></div>
+                          <div id"rightDot${id}" class="cat__head-dots_first"></div>
+                          <div id"leftDot${id}" class="cat__head-dots_second"></div>
                       </div>
 
                      
@@ -114,15 +109,15 @@ function catBox(id){
                       </div>
                     </div>
                   </div>
-
+                
                 <div class="dnaDiv" id="catDNA${id}"></div>
 
                   <ul class="ml-5 cattributes">
-                    <li><span id="eyeName${id}"></span> eyes</li>
-                    <li><span id="decorationName${id}"></span> decoration</li>
-                    <li><span id="animationName${id}"></span></li>
+                    <li><span id="eyeName${id}"></span>Eyes</li>
+                    <li><span id="decorationName${id}"></span>Decoration</li>
+                    <li><span id="animationName${id}"></span>Animation</li>
                   </ul>
                 </div>`
 
-          $("#catsDiv").append(catDiv)
+          $("#catsDiv").append(catDiv);
 }
