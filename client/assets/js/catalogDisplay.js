@@ -49,7 +49,7 @@ function catDna(dnaStr){
 }
 
 //Cat HTML Div
-var name = "";
+var name = "Nev";
 var string = "Hello " + name + "!";
 
 function catBox(id){
@@ -68,7 +68,7 @@ function catBox(id){
                       <div class="body">
                         <div id="catBody"` + id + `" class="cat_body"></div>
 
-                        <div id="catBelly"` + id + `" class="belly"></div>
+                        <div "class="belly"></div>
 
                         <div class="paws">
                           <div id="fLpaw"` + id + `" class="paws-front-left"></div>
@@ -84,13 +84,13 @@ function catBox(id){
                           <div id"leftDot` + id + `" class="cat__head-dots_second">
                       </div>
 
-                      
-                      <div id="catEye"` + id + `" class="cat__eye">
-                          <div class="cat__eye--left">
-                              <span class="pupil-left"></span>
+                     
+                      <div id="catEye" "class="cat__eye">
+                          <div "class="cat__eye--left">
+                              <span id="lPupil"` + id + `" class="pupil-left"></span>
                           </div>
-                          <div class="cat__eye--right">
-                            <span class="pupil-right"></span>
+                          <div "class="cat__eye--right">
+                            <span id="rPupil"` + id + `" class="pupil-right"></span>
                           </div>
                       </div>
                   
@@ -112,7 +112,7 @@ function catBox(id){
                     </div>
                   </div>
 
-                <div class="dnaDiv" id="catDNA` + id + `"></div>
+                <div class="dnaDiv" id="catDNA"` + id + `"></div>
 
                   <ul class="ml-5 cattributes">
                     <li><span id="eyeName` + id + `"></span> eyes</li>

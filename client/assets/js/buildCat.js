@@ -1,4 +1,5 @@
-var colors = Object.values(allColors())
+var colors = Object.values(allColors());
+//var shapes = Object.values(allShapes()); //nev added this to see if shapes will display
 
 function headColor(code, id) {
     var color = colors[code]
@@ -12,7 +13,7 @@ function mouthAndBelly(code, id) {
 
 function eyeColor(code, id) {
     var color = colors[code]
-    $("#catEye" + id).css("background", "#" + color)
+    $("#lPupil" + id + ", #rPupil" + id).css("background", "#" + color)
 }
 
 function earsAndPaw(code, id) {
@@ -33,11 +34,11 @@ function sidesColor(code, id) {
 //need to figure out how to get the decoration change to display
 
 // function eyeVariation(code, id) {
-//     var color = colors[code]
-//     $("#catEye" + id).css("background", "#" + color)
+//    var color = shapes[code]
+//    $("#catEye" + id).css("background", "#" + color)
 // }
 
 // function animationVariation(code, id) {
-//     var color = colors[code]
-//     $("#catEye" + id).css("background", "#" + color)
+//    var color = shapes[code]
+//    $("#catEye" + id).css("background", "#" + color)
 // }

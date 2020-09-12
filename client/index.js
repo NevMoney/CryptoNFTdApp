@@ -2,7 +2,7 @@
 //first we connect to web3 and MetaMask
 var web3 = new Web3(Web3.givenProvider);
 
-//need to identify a few variables
+//need to identify a few variables + use contract address from Ganache every time deployed
 var instance;
 var user;
 var contractAddress = "0x5cf351c78E3A871aCc60194b5e39965b73b75eCD";

@@ -50,6 +50,11 @@ $("#randomBtn").click(function () {
   console.log("random button clicked");
 });
 
+//this function removes button to appear to be pressed after it's pressed
+$("#randomBtn, #defaultBtn, #catCreateBtn").mouseup(function () {
+  $(this).blur()
+});
+
 $("#catCreateBtn").click(function () {
   createKitty();
   console.log("create button clicked");
