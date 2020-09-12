@@ -5,7 +5,7 @@ var web3 = new Web3(Web3.givenProvider);
 //need to identify a few variables
 var instance;
 var user;
-var contractAddress = "0xDe6adDA65BC617A82A875eFA099c11612591d75E";
+var contractAddress = "0x5cf351c78E3A871aCc60194b5e39965b73b75eCD";
 
 //when document loads, we'll have a function to connect to ethereum + connect our JS to contract
 //abi - application binary interface --> specification to pass onto MetaMask, basically, a 
