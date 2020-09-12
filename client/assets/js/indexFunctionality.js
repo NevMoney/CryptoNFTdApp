@@ -12,6 +12,11 @@ $("#cattributesTab").click(function () {
 
 $(document).ready(function () {
   $("#cattributesDiv").hide();
+  $(".factory").hide();
+  $(".home").show();
+  $("#factoryPageBtn").show();
+  $(".marketplace").hide();
+  $(".catalog").hide();
 });
 
 $("#defaultBtn").click(function () {
