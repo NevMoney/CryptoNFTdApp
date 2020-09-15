@@ -56,7 +56,7 @@ $("#randomBtn").click(function () {
 });
 
 //this function removes button to appear to be pressed after it's pressed
-$("#randomBtn, #defaultBtn, #catCreateBtn").mouseup(function () {
+$("#randomBtn, #defaultBtn, #catCreateBtn, #breedBtn").mouseup(function () {
   $(this).blur()
 });
 

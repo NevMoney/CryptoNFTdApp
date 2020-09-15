@@ -416,15 +416,3 @@ iframe {
   position: absolute;
   transform: translateX(-950%);
 }
-
-#catsDiv {
-  display: flex;
-  margin: 5px;
-  position: relative;
-}
-
-.dnaDiv {
-  position: relative;
-  margin: 90px;
-  padding: 10px;
-}

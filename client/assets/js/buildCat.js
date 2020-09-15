@@ -15,7 +15,8 @@ function mouthAndBelly(code, id) {
 
 function eyeColor2(code, id) {
     var color = colors[code]
-    $("#catEye" + id).css("background", "#" + color)
+    $(`#lPupil${id}, #rPupil${id}`).css("background", "#" + color)
+    console.log(color);
 }
 
 function earsAndPaw(code, id) {
@@ -24,7 +25,7 @@ function earsAndPaw(code, id) {
 }
 //eye variation code
 function eyeVariation2(num, id) {
-    switch (num) {
+    switch (Number(num)) {
         case 1:
           break;
         case 2:
@@ -47,11 +48,12 @@ function eyeVariation2(num, id) {
           $("#catEye" + id).find("span").css("border-right", "15px solid black");
           break;
       }  
+      console.log(num, id);
  }
  
  //decoration variation: 
  function decorationVariation2(code, id) {
-    switch (code) {
+    switch (Number(code)) {
         case 1:
             break;
         case 2:
@@ -207,7 +209,7 @@ function sidesColor(code, id) {
 }
 
 function animationVariation2(num, id) {
-    switch (num) {
+    switch (Number(num)) {
       case 1:
         break;
       case 2:

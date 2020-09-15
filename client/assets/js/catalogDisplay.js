@@ -15,8 +15,8 @@ function appendCat(dna, id){
 }
 
 //apply cat CSS from buildCat.js
-function renderblockchainCat(dna, id) {
-  headColor2(dna.headcolor, id)
+function renderBlockchainCat(dna, id) {
+  headColor2(dna.headColor, id)
   mouthAndBelly(dna.mouthColor, id)
   eyeColor2(dna.eyesColor, id)
   earsAndPaw(dna.earsColor, id)
@@ -42,7 +42,7 @@ function catDna(dnaStr){
         "animation": dnaStr.substring(14, 15),
         "lastNum": dnaStr.substring(15, 16)
     }
-
+    console.log(parseInt(dna));
     return dna;
 }
 
@@ -51,73 +51,82 @@ var name = "Nev";
 var string = "Hello " + name + "!";
 
 function catBox(id){
-    var catDiv = `<div class="col-lg-4 pointer fit-content">
-                    <div class="featureBox catDiv">
+    var catDiv = `<div class="col-lg-4 catBox m-2 light-b-shadow">
+            <div class="cat">
+              <div class="ears">
+                <div id="leftEar${id}" class="left-ear">
+                  <div class="inner-ear-left"></div>
+                </div>
+                <div id="rightEar${id}" class="right-ear">
+                  <div class="inner-ear-right"></div>
+                </div>
+              </div>
 
-                      <div class="ears">
-                          <div id="leftEar${id}" class="leftEar">
-                              <div class="inner-ear-left"></div>
-                          </div>
-                          <div id="rightEar${id}" class="right-ear">
-                              <div class="inner-ear-right"></div>
-                          </div>
-                      </div>
+              <div class="body">
+                <div id="catBody${id}" class="cat_body"></div>
 
-                      <div class="body">
-                        <div id="catBody${id}" class="cat_body"></div>
+                <div class="belly"></div>
 
-                        <div "class="belly"></div>
+                <div id="paws" class="paws">
+                  <div id="fLpaw${id}" class="paws-front-left"></div>
+                  <div id="fRpaw${id}" class="paws-front-right"></div>
+                  <div id="bLpaw${id}" class="paws-back-left"></div>
+                  <div id="bRpaw${id}" class="paws-back-right"></div>
+                </div>
+              </div>
 
-                        <div class="paws">
-                          <div id="fLpaw${id}" class="paws-front-left"></div>
-                          <div id="fRpaw${id}" class="paws-front-right"></div>
-                          <div id="bLpaw${id}" class="paws-back-left"></div>
-                          <div id="bRpaw${id}" class="paws-back-right"></div>
-                        </div>
-                      </div>
-                      
-                      <div id="head$${id}" class="head">
-                          <div id="midDot${id}" class="cat__head-dots"></div>
-                          <div id"rightDot${id}" class="cat__head-dots_first"></div>
-                          <div id"leftDot${id}" class="cat__head-dots_second"></div>
-                      </div>
+              <div id="head${id}" class="head">
+                <div id="midDot${id}" class="cat__head-dots">
+                  <div id="leftDot${id}" class="cat__head-dots_first"></div>
+                  <div id="rightDot${id}" class="cat__head-dots_second"></div>
+                </div>
 
-                     
-                      <div id="catEye${id}" "class="cat__eye">
-                          <div "class="cat__eye--left">
-                              <span id="lPupil" class="pupil-left"></span>
-                          </div>
-                          <div "class="cat__eye--right">
-                            <span id="rPupil" class="pupil-right"></span>
-                          </div>
-                      </div>
-                  
-                      <div id="catNose${id}" class="nose"></div>
-
-                      <div id="mouth-contour${id}" class="cat__mouth-contour">
-                          <div class="cat__mouth-left"></div>
-                          <div class="cat__mouth-right"></div>
-                      </div>
-
-                      <div class="whiskers">
-                        <div class="whisker-l1"></div>
-                        <div class="whisker-l2"></div>
-                        <div class="whisker-l3"></div>
-                        <div class="whisker-r1"></div>
-                        <div class="whisker-r2"></div>
-                        <div class="whisker-r3"></div>
-                      </div>
+                <div id="catEye${id}" class="cat__eye">
+                    <div class="cat__eye--left">
+                        <span id="lPupil${id}" class="pupil-left"></span>
                     </div>
-                  </div>
-                
-                <div class="dnaDiv" id="catDNA${id}"></div>
+                    <div class="cat__eye--right">
+                      <span id="rPupil${id}" class="pupil-right"></span>
+                    </div>
+                </div>
+                  
 
-                  <ul class="ml-5 cattributes">
-                    <li><span id="eyeName${id}"></span>Eyes</li>
-                    <li><span id="decorationName${id}"></span>Decoration</li>
-                    <li><span id="animationName${id}"></span>Animation</li>
-                  </ul>
-                </div>`
+                <div id="catNose${id}" class="nose"></div>
+
+                <div id="mouth-contour${id}" class="cat__mouth-contour"></div>
+                <div class="cat__mouth-left"></div>
+                <div class="cat__mouth-right"></div>
+
+                <div class="whiskers">
+                  <div class="whisker-l1"></div>
+                  <div class="whisker-l2"></div>
+                  <div class="whisker-l3"></div>
+                  <div class="whisker-r1"></div>
+                  <div class="whisker-r2"></div>
+                  <div class="whisker-r3"></div>
+                </div>
+              </div>
+            </div>
+            <br />
+            <div class="dnaDiv" id="catDNA${id}">
+            <b>
+                DNA:
+                <!-- Colors -->
+                <span id="dnabody${id}"></span>
+                <span id="dnamouth${id}"></span>
+                <span id="dnaeyes${id}"></span>
+                <span id="dnaears${id}"></span>
+
+                <!-- Cattributes -->
+                <span id="dnashape${id}"></span>
+                <span id="dnadecoration${id}"></span>
+                <span id="dnadecorationMid${id}"></span>
+                <span id="dnadecorationSides${id}"></span>
+                <span id="dnaanimation${id}"></span>
+                <span id="dnaspecial${id}"></span>
+              </b>
+          </div>
+        </div>`
 
           $("#catsDiv").append(catDiv);
 }
