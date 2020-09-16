@@ -10,7 +10,7 @@ function headColor2(code, id) {
 
 function mouthAndBelly(code, id) {
     var color = colors[code]
-    $("#leftEar" + id + ", #rightEar" + id + ", #catNose" + id + ", #mouth-contour" + id).css("background", "#" + color)
+    $("#leftEar" + id + ", #rightEar" + id + ", #catNose" + id).css("background", "#" + color)
 }
 
 function eyeColor2(code, id) {

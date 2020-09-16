@@ -8,7 +8,7 @@ function headColor(color, code) {
 }
 
 function mouthColor(color, code) {
-  $(".left-ear, .right-ear, .mouth, .nose").css("background", "#" + color);
+  $(".left-ear, .right-ear, .nose").css("background", "#" + color);
   $("#mouthcode").html("code: " + code);
   $("#dnamouth").html(code);
 }

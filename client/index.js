@@ -5,7 +5,7 @@ var web3 = new Web3(Web3.givenProvider);
 //need to identify a few variables + use contract address from Ganache every time deployed
 var instance;
 var user;
-var contractAddress = "0xD9BA5531e11163f50DDd3cA06f59DE671c98cB68";
+var contractAddress = "0xbB5bFd7fE5277BB0e80e63131DACb419971AD084";
 
 
 
@@ -21,8 +21,6 @@ $(document).ready(function(){
         console.log(accounts);
 
         console.log(instance);
-
-        getKitties();
 
         instance.events.Birth().on("data", function(event){
             console.log(event);

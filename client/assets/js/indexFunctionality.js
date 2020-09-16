@@ -40,15 +40,15 @@ $("#cattributesTab").click(function (e) {
 //random cat creation - code needs to be written to generate random Cat
 $("#randomBtn").click(function () {
   var randomDNA = {
-    headColor: randomNumber(9, 97),
-    mouthColor: randomNumber(9, 97),
-    eyesColor: randomNumber(9, 97),
-    earsColor: randomNumber(9, 97),
-    eyesShape: randomNumber(0, 6),
-    decorationPattern: randomNumber(0, 6),
-    decorationMidcolor: randomNumber(9, 97),
-    decorationSidescolor: randomNumber(9, 97),
-    animation: randomNumber(0, 6),
+    headColor: randomNumber(10, 89),
+    mouthColor: randomNumber(10, 89),
+    eyesColor: randomNumber(10, 89),
+    earsColor: randomNumber(10, 89),
+    eyesShape: randomNumber(1, 7),
+    decorationPattern: randomNumber(1, 7),
+    decorationMidcolor: randomNumber(10, 89),
+    decorationSidescolor: randomNumber(10, 89),
+    animation: randomNumber(1, 7),
     lastNum: 1,
   };
   renderCat(randomDNA);
@@ -110,6 +110,8 @@ $("#catalogPage").click(function() {
   $(".marketplace").hide();
   $("#factoryPageBtn").show();
   $(".catalog").show();
+  
+  getKitties();
 })
 
 $(".buyACatBtn").click(function() {

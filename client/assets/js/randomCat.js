@@ -1,5 +1,6 @@
 function randomNumber(min, max) {
-  var randomNum = Math.floor(Math.random() * max) + 1;
+  var randomNum = Math.floor(Math.random() * max) + min;
+  //need to insert min into function using Math.ceil
   console.log(randomNum);
   return randomNum;
 }
