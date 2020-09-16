@@ -7,7 +7,7 @@ function appendCat(dna, id){
     var KittyDna = catDna(dna);
 
     //then, build the catBox div into HTML element
-    catBox(id);
+    catBox(id, dna);
 
     //and then renter the cat CSS style depending on the string
     renderBlockchainCat(KittyDna, id);
@@ -25,6 +25,8 @@ function renderBlockchainCat(dna, id) {
   midColor(dna.decorationMidcolor, id)
   sidesColor(dna.decorationSidescolor, id)
   animationVariation2(dna.animation, id)
+
+  console.log("renderBlockainCat: ", dna);
 }
 
 //splitting DNA to use it in redering the cat
@@ -42,7 +44,7 @@ function catDna(dnaStr){
         "animation": dnaStr.substring(14, 15),
         "lastNum": dnaStr.substring(15, 16)
     }
-    console.log(parseInt(dna));
+    console.log(parseInt(dnaStr));
     return dna;
 }
 
@@ -50,8 +52,9 @@ function catDna(dnaStr){
 var name = "Nev";
 var string = "Hello " + name + "!";
 
-function catBox(id){
-    var catDiv = `<div class="col-lg-4 catBox m-2 light-b-shadow">
+function catBox(id, dna){
+
+    var catDiv = `<div class="col-lg-3 catBox m-5 light-b-shadow">
             <div class="cat">
               <div class="ears">
                 <div id="leftEar${id}" class="left-ear">
@@ -77,8 +80,8 @@ function catBox(id){
 
               <div id="head${id}" class="head">
                 <div id="midDot${id}" class="cat__head-dots">
-                  <div id="leftDot${id}" class="cat__head-dots_first"></div>
-                  <div id="rightDot${id}" class="cat__head-dots_second"></div>
+                  <div id="rightDot${id}" class="cat__head-dots_first"></div>
+                  <div id="leftDot${id}" class="cat__head-dots_second"></div>
                 </div>
 
                 <div id="catEye${id}" class="cat__eye">
@@ -108,22 +111,10 @@ function catBox(id){
               </div>
             </div>
             <br />
-            <div class="dnaDiv" id="catDNA${id}">
+            <div class="dnaDiv" id="catDNA">
             <b>
-                DNA:
-                <!-- Colors -->
-                <span id="dnabody${id}"></span>
-                <span id="dnamouth${id}"></span>
-                <span id="dnaeyes${id}"></span>
-                <span id="dnaears${id}"></span>
-
-                <!-- Cattributes -->
-                <span id="dnashape${id}"></span>
-                <span id="dnadecoration${id}"></span>
-                <span id="dnadecorationMid${id}"></span>
-                <span id="dnadecorationSides${id}"></span>
-                <span id="dnaanimation${id}"></span>
-                <span id="dnaspecial${id}"></span>
+                DNA:${dna}
+                
               </b>
           </div>
         </div>`

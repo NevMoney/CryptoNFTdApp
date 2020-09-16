@@ -197,7 +197,6 @@ function eyeVariation2(num, id) {
     }
 }
 
-
 function midColor(code, id) {
     var color = colors[code]
     $("#midDot" + id).css("background", "#" + color)
