@@ -1,3 +1,5 @@
+//this file passes the action from catSettings and Index Factory to make the cat
+
 //Color variations
 function headColor(color, code) {
   $(".cat_body").css("background", "#" + color); //This changes the color of the cat
@@ -6,7 +8,7 @@ function headColor(color, code) {
 }
 
 function mouthColor(color, code) {
-  $(".left-ear, .right-ear, .mouth, .nose").css("background", "#" + color);
+  $(".left-ear, .right-ear, .nose").css("background", "#" + color);
   $("#mouthcode").html("code: " + code);
   $("#dnamouth").html(code);
 }

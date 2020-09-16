@@ -1,3 +1,5 @@
+//this file creates actual cats from index factory
+
 var colors = Object.values(allColors());
 
 var defaultDNA = {

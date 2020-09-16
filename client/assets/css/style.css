@@ -23,7 +23,7 @@ h3 {
 }
 
 .cat {
-  height: 30vh;
+  height: 20vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -412,3 +412,7 @@ iframe {
   display: flex;
 }
 
+#breedBtn {
+  position: absolute;
+  transform: translateX(-950%);
+}

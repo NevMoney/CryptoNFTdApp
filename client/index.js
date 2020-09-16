@@ -2,10 +2,12 @@
 //first we connect to web3 and MetaMask
 var web3 = new Web3(Web3.givenProvider);
 
-//need to identify a few variables
+//need to identify a few variables + use contract address from Ganache every time deployed
 var instance;
 var user;
-var contractAddress = "0x5cf351c78E3A871aCc60194b5e39965b73b75eCD";
+var contractAddress = "0xbB5bFd7fE5277BB0e80e63131DACb419971AD084";
+
+
 
 //when document loads, we'll have a function to connect to ethereum + connect our JS to contract
 //abi - application binary interface --> specification to pass onto MetaMask, basically, a 
@@ -19,8 +21,6 @@ $(document).ready(function(){
         console.log(accounts);
 
         console.log(instance);
-
-        getKitties();
 
         instance.events.Birth().on("data", function(event){
             console.log(event);
