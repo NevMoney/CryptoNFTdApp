@@ -1,6 +1,7 @@
-pragma solidity 0.5.12;
+pragma solidity ^0.5.12;
 
 import "./IERC721.sol";
+import "./IERC721Receiver.sol";
 import "./Ownable.sol";
 
 contract Kittycontract is IERC721, Ownable {
@@ -8,6 +9,13 @@ contract Kittycontract is IERC721, Ownable {
     uint256 public constant CREATION_LIMIT_GEN0 = 20;
     string public constant name = "DigiCats"; //created token name
     string public constant symbol = "DGC"; //created token symbol
+
+    bytes4 internal constant MAGIC_ERC721_RECEIVED = bytes4(keccak256("onERC721Received(address,address,uint256,bytes)"));
+
+    bytes4 private constant _INTERFACE_ID_ERC721 = 0x80ac58cd;
+
+    bytes4 private constant _INTERFACE_ID_ERC165 = 0x01ffc9a7;
+
 
     //we have some events that we need to emit & can be used for the website
     event Birth(address owner, uint256 kittenId, uint256 momId, uint256 dadId, uint256 genes);
@@ -25,8 +33,15 @@ contract Kittycontract is IERC721, Ownable {
 
     mapping(uint256 => address) public kittyIndexToOwner; //tying the cat ID and ties it to the owner
     mapping(address => uint256) private ownershipTokenCount; //takes the address and gives us the number of cats owned
+    mapping(uint256 => address) public kittyIndexToApproved; //mapping from kitty index to an address (need this for exchange listing & transfer token)
+    //take address of owner and address of operator who gets permission and it will give us T/F (double mapping)
+    mapping(address => mapping (address => bool)) private _operatorApprovals;
 
     uint256 public gen0Counter; //keep track of gen0 cats
+
+    function supportsInterface(bytes4 _interfaceId) external view returns (bool) {
+        return(_interfaceId == _INTERFACE_ID_ERC721 || _interfaceId == _INTERFACE_ID_ERC165);
+    }
 
     function createKittyGen0(uint256 _genes) public onlyOwner returns (uint256) {
         require(gen0Counter < CREATION_LIMIT_GEN0); //require limited number of gen0 cats -- must have constant
@@ -129,6 +144,7 @@ contract Kittycontract is IERC721, Ownable {
         //this makes sure that if it's not a brand new kitty, it's taken out of the senders address
         if(msg.sender != address(0)){
             ownershipTokenCount[from]--;
+            delete kittyIndexToApproved[tokenId];
         }
 
          emit Transfer(from, to, tokenId); //emit the event that transfer took place
@@ -138,4 +154,82 @@ contract Kittycontract is IERC721, Ownable {
     function _owns(address seller, uint tokenId) internal view returns (bool){
         return kittyIndexToOwner[tokenId] == seller;
     }
+
+    function approve(address _to, uint256 _tokenId) public{
+        require(_owns(msg.sender, _tokenId)); //require ownership
+
+        _approve(_tokenId, _to);
+        emit Approval(msg.sender, _to, _tokenId);
+    }
+
+    function setApprovalForAll(address operator, bool approved) public{
+        require(operator != msg.sender);
+       
+        _operatorApprovals[msg.sender][operator] = approved;
+        emit ApprovalForAll(msg.sender, operator, approved);
+    }
+
+    function getApproved(uint256 tokenId) public view returns (address){
+        require(tokenId < kitties.length); //verify ID exists
+        
+        return kittyIndexToApproved[tokenId];
+    }
+
+    function isApprovedForAll(address _owner, address _operator) public view returns (bool){
+        return _operatorApprovals[owner][_operator]; //checks mapping for owner and approved operators
+    }
+
+    function _approve(uint256 _tokenId, address _approved) internal {
+        kittyIndexToApproved[_tokenId] = _approved;
+    }
+
+    function transferFrom(address _from, address _to, uint256 _tokenId) public{
+        //ensure sender is an owner, authorized sender for the specific token or operator
+        require(msg.sender == _from || _approvedFor(msg.sender, _tokenId) || isApprovedForAll(_from, msg.sender)); 
+        require(_to != address(0)); //ensure you are not sending to zero address/burning it
+        require(_tokenId < kitties.length); //ensure ID is valid
+        require(_owns(_from, _tokenId)); //ensure sender is the owner
+
+        _transfer(_from, _to, _tokenId);
+    }
+
+    function _approvedFor(address _claimant, uint256 _tokenId) internal view returns(bool){ //need this function to make transferFrom function work
+        return kittyIndexToApproved[_tokenId] == _claimant;
+    }
+
+    function _safeTransfer(address _from, address _to, uint256 _tokenId, bytes memory _data) internal {
+        _transfer(_from, _to, _tokenId);
+        require(_checkERC721Support(_from, _to, _tokenId, _data));
+    }
+
+    function _checkERC721Support(address _from, address _to, uint256 _tokenId, bytes memory _data) internal returns(bool){
+        if(!_isContract(_to)){
+            return true;
+        }
+        //call onERC721Received in the _to contract (ensuring if it's smart contract it can handle ERC721)
+        bytes4 returnData = IERC721Receiver(_to).onERC721Received(msg.sender, _from, _tokenId, _data);
+        return returnData == MAGIC_ERC721_RECEIVED;
+    }
+
+    function _isContract(address _to) view internal returns (bool){
+        uint32 size;
+        assembly{
+            size := extcodesize(_to)
+        }
+        return size > 0;
+    }
+
+    function safeTransferFrom(address _from, address _to, uint256 _tokenId, bytes memory _data) public{
+        require(msg.sender == from || _approvedFor(msg.sender, _tokenId) || isApprovedForAll(_from, msg.sender)); 
+        require(to != address(0)); 
+        require(tokenId < kitties.length);
+        require(_owns(from, tokenId)); 
+        
+        _safeTransfer(from, to, tokenId, data);
+    }
+
+    function safeTransferFrom(address _from, address _to, uint256 _tokenId) public{
+        safeTransferFrom(_from, _to, _tokenId, "");
+    }
+
 }
