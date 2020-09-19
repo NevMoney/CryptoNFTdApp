@@ -94,7 +94,7 @@ contract Kittycontract is IERC721, Ownable {
         return result;
     }
 
-    function getKitty(uint256 _id) external view returns(
+    function getKitty(uint256 _id) public view returns(
         uint256 genes, 
         uint256 birthTime, 
         uint256 momId, 
@@ -220,16 +220,55 @@ contract Kittycontract is IERC721, Ownable {
     }
 
     function safeTransferFrom(address _from, address _to, uint256 _tokenId, bytes memory _data) public{
-        require(msg.sender == from || _approvedFor(msg.sender, _tokenId) || isApprovedForAll(_from, msg.sender)); 
-        require(to != address(0)); 
-        require(tokenId < kitties.length);
-        require(_owns(from, tokenId)); 
+        require(msg.sender == _from || _approvedFor(msg.sender, _tokenId) || isApprovedForAll(_from, msg.sender)); 
+        require(_to != address(0)); 
+        require(_tokenId < kitties.length);
+        require(_owns(_from, _tokenId)); 
         
-        _safeTransfer(from, to, tokenId, data);
+        _safeTransfer(_from, _to, _tokenId, _data);
     }
 
     function safeTransferFrom(address _from, address _to, uint256 _tokenId) public{
         safeTransferFrom(_from, _to, _tokenId, "");
     }
 
+    function breed(uint256 _dadId, uint256 _momId) public returns (uint256){
+        //check ownership
+        require(_owns(msg.sender, _dadId), "Hmm, something went wrong! You don't seem to own this kitty");
+        require(_owns(msg.sender, _momId), "Hmm, something went wrong! You don't seem to own this kitty");
+        
+        //get cat info using getKitty function:
+        (uint256 dadDna,,,,uint256 dadGeneration) = getKitty(_dadId);
+        (uint256 momDna,,,,uint256 momGeneration) = getKitty(_momId);
+        uint256 newDna = _mixDna(dadDna, momDna);
+
+        //figure out generation - how to calculate new gen (add mom gen + dad gen)
+        uint256 kidGen = 0;
+        if (dadGeneration < momGeneration){
+            kidGen = momGeneration + 1;
+            kidGen = (kidGen/2) + 1;
+        }
+        else if (dadGeneration > momGeneration){
+            kidGen = dadGeneration + 1;
+            kidGen = (kidGen/2) + 1;
+        }
+        else{
+            kidGen = momGeneration + 1;
+        }
+
+        //create new cat with new properties and give it to msg.sender
+        _createKitty(_momId, _dadId, kidGen, newDna, msg.sender);
+    }
+
+    function _mixDna(uint256 _dadDna, uint256 _momDna) internal returns (uint256){
+        //take two DNA strings and take first half of 16 digits from dad and second from mom
+        uint256 dadsHalf = _dadDna / 100000000;
+        uint256 momsHalf = _momDna % 100000000;
+
+        //then add dad dna to mom dna to create kid dna
+        uint256 kidDna = (dadsHalf * 100000000) + momsHalf;
+        return kidDna;
+    }
+
+    
 }

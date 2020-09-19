@@ -5,7 +5,7 @@ var web3 = new Web3(Web3.givenProvider);
 //need to identify a few variables + use contract address from Ganache every time deployed
 var instance;
 var user;
-var contractAddress = "0xbB5bFd7fE5277BB0e80e63131DACb419971AD084";
+var contractAddress = "0xe42bcDE0B5eB0C4A4F57cc41B45338689AD20Db6";
 
 
 
