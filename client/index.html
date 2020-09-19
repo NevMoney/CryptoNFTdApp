@@ -114,7 +114,7 @@
       <p>All your DigiCats are here proudly displayed.</p>
       </div>
       <div class="catalog-bottom">
-        <button id="breedBtn" type="button" class="btn btn-danger light-b-shadow">Breed</button>
+        <button id="breedBtn" type="button" class="btn btn-danger btn-lg light-b-shadow">Breed</button>
         <br><br><br>      
             
           <div id="catsDiv" class="row"></div>
@@ -123,7 +123,7 @@
     </div>
 
     <!--kitty factory display-->
-    <div class="factory">
+    <div class="factory" align="center">
       <div class="container p-5" style="margin-top: 12vh; margin-bottom: 10vh;">
         <div align="center">
           <h1 class="c-white">DigiCat Factory</h1>
@@ -376,6 +376,26 @@
             Create Kitty
           </button>
         </div>
+      </div>
+    </div>
+
+    <!--breed page (hidden)-->
+    <div class="breed" align="center">
+      <div class="container p-5" style="margin-top: 5vh; margin-bottom: 20vh;">
+        <h1 class="c-white">Breed Your Kitties</h1>
+        <div class="row" style="margin-top: 5vh; margin-bottom: 20vh;">
+          <div class="col-lg-5 breedBox m-2 light-b-shadow">
+            <p><strong>Select a Dame (mom)</strong></p>
+            <p>This kitty will be a proud mama!</p>
+            <button type="button" id="momBtn" class="btn btn-outline-danger">Add A Mom</button>
+          </div>
+          <div class="col-lg-5 breedBox m-2 light-b-shadow">
+            <p><strong>Select a Sire</strong></p>
+            <p>This kitty will be a proud papa!</p>
+            <button type="button" id="dadBtn" class="btn btn-outline-info">Add A Dad</button>
+          </div>
+          <button type="button" id="privacyBreedBtn" class="btn btn-lg btn-secondary light-b-shadow" disabled>Now, some privacy please!</button>
+        </div>  
       </div>
     </div>
 

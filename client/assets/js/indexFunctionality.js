@@ -17,6 +17,7 @@ $(document).ready(function () {
   $("#factoryPageBtn").show();
   $(".marketplace").hide();
   $(".catalog").hide();
+  $(".breed").hide();
 });
 
 $("#defaultBtn").click(function () {
@@ -70,6 +71,7 @@ $("#factoryPageBtn").click(function() {
   $(".home").hide();
   $("#factoryPageBtn").hide();
   $(".marketplace").hide();
+  $(".breed").hide();
 })
 
 $("#factoryPage").click(function() {
@@ -78,6 +80,7 @@ $("#factoryPage").click(function() {
   $("#factoryPageBtn").hide();
   $(".marketplace").hide();
   $(".catalog").hide();
+  $(".breed").hide();
 })
 
 $("#makeKittyBtn").click(function() {
@@ -86,6 +89,7 @@ $("#makeKittyBtn").click(function() {
   $("#factoryPageBtn").hide();
   $(".marketplace").hide();
   $(".catalog").hide();
+  $(".breed").hide();
 })
 
 $("#homePage").click(function() {
@@ -94,6 +98,7 @@ $("#homePage").click(function() {
   $("#factoryPageBtn").show();
   $(".marketplace").hide();
   $(".catalog").hide();
+  $(".breed").hide();
 })
 
 $("#marketplacePage").click(function() {
@@ -102,6 +107,7 @@ $("#marketplacePage").click(function() {
   $(".marketplace").show();
   $("#factoryPageBtn").show();
   $(".catalog").hide();
+  $("#breed").hide();
 })
 
 $("#catalogPage").click(function() {
@@ -110,6 +116,7 @@ $("#catalogPage").click(function() {
   $(".marketplace").hide();
   $("#factoryPageBtn").show();
   $(".catalog").show();
+  $(".breed").hide();
   
   getKitties();
 })
@@ -120,6 +127,7 @@ $(".buyACatBtn").click(function() {
   $(".marketplace").show();
   $("#factoryPageBtn").show();
   $(".catalog").hide();
+  $(".breed").hide();
 })
 
 $("#makeAcatBtn").click(function() {
@@ -128,5 +136,16 @@ $("#makeAcatBtn").click(function() {
   $("#factoryPageBtn").hide();
   $(".marketplace").hide();
   $(".catalog").hide();
+  $(".breed").hide();
 })
 
+//need to add breed functionality
+
+$("#breedBtn").click(function(){
+  $(".factory").hide();
+  $(".home").hide();
+  $("#factoryPageBtn").hide();
+  $(".marketplace").hide();
+  $(".catalog").hide();
+  $(".breed").show();
+})

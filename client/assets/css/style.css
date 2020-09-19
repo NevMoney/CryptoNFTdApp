@@ -416,3 +416,24 @@ iframe {
   position: absolute;
   transform: translateX(-950%);
 }
+
+.breedBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 10px;
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
+#privacyBreedBtn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  margin-top: 30px;
+  margin-left: 30%;
+  margin-right: 30%;
+}

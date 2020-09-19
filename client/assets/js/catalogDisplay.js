@@ -52,8 +52,8 @@ function catDna(dnaStr){
 var name = "Nev";
 var string = "Hello " + name + "!";
 
-function catBox(id, dna){
-
+function catBox(id, dna, generation){
+    
     var catDiv = `<div class="col-lg-3 catBox m-5 light-b-shadow">
             <div class="cat">
               <div class="ears">
@@ -113,11 +113,13 @@ function catBox(id, dna){
             <br />
             <div class="dnaDiv" id="catDNA">
             <b>
-                DNA:${dna}
-                
-              </b>
+
+              Gen:${generation}
+              DNA:${dna}
+ 
+            </b>
           </div>
         </div>`
 
-          $("#catsDiv").append(catDiv);
+    $("#catsDiv").append(catDiv);
 }
