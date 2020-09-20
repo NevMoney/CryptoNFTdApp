@@ -39,6 +39,10 @@ contract Kittycontract is IERC721, Ownable {
 
     uint256 public gen0Counter; //keep track of gen0 cats
 
+    constructor() public {
+        _createKitty(0, 0, 0, uint256(-1), address(0));
+    }
+
     function supportsInterface(bytes4 _interfaceId) external view returns (bool) {
         return(_interfaceId == _INTERFACE_ID_ERC721 || _interfaceId == _INTERFACE_ID_ERC165);
     }
