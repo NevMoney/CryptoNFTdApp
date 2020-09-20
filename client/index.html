@@ -384,18 +384,25 @@
       <div class="container p-5" style="margin-top: 5vh; margin-bottom: 20vh;">
         <h1 class="c-white">Breed Your Kitties</h1>
         <div class="row" style="margin-top: 5vh; margin-bottom: 20vh;">
-          <div class="col-lg-5 breedBox m-2 light-b-shadow">
+          <div id="momDiv" class="col-lg-5 breedBox m-2 light-b-shadow" onclick="togglePopup()">
             <p><strong>Select a Dame (mom)</strong></p>
             <p>This kitty will be a proud mama!</p>
-            <button type="button" id="momBtn" class="btn btn-outline-danger">Add A Mom</button>
           </div>
-          <div class="col-lg-5 breedBox m-2 light-b-shadow">
+          <div id="dadDiv" class="col-lg-5 breedBox m-2 light-b-shadow">
             <p><strong>Select a Sire</strong></p>
             <p>This kitty will be a proud papa!</p>
-            <button type="button" id="dadBtn" class="btn btn-outline-info">Add A Dad</button>
           </div>
           <button type="button" id="privacyBreedBtn" class="btn btn-lg btn-secondary light-b-shadow" disabled>Now, some privacy please!</button>
         </div>  
+      </div>
+    </div>
+
+    <div class="popup" id="kittyPopup">
+      <div class="overlay"></div>
+      <div class="content">
+        <div class="close-btn" onclick="togglePopup()">$times;</div>
+        <h1>Here are the kitties you can breed!</h1>
+        <div id="catsDiv" class="row"></div>
       </div>
     </div>
 

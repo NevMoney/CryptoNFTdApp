@@ -148,4 +148,16 @@ $("#breedBtn").click(function(){
   $(".marketplace").hide();
   $(".catalog").hide();
   $(".breed").show();
-})
+});
+
+$("#momDiv").click(function togglePopup() {
+  document.getElementById("kittyPopup").classList.toggle("active")
+});
+
+$("#dadDiv").click(function togglePopup() {
+  document.getElementById("kittyPopup").classList.toggle("active")
+});
+
+// function togglePopup() {
+//   document.getElementById("kittyPopup").classList.toggle("active");
+// }
