@@ -1,5 +1,11 @@
 var  abi = [
   {
+    "inputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
     "anonymous": false,
     "inputs": [
       {
@@ -597,9 +603,4 @@ var  abi = [
         "name": "",
         "type": "uint256"
       }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  }
 ]
