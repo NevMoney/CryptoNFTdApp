@@ -25,8 +25,6 @@ function renderBlockchainCat(dna, id) {
   midColor(dna.decorationMidcolor, id)
   sidesColor(dna.decorationSidescolor, id)
   animationVariation2(dna.animation, id)
-
-  console.log("renderBlockainCat: ", dna);
 }
 
 //splitting DNA to use it in redering the cat
@@ -44,7 +42,6 @@ function catDna(dnaStr){
         "animation": dnaStr.substring(14, 15),
         "lastNum": dnaStr.substring(15, 16)
     }
-    console.log(parseInt(dnaStr));
     return dna;
 }
 
@@ -54,7 +51,7 @@ var string = "Hello " + name + "!";
 
 function catBox(id, dna, generation){
     
-    var catDiv = `<div class="col-lg-3 catBox m-5 light-b-shadow">
+    var catDiv = `<div class="col-lg-3 catBox m-5 light-b-shadow" id="catalogDisplay" onclick="selectCat()">
             <div class="cat">
               <div class="ears">
                 <div id="leftEar${id}" class="left-ear">

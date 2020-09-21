@@ -16,7 +16,6 @@ function mouthAndBelly(code, id) {
 function eyeColor2(code, id) {
     var color = colors[code]
     $(`#lPupil${id}, #rPupil${id}`).css("background", "#" + color)
-    console.log(color);
 }
 
 function earsAndPaw(code, id) {
@@ -48,7 +47,6 @@ function eyeVariation2(num, id) {
           $("#catEye" + id).find("span").css("border-right", "15px solid black");
           break;
       }  
-      console.log(num, id);
  }
  
  //decoration variation: 

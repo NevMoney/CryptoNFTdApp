@@ -6,8 +6,8 @@ var web3 = new Web3(Web3.givenProvider);
 var instance;
 var marketplaceInstance;
 var user;
-var contractAddress = "0x15384F361De16F81678D5Fb931D43a8382b8eAec";
-var marketplaceAddress = "0x7f0aCE9bF8343A04C9f2d1415A7E9C79dFa26200";
+var contractAddress = "0xf82a9d2DF62369DcB3B26F39b9CB676054E11afc";
+var marketplaceAddress = "0x774a0e7F305959fcc209057CD66bf08a8FD2CD44";
 
 
 
@@ -21,10 +21,6 @@ $(document).ready(function(){
         marketplaceInstance = new web3.eth.Contract(abi.KittyMarketplace, marketplaceAddress, {from: accounts[0]});
         user = accounts[0];
 
-        console.log(accounts);
-
-        console.log(instance);
-
         instance.events.Birth().on("data", function(event){
             console.log(event);
             let owner = event.returnValues.owner;
@@ -32,8 +28,8 @@ $(document).ready(function(){
             let momId = event.returnValues.momId;
             let dadId = event.returnValues.dadId;
             let genes = event.returnValues.genes;
-            $("#catCreateBtn").css("display", "block");
-            $("#catCreateBtn").text("Meow For Joy! You have just created your own DigiCat! Congrats! Owner: " + owner 
+            $("#catCreatedMsg").css("display", "block");
+            $("#catCreatedMsg").text("Meow For Joy! You have just created your own DigiCat! Congrats! Owner: " + owner 
                                     + ", kittenId: " + kittenId 
                                     + ", momId: " + momId 
                                     + ", dadId: " + dadId 
@@ -80,15 +76,12 @@ async function getKitties(){
     
     try {
         arrayId = await instance.methods.getKittyByOwner(user).call();
-
-        console.log("arrayId", arrayId);
     }
     catch(err){
         console.log(err);
     }
     for (i = 0; i < arrayId.length; i++){
         kitty = await instance.methods.getKitty(arrayId[i]).call();
-        console.log("kitty info:", kitty);
         appendCat(kitty.genes, i, kitty.generation);
     }
 }
