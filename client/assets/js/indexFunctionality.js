@@ -107,7 +107,7 @@ $("#marketplacePage").click(function() {
   $(".marketplace").show();
   $("#factoryPageBtn").show();
   $(".catalog").hide();
-  $("#breed").hide();
+  $(".breed").hide();
 })
 
 $("#catalogPage").click(function() {

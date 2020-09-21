@@ -6,8 +6,8 @@ var web3 = new Web3(Web3.givenProvider);
 var instance;
 var marketplaceInstance;
 var user;
-var contractAddress = "0xF49848D96B723263fd77bEdf94006c7E91aF47Ca";
-var marketplaceAddress = "0x1220d93278Ee8dE5F82b02B6Fe01318B9BAbac9E";
+var contractAddress = "0x15384F361De16F81678D5Fb931D43a8382b8eAec";
+var marketplaceAddress = "0x7f0aCE9bF8343A04C9f2d1415A7E9C79dFa26200";
 
 
 
@@ -17,8 +17,8 @@ var marketplaceAddress = "0x1220d93278Ee8dE5F82b02B6Fe01318B9BAbac9E";
 //find abi under the contract in build folder, then create new file called abi.js and past the object
 $(document).ready(function(){
     window.ethereum.enable().then(function(accounts){
-        instance = new web3.eth.Contract(abi.kittyContract, contractAddress, {from: accounts[0]});
-        marketplaceInstance = new web3.eth.Contract(abi.marketplace, marketplaceAddress, {from: accounts[0]});
+        instance = new web3.eth.Contract(abi.Kittycontract, contractAddress, {from: accounts[0]});
+        marketplaceInstance = new web3.eth.Contract(abi.KittyMarketplace, marketplaceAddress, {from: accounts[0]});
         user = accounts[0];
 
         console.log(accounts);
@@ -38,7 +38,7 @@ $(document).ready(function(){
                                     + ", momId: " + momId 
                                     + ", dadId: " + dadId 
                                     + ", genes: " + genes)
-        });
+        })
         .on("error", console.error);
 
         marketplaceInstance.events.MarketTransaction().on("data", (event) => {
@@ -56,7 +56,7 @@ $(document).ready(function(){
                 alert_msg("Successfully removed offer to sell Kitty ID: " + tokenId)
                 //again see W9 D5 Vid3 for add stuff
             }
-        });
+        })
         .on("error", console.error);
     });
 });
@@ -89,7 +89,7 @@ async function getKitties(){
     for (i = 0; i < arrayId.length; i++){
         kitty = await instance.methods.getKitty(arrayId[i]).call();
         console.log("kitty info:", kitty);
-        appendCat(kitty.genes, i);
+        appendCat(kitty.genes, i, kitty.generation);
     }
 }
 
@@ -159,7 +159,7 @@ async function singleKitty() {
 }
 
 async function catOwnership(id) {
-    var address = await instance.methods.ownerOf(id),call();
+    var address = await instance.methods.ownerOf(id).call();
     if (address.toLowerCase() == user.toLowerCase()) {
         return true;
     }

@@ -97,11 +97,7 @@
         <h2><strong>Welcome To The MarketPlace</strong></h2>
         <p>Buy, Sell, Trade Your DigiCats In One Convenient Place</p>
       </div>
-      <div class="marketplace-bottom">
-        <h3 style="text-align: center; justify-content: center;">No Kitties On The Market! Bummer! &#128546</h3>
-        <br>
-        
-      </div>
+      
     </div>
 
     <!--catalog page display-->
@@ -385,7 +381,7 @@
             <p><strong>Select a Dame!</strong></p>
             <p>This kitty will be a proud mama!</p>
           </div>
-          <div id="dadDiv" class="col-lg-5 breedBox m-2 light-b-shadow">
+          <div id="dadDiv" class="col-lg-5 breedBox m-2 light-b-shadow" onclick="togglePopup()">
             <p><strong>Select a Sire!</strong></p>
             <p>This kitty will be a proud papa!</p>
           </div>
@@ -402,6 +398,56 @@
         <div id="catsDiv" class="row"></div>
       </div>
     </div>
+
+    <!--listing cat for sale page (hidden)-->
+    <!-- Start Menu-->
+    <div id="menu"></div>
+    <!-- End Menu-->
+    <div class="animation-wrapper">
+      <div class="particle particle-1"></div>
+    </div>
+    <div class="catHeader">
+      <div class="container">
+        <div id="singleCat"></div>
+      </div>
+    </div>
+
+    <div class="container middleBox mt-5">
+      <div id="catDNA" align="center"></div>
+      <br>
+      <div class="hidden" align="center" id="buyBox">
+        <div class="btn-group">
+          <button class="btn btn-light btn-lg light-b-shadow" id="butBtn"><b>Buy Kitty</b></button>
+          <button class="btn btn-light btn-lg ml-2 light-b-shadow" id="priceBtn"></button>
+        </div>
+        <br>
+      </div>
+
+      <div class="hidden row justify-content-center" align="center" id="sellBox">
+        
+        <div class="col-lg-2 p-1">
+          <button class="btn btn-warning" id="sellBtn"><b>Sell Kitty</b></button>
+        </div>
+
+        <div class="col-lg-2 p-1">
+          <input type="number" class="form-control" id="catPrice" placeholder="Enter Price in Ether">
+          <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon2"><b>ETH</b></span>
+          </div>
+        </div>
+        
+        <div class="col-lg-2 p-1 hidden" id="cancelBox">
+          <button class="btn btn-danger" id="cancelBtn"><b>Cancell Offer</b></button>
+        </div>
+
+      </div>
+
+      <div id="message" align="center"></div>
+      <br>
+      <div id="cattributes"></div>
+      
+    </div>
+
 
     <footer align="center">
       <p>

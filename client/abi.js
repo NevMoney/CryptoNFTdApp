@@ -1,6 +1,6 @@
 var  abi = {
 
-  kittyContract: [
+  Kittycontract: [
     {
       "inputs": [],
       "payable": false,
@@ -610,9 +610,9 @@ var  abi = {
       "stateMutability": "nonpayable",
       "type": "function"
     }
-  ]
+  ],
 
-  marketplace: [
+  KittyMarketplace: [
     {
       "inputs": [
         {

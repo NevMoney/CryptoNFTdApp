@@ -1,13 +1,13 @@
 //this file takes blockchain cats from buildCat file then displayes them onto the index catalog page
 
 //append cats from contract onto the catalog page
-function appendCat(dna, id){
+function appendCat(dna, id, generation){
 
     //first find and return cat DNA into readable string
     var KittyDna = catDna(dna);
 
     //then, build the catBox div into HTML element
-    catBox(id, dna);
+    catBox(id, dna, generation);
 
     //and then renter the cat CSS style depending on the string
     renderBlockchainCat(KittyDna, id);
