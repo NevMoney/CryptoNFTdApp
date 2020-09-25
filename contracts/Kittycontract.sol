@@ -238,8 +238,8 @@ contract Kittycontract is IERC721, Ownable {
 
     function breed(uint256 _dadId, uint256 _momId) public returns (uint256){
         //check ownership
-        require(_owns(msg.sender, _dadId), "Hmm, something went wrong! You don't seem to own this kitty");
-        require(_owns(msg.sender, _momId), "Hmm, something went wrong! You don't seem to own this kitty");
+        require(_owns(msg.sender, _dadId), "ERR20");
+        require(_owns(msg.sender, _momId), "ERR20");
         
         //get cat info using getKitty function:
         (uint256 dadDna,,,,uint256 dadGeneration) = getKitty(_dadId);

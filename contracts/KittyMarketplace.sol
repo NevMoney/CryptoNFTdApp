@@ -58,9 +58,9 @@ contract KittyMarketplace is Ownable, IKittyMarketPlace {
     }
 
     function setOffer(uint256 _price, uint256 _tokenId) public {
-        require(_ownsKitty(msg.sender, _tokenId), "You don't seem to own that kitty!");
-        require(tokenIdToOffer[_tokenId].active == false, "You cannot sell the same cat more than once!");
-        require(_kittyContract.isApprovedForAll(msg.sender, address(this)), "Contract needs to be approved as operator.");
+        require(_ownsKitty(msg.sender, _tokenId), "ERR20");
+        require(tokenIdToOffer[_tokenId].active == false, "ERR30");
+        require(_kittyContract.isApprovedForAll(msg.sender, address(this)), "ERR40");
 
         //create offer by inserting items into the array
         Offer memory _offer = Offer({
@@ -79,7 +79,7 @@ contract KittyMarketplace is Ownable, IKittyMarketPlace {
 
     function removeOffer(uint256 _tokenId) public{
         Offer memory offer = tokenIdToOffer[_tokenId]; //first access the offer
-        require(offer.seller == msg.sender, "You must be the seller to remove an offer"); //ensure owner only can do this
+        require(offer.seller == msg.sender, "ERR20"); //ensure owner only can do this
 
         delete offer;
         offers[offer.index].active == false; //access the offer inside the mapping and array and make inactive
@@ -89,8 +89,8 @@ contract KittyMarketplace is Ownable, IKittyMarketPlace {
 
     function buyKitty(uint256 _tokenId) public payable{
         Offer memory offer = tokenIdToOffer[_tokenId]; 
-        require(msg.value == offer.price, "You've entered wrong ammount");
-        require(offer.active == true, "No active order present");
+        require(msg.value == offer.price, "ERR10");
+        require(offer.active == true, "ERR50");
 
         //MUST remove the kitty from mapping and array BEFORE transfer takes place to ensure there is no double sale
         delete offer;

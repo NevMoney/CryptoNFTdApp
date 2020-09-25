@@ -1,13 +1,11 @@
 $("#catColorTab").click(function () {
   $("#cattributesDiv").hide();
   $("#catColors").show();
-  console.log("tab clicked");
 });
 
 $("#cattributesTab").click(function () {
   $("#catColors").hide();
   $("#cattributesDiv").show();
-  console.log("tab clicked");
 });
 
 $(document).ready(function () {
@@ -17,7 +15,7 @@ $(document).ready(function () {
   $("#factoryPageBtn").show();
   $(".marketplace").hide();
   $(".catalog").hide();
-  $(".breed").hide();
+  $("#privacyBtn").hide();
 });
 
 $("#defaultBtn").click(function () {
@@ -25,7 +23,6 @@ $("#defaultBtn").click(function () {
   normaldecoration();
   normalEyes();
   resetAnimation();
-  console.log("default button clicked");
 });
 
 $("#catColorTab").click(function (e) {
@@ -53,17 +50,15 @@ $("#randomBtn").click(function () {
     lastNum: 1,
   };
   renderCat(randomDNA);
-  console.log("random button clicked");
 });
 
 //this function removes button to appear to be pressed after it's pressed
-$("#randomBtn, #defaultBtn, #catCreateBtn, #breedBtn").mouseup(function () {
+$("#randomBtn, #defaultBtn, #catCreateBtn, #breedBtn", "#privacyBtn").mouseup(function () {
   $(this).blur()
 });
 
 $("#catCreateBtn").click(function () {
   createKitty();
-  console.log("create button clicked");
 });
 
 $("#factoryPageBtn").click(function() {
@@ -71,7 +66,6 @@ $("#factoryPageBtn").click(function() {
   $(".home").hide();
   $("#factoryPageBtn").hide();
   $(".marketplace").hide();
-  $(".breed").hide();
 })
 
 $("#factoryPage").click(function() {
@@ -80,7 +74,7 @@ $("#factoryPage").click(function() {
   $("#factoryPageBtn").hide();
   $(".marketplace").hide();
   $(".catalog").hide();
-  $(".breed").hide();
+  $("#catCreatedMsg").hide();
 })
 
 $("#makeKittyBtn").click(function() {
@@ -89,7 +83,6 @@ $("#makeKittyBtn").click(function() {
   $("#factoryPageBtn").hide();
   $(".marketplace").hide();
   $(".catalog").hide();
-  $(".breed").hide();
 })
 
 $("#homePage").click(function() {
@@ -98,7 +91,6 @@ $("#homePage").click(function() {
   $("#factoryPageBtn").show();
   $(".marketplace").hide();
   $(".catalog").hide();
-  $(".breed").hide();
 })
 
 $("#marketplacePage").click(function() {
@@ -107,7 +99,6 @@ $("#marketplacePage").click(function() {
   $(".marketplace").show();
   $("#factoryPageBtn").show();
   $(".catalog").hide();
-  $(".breed").hide();
 })
 
 $("#catalogPage").click(function() {
@@ -116,8 +107,12 @@ $("#catalogPage").click(function() {
   $(".marketplace").hide();
   $("#factoryPageBtn").show();
   $(".catalog").show();
-  $(".breed").hide();
-  
+  $("#selectMom").hide();
+  $("#selectDad").hide();
+  $("#privacyBtn").hide();
+
+  $("#catsDiv").empty();
+
   getKitties();
 })
 
@@ -127,7 +122,6 @@ $(".buyACatBtn").click(function() {
   $(".marketplace").show();
   $("#factoryPageBtn").show();
   $(".catalog").hide();
-  $(".breed").hide();
 })
 
 $("#makeAcatBtn").click(function() {
@@ -136,28 +130,47 @@ $("#makeAcatBtn").click(function() {
   $("#factoryPageBtn").hide();
   $(".marketplace").hide();
   $(".catalog").hide();
-  $(".breed").hide();
 })
 
-//need to add breed functionality
+/*
+the idea below is to have a person click "breed" button and message to select mom pops up
+the cursor changes to pointer above divs and first selection (mom) adds red border
+upon selecting the first div messafe to select mom disapears and dad message comes up
+selecting a div makes that particular border blue
+when both red and blue cats are chosen "breed" button disapears and it's replaced by 
+Privacy Button, which is what generates new kitten
+
+BUT IT'S NOT WORKING!
+*/
 
 $("#breedBtn").click(function(){
-  $(".factory").hide();
-  $(".home").hide();
-  $("#factoryPageBtn").hide();
-  $(".marketplace").hide();
-  $(".catalog").hide();
-  $(".breed").show();
+  $("#selectMom").show();
+  $("#selectDad").hide();
+  $("#catsDiv").css("cursor", "pointer");
 });
 
-// $("#momDiv").click(function() {
-//   $("#kittyPopup").show();
-// });
+function selectCat(id) {
+  
+  $("#catalogDisplay" + id).css("border", "5px solid red");
+  // when clicked second time, it will select different cat as dad and mark it blue
+  // $("#catalogDisplay").css("border", "5px solid blue");
+  console.log(id);
+}
 
-// $("#dadDiv").click(function() {
-//   $("#kittyPopup").show();
+// $("#catsDiv").click(function(id){
+//   for(i=0; i<2; i++){
+//     if (i == 0){
+//     $("#catalogDisplay"+ id).addClass("border", "5px solid red");
+//     }
+//     else if (i == 1){
+//       $("#selectMom").hide();
+//       $("#selectDad").show();
+//       $("#catalogDisplay" + id).css("border", "5px solid blue");
+//     }
+//     else {
+//       $("#breedBtn").hide();
+//       $("#privacyBtn").show();
+//     }
+//   }
+  
 // });
-
-// function togglePopup() {
-//   document.getElementById("kittyPopup").classList.toggle("active");
-// }

@@ -418,12 +418,3 @@ iframe {
   padding-right: 10px;
 }
 
-.breedBox {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: white;
-  border-radius: 10px;
-  margin-left: 30%;
-  margin-right: 30%;
-}
