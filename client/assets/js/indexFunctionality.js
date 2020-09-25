@@ -150,14 +150,14 @@ $("#breedBtn").click(function(){
   $(".breed").show();
 });
 
-$("#momDiv").click(function() {
-  $("#kittyPopup").show();
-});
+// $("#momDiv").click(function() {
+//   $("#kittyPopup").show();
+// });
 
-$("#dadDiv").click(function() {
-  $("#kittyPopup").show();
-});
+// $("#dadDiv").click(function() {
+//   $("#kittyPopup").show();
+// });
 
-function togglePopup() {
-  document.getElementById("kittyPopup").classList.toggle("active");
-}
+// function togglePopup() {
+//   document.getElementById("kittyPopup").classList.toggle("active");
+// }
