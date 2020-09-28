@@ -150,8 +150,10 @@ $("#breedBtn").click(function(){
 });
 
 function selectCat(id) {
+
+  // var id = "catalogDisplay${id}"
   
-  $("#catalogDisplay" + id).css("border", "5px solid red");
+  $("#catalogDisplay").css("border", "5px solid red");
   // when clicked second time, it will select different cat as dad and mark it blue
   // $("#catalogDisplay").css("border", "5px solid blue");
   console.log(id);
