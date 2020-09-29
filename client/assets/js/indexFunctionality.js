@@ -153,6 +153,8 @@ var momId;
 var dadId;
 
 function selectCat(id) {
+  if(momId && dadId) return;
+
   if (typeof(momId) != "number") {
     $(`#catalogDisplay${id}`).css("border", "5px solid red");
     $("#selectMom").hide();
@@ -180,7 +182,10 @@ $("#confirmSellCatBtn").click(function(){
   $("#singleCat").append(singleKitty());
 });
 
+var id; 
+
 $("#sellBtn").click(function(){
   sellCat(id);
-  
+  getInventory();
 });
+

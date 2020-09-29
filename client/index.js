@@ -6,8 +6,8 @@ var web3 = new Web3(Web3.givenProvider);
 var instance;
 var marketplaceInstance;
 var user;
-var contractAddress = "0x075c5E70A43420786A37E65D301bea100f627821";
-var marketplaceAddress = "0x50D89eb8E98E9F19cBD4BDbF5868E0702924405b";
+var contractAddress = "0x05Ccb335d34041671ebc052C1D8c619edaCb5728";
+var marketplaceAddress = "0xd67e1b51A4160b2F087A553E9Cb6d351Fd69023a";
 
 
 
@@ -76,14 +76,15 @@ async function getKitties(){
     
     try {
         arrayId = await instance.methods.getKittyByOwner(user).call();
+        for (i = 0; i < arrayId.length; i++){
+            kitty = await instance.methods.getKitty(arrayId[i]).call();
+            appendCat(kitty.genes, arrayId[i], kitty.generation, false);
+        }
     }
     catch(err){
         console.log(err);
     }
-    for (i = 0; i < arrayId.length; i++){
-        kitty = await instance.methods.getKitty(arrayId[i]).call();
-        appendCat(kitty.genes, arrayId[i], kitty.generation);
-    }
+    
 }
 
 //send user to give permission to marketplace to run as operator
@@ -101,7 +102,7 @@ async function initMarketplace() {
     }
 }
 
-//get the inventory of cats available for sale
+//get the inventory of cats available for sale to list on marketplace
 async function getInventory() {
     var arrayId = await marketplaceInstance.methods.getAllTokenOnSale().call();
     console.log("getInventory array: ", arrayId);
@@ -112,24 +113,11 @@ async function getInventory() {
     }
 }
 
-//kitties for breeding
-// async function breedCats(gender) {
-//     var arrayId = await instance.methods.getKittyByOwner(user).call();
-//     for(i = 0; i < arrayId.length; i++) {
-//         appendBreed(arrayId[i], gender);
-//     }
-// }
-
-//append cat to breed selection
-// async function appendBreed(id, gender) {
-//     var kitty = await instance.methods.getKitty(id).call();
-//     breedAppend(kitty[0], id, kitty.generation, gender);
-// }
-
 //appending cat to breed select
 async function breed(dadId, momId) {
     try {
         var newKitty = await instance.methods.breed(dadId, momId).send();
+        //WARNING: code stops working here for unknown reason
         console.log("newKitty: ", newKitty);
         setTimeout(() => {      
             go_to(".catalog")
@@ -145,12 +133,12 @@ async function appendKitty(id) {
     appendCat(kitty[0], id, kitty["generation"]);
 }
 
-async function singleKitty() {
-    var id = get_variables().catId;
-    var kitty = await instance.methods.getKitty(id).call();
-    renderSingleCat(kitty[0], id, kitty["generation"]);
+// async function singleKitty() {
+//     var id = get_variables().catId;
+//     var kitty = await instance.methods.getKitty(id).call();
+//     renderSingleCat(kitty[0], id, kitty["generation"]);
 
-}
+// }
 
 async function catOwnership(id) {
     var address = await instance.methods.ownerOf(id).call();
@@ -164,7 +152,16 @@ async function sellCat(id) {
     var price = $("#catPrice").val();
     var amount = web3.utils.toWei(price, "ether");
     try {
-        await marketplaceInstance.methods.setOffer(amount, id).send();
+        //check if user has approved marketplace (isApprovedForAll())
+        const isApproved = await marketplaceInstance.methods.isApprovedForAll(user, marketplaceAddress).call();
+        //if false, approve first
+        if(!isApproved){
+            await marketplaceInstance.methods.setApprovalForAll(operator, approved).send();
+        }
+        //if true
+        else {
+            await marketplaceInstance.methods.setOffer(amount, id).send();
+        }    
     }
     catch (err) {
         console.log(err);

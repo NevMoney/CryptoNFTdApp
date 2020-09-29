@@ -1,7 +1,7 @@
 //this file takes blockchain cats from buildCat file then displayes them onto the index catalog page
 
 //append cats from contract onto the catalog page
-function appendCat(dna, id, generation){
+function appendCat(dna, id, generation, isMarketPlace){
 
     //first find and return cat DNA into readable string
     var KittyDna = catDna(dna);
@@ -49,10 +49,10 @@ function catDna(dnaStr){
 var name = "Nev";
 var string = "Hello " + name + "!";
 
-function catBox(id, dna, generation){
+function catBox(id, dna, generation, isMarketPlace){
     
-    var catDiv = `<div class="col-lg-3 catBox m-5 light-b-shadow" id="catalogDisplay${id}" onclick="selectCat(${id})">
-            <div class="cat">
+    var catDiv = `<div class="col-lg-3 catBox m-5 light-b-shadow" id="catalogDisplay${id}">
+            <div class="cat"  onclick="selectCat(${id})">
               <div class="ears">
                 <div id="leftEar${id}" class="left-ear">
                   <div class="inner-ear-left"></div>
@@ -110,14 +110,21 @@ function catBox(id, dna, generation){
             <br />
             <div class="dnaDiv" id="catDNA">
             <b>
-
+            
               Gen:${generation}
               DNA:${dna}
- 
+                <button class="btn btn-outline-success" id="sellKittyBtn" data-toggle="modal" data-target=".bd-example-modal-lg">Sell</button>
+
             </b>
           </div>
         </div>`
 
-    $("#catsDiv").append(catDiv);
-    //$("#catsDivSale").append(catDiv);
+    if(!isMarketPlace){
+      $("#catsDiv").append(catDiv);
+      
+    }
+    else {
+      $("#catsDivSale").append(catDiv);
+    }
+    
 }
