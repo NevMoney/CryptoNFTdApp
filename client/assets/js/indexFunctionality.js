@@ -182,4 +182,5 @@ $("#confirmSellCatBtn").click(function(){
 
 $("#sellBtn").click(function(){
   sellCat(id);
+  
 });
