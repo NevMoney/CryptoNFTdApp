@@ -119,4 +119,5 @@ function catBox(id, dna, generation){
         </div>`
 
     $("#catsDiv").append(catDiv);
+    //$("#catsDivSale").append(catDiv);
 }

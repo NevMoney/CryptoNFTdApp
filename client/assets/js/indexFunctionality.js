@@ -53,7 +53,7 @@ $("#randomBtn").click(function () {
 });
 
 //this function removes button to appear to be pressed after it's pressed
-$("#randomBtn, #defaultBtn, #catCreateBtn, #breedBtn, #privacyBtn, #sellCatBtn").mouseup(function () {
+$("#randomBtn, #defaultBtn, #catCreateBtn, #breedBtn, #privacyBtn, #listCatBtn").mouseup(function () {
   $(this).blur()
 });
 
@@ -173,6 +173,13 @@ $("#privacyBtn").click(function(){
   console.log(momId, dadId);
 });
 
-$("#sellCatBtn").click(function(){
-  $("#singleCat").show();
+$("#confirmSellCatBtn").click(function(){
+  $("#listCatBtn").hide();
+  // $(".modal").hide();
+  $("#sellBox").show();
+  $("#singleCat").append(singleKitty());
+});
+
+$("#sellBtn").click(function(){
+  sellCat(id);
 });

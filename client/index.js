@@ -6,8 +6,8 @@ var web3 = new Web3(Web3.givenProvider);
 var instance;
 var marketplaceInstance;
 var user;
-var contractAddress = "0x5E1C5e0f24A86b72F69a1F25351fd5A4fe50994C";
-var marketplaceAddress = "0x7880821cb8Dc236016B4114936de5264F3ba0Dd1";
+var contractAddress = "0x075c5E70A43420786A37E65D301bea100f627821";
+var marketplaceAddress = "0x50D89eb8E98E9F19cBD4BDbF5868E0702924405b";
 
 
 
@@ -133,8 +133,7 @@ async function breed(dadId, momId) {
         console.log("newKitty: ", newKitty);
         setTimeout(() => {      
             go_to(".catalog")
-        }, 2000)
-        
+        }, 2000);
     } catch (err) {
         console.log(err);
     } 
@@ -150,6 +149,7 @@ async function singleKitty() {
     var id = get_variables().catId;
     var kitty = await instance.methods.getKitty(id).call();
     renderSingleCat(kitty[0], id, kitty["generation"]);
+
 }
 
 async function catOwnership(id) {
