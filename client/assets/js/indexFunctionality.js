@@ -53,7 +53,7 @@ $("#randomBtn").click(function () {
 });
 
 //this function removes button to appear to be pressed after it's pressed
-$("#randomBtn, #defaultBtn, #catCreateBtn, #breedBtn", "#privacyBtn").mouseup(function () {
+$("#randomBtn, #defaultBtn, #catCreateBtn, #breedBtn, #privacyBtn, #sellCatBtn").mouseup(function () {
   $(this).blur()
 });
 
@@ -149,30 +149,30 @@ $("#breedBtn").click(function(){
   $("#catsDiv").css("cursor", "pointer");
 });
 
-function selectCat(id) {
+var momId;
+var dadId;
 
-  // var id = "catalogDisplay${id}"
-  
-  $("#catalogDisplay").css("border", "5px solid red");
-  // when clicked second time, it will select different cat as dad and mark it blue
-  // $("#catalogDisplay").css("border", "5px solid blue");
-  console.log(id);
+function selectCat(id) {
+  if (typeof(momId) != "number") {
+    $(`#catalogDisplay${id}`).css("border", "5px solid red");
+    $("#selectMom").hide();
+    $("#selectDad").show();
+    momId = id;
+  }
+  else {
+    $(`#catalogDisplay${id}`).css("border", "5px solid blue");
+    $("#breedBtn").hide();
+    $("#selectDad").hide();
+    $("#privacyBtn").show();
+    dadId = id;    
+  }
 }
 
-// $("#catsDiv").click(function(id){
-//   for(i=0; i<2; i++){
-//     if (i == 0){
-//     $("#catalogDisplay"+ id).addClass("border", "5px solid red");
-//     }
-//     else if (i == 1){
-//       $("#selectMom").hide();
-//       $("#selectDad").show();
-//       $("#catalogDisplay" + id).css("border", "5px solid blue");
-//     }
-//     else {
-//       $("#breedBtn").hide();
-//       $("#privacyBtn").show();
-//     }
-//   }
-  
-// });
+$("#privacyBtn").click(function(){
+  breed(dadId, momId);
+  console.log(momId, dadId);
+});
+
+$("#sellCatBtn").click(function(){
+  $("#singleCat").show();
+});

@@ -51,7 +51,7 @@ var string = "Hello " + name + "!";
 
 function catBox(id, dna, generation){
     
-    var catDiv = `<div class="col-lg-3 catBox m-5 light-b-shadow" id="catalogDisplay" onclick="selectCat(${id})">
+    var catDiv = `<div class="col-lg-3 catBox m-5 light-b-shadow" id="catalogDisplay${id}" onclick="selectCat(${id})">
             <div class="cat">
               <div class="ears">
                 <div id="leftEar${id}" class="left-ear">

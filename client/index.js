@@ -6,8 +6,8 @@ var web3 = new Web3(Web3.givenProvider);
 var instance;
 var marketplaceInstance;
 var user;
-var contractAddress = "0x168d767CA075B5D40DB34F31B0945c0f93e9743B";
-var marketplaceAddress = "0x2E76409Fac34cd9cc77cea98e9FC7953038C8277";
+var contractAddress = "0x5E1C5e0f24A86b72F69a1F25351fd5A4fe50994C";
+var marketplaceAddress = "0x7880821cb8Dc236016B4114936de5264F3ba0Dd1";
 
 
 
@@ -82,7 +82,7 @@ async function getKitties(){
     }
     for (i = 0; i < arrayId.length; i++){
         kitty = await instance.methods.getKitty(arrayId[i]).call();
-        appendCat(kitty.genes, i, kitty.generation);
+        appendCat(kitty.genes, arrayId[i], kitty.generation);
     }
 }
 
@@ -113,30 +113,31 @@ async function getInventory() {
 }
 
 //kitties for breeding
-async function breedCats(gender) {
-    var arrayId = await instance.methods.getKittyByOwner(user).call();
-    for(i = 0; i < arrayId.length; i++) {
-        appendBreed(arrayId[i], gender);
-    }
-}
+// async function breedCats(gender) {
+//     var arrayId = await instance.methods.getKittyByOwner(user).call();
+//     for(i = 0; i < arrayId.length; i++) {
+//         appendBreed(arrayId[i], gender);
+//     }
+// }
 
 //append cat to breed selection
-async function appendBreed(id, gender) {
-    var kitty = await instance.methods.getKitty(id).call();
-    breedAppend(kitty[0], id, kitty.generation, gender);
-}
+// async function appendBreed(id, gender) {
+//     var kitty = await instance.methods.getKitty(id).call();
+//     breedAppend(kitty[0], id, kitty.generation, gender);
+// }
 
 //appending cat to breed select
 async function breed(dadId, momId) {
     try {
         var newKitty = await instance.methods.breed(dadId, momId).send();
         console.log("newKitty: ", newKitty);
-        setTimeout(() => {
+        setTimeout(() => {      
             go_to(".catalog")
         }, 2000)
+        
     } catch (err) {
         console.log(err);
-    }
+    } 
 }
 
 //appending cats for catalog
