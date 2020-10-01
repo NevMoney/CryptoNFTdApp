@@ -6,8 +6,8 @@ var web3 = new Web3(Web3.givenProvider);
 var instance;
 var marketplaceInstance;
 var user;
-var contractAddress = "0x05Ccb335d34041671ebc052C1D8c619edaCb5728";
-var marketplaceAddress = "0xd67e1b51A4160b2F087A553E9Cb6d351Fd69023a";
+var contractAddress = "0xeb7DEc206B359160B1bb3F03e4dF6056a679c58d";
+var marketplaceAddress = "0x08fE938dD9D30c4ad648F8cB1330A4eF9192abc8";
 
 
 
@@ -87,21 +87,6 @@ async function getKitties(){
     
 }
 
-//send user to give permission to marketplace to run as operator
-async function initMarketplace() {
-    var isMarketplaceOperator = await instance.methods.isApprovedForAll(user, marketplaceAddress).call();
-
-    if(isMarketplaceOperator) {
-        getInventory();
-    }
-    else {
-        await instance.methods.setApprovalForAll(marketplaceAddress, true).send().on("receipt", function(receipt){
-            console.log("operator approval set");
-            getInventory();
-        });
-    }
-}
-
 //get the inventory of cats available for sale to list on marketplace
 async function getInventory() {
     var arrayId = await marketplaceInstance.methods.getAllTokenOnSale().call();
@@ -127,10 +112,10 @@ async function breed(dadId, momId) {
     } 
 }
 
-//appending cats for catalog
+//appending cats for marketplace (added "isMarketPlace = true")
 async function appendKitty(id) {
-    var kitty = await instance.methods.getKitty(id).call();
-    appendCat(kitty[0], id, kitty["generation"]);
+    var kitty = await marketplaceInstance.methods.getKitty(id).call();
+    appendCat(kitty[0], id, kitty["generation"], true);
 }
 
 // async function singleKitty() {
@@ -153,14 +138,18 @@ async function sellCat(id) {
     var amount = web3.utils.toWei(price, "ether");
     try {
         //check if user has approved marketplace (isApprovedForAll())
-        const isApproved = await marketplaceInstance.methods.isApprovedForAll(user, marketplaceAddress).call();
+        const isApproved = await instance.methods.isApprovedForAll(user, marketplaceAddress).call();
         //if false, approve first
         if(!isApproved){
-            await marketplaceInstance.methods.setApprovalForAll(operator, approved).send();
+            await instance.methods.setApprovalForAll(marketplaceAddress, true).send().on("rececipt", function(receipt){
+                console.log("operator approval", receipt);
+                getInventory();
+            })
         }
         //if true
         else {
             await marketplaceInstance.methods.setOffer(amount, id).send();
+            getInventory();
         }    
     }
     catch (err) {

@@ -53,7 +53,7 @@ $("#randomBtn").click(function () {
 });
 
 //this function removes button to appear to be pressed after it's pressed
-$("#randomBtn, #defaultBtn, #catCreateBtn, #breedBtn, #privacyBtn, #listCatBtn").mouseup(function () {
+$("#randomBtn, #defaultBtn, #catCreateBtn, #breedBtn, #privacyBtn, #sellBtn").mouseup(function () {
   $(this).blur()
 });
 
@@ -175,17 +175,16 @@ $("#privacyBtn").click(function(){
   console.log(momId, dadId);
 });
 
-$("#confirmSellCatBtn").click(function(){
-  $("#listCatBtn").hide();
-  // $(".modal").hide();
-  $("#sellBox").show();
-  $("#singleCat").append(singleKitty());
-});
-
 var id; 
 
 $("#sellBtn").click(function(){
+  initMarketplace();
   sellCat(id);
-  getInventory();
 });
 
+$("#confirmSaleBtn").click(function(){
+  getInventory();
+  $(".marketplace").show();
+  $(".catalog").hide();
+  
+})
