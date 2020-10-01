@@ -421,3 +421,7 @@ iframe {
 #sellKittyBtn {
   transform: translate(90%, -20%);
 }
+
+#confirmSaleBtn{
+  transform: translate(700%, -25%);
+}

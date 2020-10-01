@@ -89,12 +89,17 @@ async function getKitties(){
 
 //get the inventory of cats available for sale to list on marketplace
 async function getInventory() {
-    var arrayId = await marketplaceInstance.methods.getAllTokenOnSale().call();
-    console.log("getInventory array: ", arrayId);
-    for(i = 0; i < arrayId.length; i++){
-        if(arrayId[i] != 0){
-            appendKitty(arrayId[i]);
+    try {
+        var arrayId = await marketplaceInstance.methods.getAllTokenOnSale().call();
+        console.log("getInventory array: ", arrayId);
+        for(i = 0; i < arrayId.length; i++){
+            if(arrayId[i] != 0){
+                appendKitty(arrayId[i]);
+            }
         }
+    }
+    catch(err){
+        console.log(err);
     }
 }
 
@@ -118,13 +123,6 @@ async function appendKitty(id) {
     appendCat(kitty[0], id, kitty["generation"], true);
 }
 
-// async function singleKitty() {
-//     var id = get_variables().catId;
-//     var kitty = await instance.methods.getKitty(id).call();
-//     renderSingleCat(kitty[0], id, kitty["generation"]);
-
-// }
-
 async function catOwnership(id) {
     var address = await instance.methods.ownerOf(id).call();
     if (address.toLowerCase() == user.toLowerCase()) {
@@ -136,17 +134,14 @@ async function catOwnership(id) {
 async function sellCat(id) {
     var price = $("#catPrice").val();
     var amount = web3.utils.toWei(price, "ether");
+    const isApproved = await instance.methods.isApprovedForAll(user, marketplaceAddress).call();
     try {
-        //check if user has approved marketplace (isApprovedForAll())
-        const isApproved = await instance.methods.isApprovedForAll(user, marketplaceAddress).call();
-        //if false, approve first
         if(!isApproved){
             await instance.methods.setApprovalForAll(marketplaceAddress, true).send().on("rececipt", function(receipt){
                 console.log("operator approval", receipt);
                 getInventory();
             })
         }
-        //if true
         else {
             await marketplaceInstance.methods.setOffer(amount, id).send();
             getInventory();

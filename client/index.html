@@ -98,10 +98,34 @@
         <p>Buy, Sell, Trade Your DigiCats In One Convenient Place</p>
       </div>
       <br>
-      <div id="catsDivSale"></div>
-    </div>
-
+      <div id="menu"></div>
+      <div class="animation-wrapper">
+      <div class="particle particle-1"></div>
+      </div>
+      <div class="catHeader">
+        <div class="container">
+          <div id="catsDivSale"></div>
+        </div>
+      </div> 
     
+      <div class="container middleBox mt-5">
+        <div id="catDNA" align="center"></div>
+        <br>
+        <div class="hidden" align="center" id="buyBox">
+          <div class="btn-group">
+            <button class="btn btn-light btn-lg light-b-shadow" id="butBtn"><b>Buy Kitty</b></button>
+            <button class="btn btn-light btn-lg ml-2 light-b-shadow" id="priceBtn"></button>
+          </div>
+          <br>
+        </div>
+        <div class="hidden col-lg-2 p-1" id="cancelBox">
+          <button class="btn btn-danger" id="cancelBtn"><b>Cancell Listing</b></button>
+        </div>
+        <div id="message" align="center"></div>
+        <br>
+        <div id="cattributes"></div>
+      </div>
+    </div>
 
     <!--catalog page display-->
     <div class="catalog" align="center">
@@ -148,7 +172,7 @@
                     </div>
                   </div>
 
-                  <div class-"modal-footer text-right">
+                  <div class-"modal-footer">
                     <button type="button" class="btn btn-danger light-b-shadow" data-dismiss="modal" id="confirmSaleBtn">Confirm</button>
                   </div>
 
@@ -418,42 +442,6 @@
         <div class="alert alert-success" id="catCreatedMsg" role="alert"></div>
       </div>
     </div>
-
-    <!--listing cat for sale page (hidden)-->
-    <div id="menu"></div>
-    <div class="animation-wrapper">
-      <div class="particle particle-1"></div>
-    </div>
-   
-    <div class="catHeader">
-      <div class="container">
-        <div id="singleCat"></div>
-      </div>
-    </div>
-
-    <div class="container middleBox mt-5">
-      <div id="catDNA" align="center"></div>
-      <br>
-      <div class="hidden" align="center" id="buyBox">
-        <div class="btn-group">
-          <button class="btn btn-light btn-lg light-b-shadow" id="butBtn"><b>Buy Kitty</b></button>
-          <button class="btn btn-light btn-lg ml-2 light-b-shadow" id="priceBtn"></button>
-        </div>
-        <br>
-      </div>
-
-      <div class="hidden col-lg-2 p-1" id="cancelBox">
-        <button class="btn btn-danger" id="cancelBtn"><b>Cancell Listing</b></button>
-      </div>
-
-     
-
-      <div id="message" align="center"></div>
-      <br>
-      <div id="cattributes"></div>
-      
-    </div>
-
 
     <footer align="center">
       <p>

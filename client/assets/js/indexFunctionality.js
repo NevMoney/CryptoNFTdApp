@@ -178,7 +178,6 @@ $("#privacyBtn").click(function(){
 var id; 
 
 $("#sellBtn").click(function(){
-  initMarketplace();
   sellCat(id);
 });
 
@@ -186,5 +185,5 @@ $("#confirmSaleBtn").click(function(){
   getInventory();
   $(".marketplace").show();
   $(".catalog").hide();
-  
+
 })
