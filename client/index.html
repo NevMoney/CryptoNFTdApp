@@ -97,15 +97,20 @@
         <h2><strong>Welcome To The MarketPlace</strong></h2>
         <p>Buy, Sell, Trade Your DigiCats In One Convenient Place</p>
       </div>
-      <div class="marketplace-bottom">
-        <h4 style="text-align: center; justify-content: center;">No Kitties On The Market! Bummer! &#128546</h4>
-        <br>
-        <div class="col-lg-2 catDisplay m-2 light-b-shadow">
-          <div class="cat">
-          </div>
-        </div>
+      <br>
+      <div id="menu"></div>
+      <div class="animation-wrapper">
+      <div class="particle particle-1"></div>
       </div>
-    </div>
+      <div class="catHeader">
+          <div id="catsDivSale" class="row"></div>
+          <div id="catDNA"></div>
+          <div id="message" ></div>
+          <div id="cattributes"></div>
+      </div>
+    </div> 
+    
+      
 
     <!--catalog page display-->
     <div class="catalog" align="center">
@@ -114,7 +119,10 @@
       <p>All your DigiCats are here proudly displayed.</p>
       </div>
       <div class="catalog-bottom">
-        <button id="breedBtn" type="button" class="btn btn-danger light-b-shadow">Breed</button>
+        <button id="breedBtn" type="button" class="btn btn-danger btn-lg light-b-shadow">Breed</button>
+        <button id="privacyBtn" type="button" class="btn btn-danger btn-lg light-b-shadow">Now, Some Privacy Please</button>
+        <div class="alert alert-danger" id="selectMom" role="alert">Please click on a kitty you wish to be a mom!</div>
+        <div class="alert alert-danger" id="selectDad" role="alert">Excellent! Now plesae select a dad-kitty!</div>
         <br><br><br>      
             
           <div id="catsDiv" class="row"></div>
@@ -122,8 +130,42 @@
       </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-lg" id="sellCatModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Let's sell this kitty!</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-12">
+                  
+                  <div class="row justify-content-center" align="center" id="sellBox">
+                    <div class="col-lg-3 p-1">
+                      <input class="form-control" id="catPrice" placeholder="Enter Amount">
+                      <div class="input-group-append">
+                        <span class="input-group-text form-inline" id="basic-addon2"><b>ETH</b></span>
+                      </div>
+                    </div>
+                    <div class="col-lg-2 p-1">
+                      <button class="btn btn-warning light-b-shadow" id="sellBtn"><b>List For Sale</b></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!--kitty factory display-->
-    <div class="factory">
+    <div class="factory" align="center">
       <div class="container p-5" style="margin-top: 12vh; margin-bottom: 10vh;">
         <div align="center">
           <h1 class="c-white">DigiCat Factory</h1>
@@ -376,6 +418,8 @@
             Create Kitty
           </button>
         </div>
+
+        <div class="alert alert-success" id="catCreatedMsg" role="alert"></div>
       </div>
     </div>
 

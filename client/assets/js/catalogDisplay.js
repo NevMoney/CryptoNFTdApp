@@ -1,13 +1,13 @@
 //this file takes blockchain cats from buildCat file then displayes them onto the index catalog page
 
 //append cats from contract onto the catalog page
-function appendCat(dna, id){
+function appendCat(dna, id, generation, isMarketPlace){
 
     //first find and return cat DNA into readable string
     var KittyDna = catDna(dna);
 
     //then, build the catBox div into HTML element
-    catBox(id, dna);
+    catBox(id, dna, generation, isMarketPlace);
 
     //and then renter the cat CSS style depending on the string
     renderBlockchainCat(KittyDna, id);
@@ -25,8 +25,6 @@ function renderBlockchainCat(dna, id) {
   midColor(dna.decorationMidcolor, id)
   sidesColor(dna.decorationSidescolor, id)
   animationVariation2(dna.animation, id)
-
-  console.log("renderBlockainCat: ", dna);
 }
 
 //splitting DNA to use it in redering the cat
@@ -44,7 +42,6 @@ function catDna(dnaStr){
         "animation": dnaStr.substring(14, 15),
         "lastNum": dnaStr.substring(15, 16)
     }
-    console.log(parseInt(dnaStr));
     return dna;
 }
 
@@ -52,10 +49,10 @@ function catDna(dnaStr){
 var name = "Nev";
 var string = "Hello " + name + "!";
 
-function catBox(id, dna){
-
-    var catDiv = `<div class="col-lg-3 catBox m-5 light-b-shadow">
-            <div class="cat">
+function catBox(id, dna, generation, isMarketPlace){
+    
+    var catDiv = `<div class="col-lg-3 catBox m-5 light-b-shadow" id="catalogDisplay${id}">
+            <div class="cat"  onclick="selectCat(${id})">
               <div class="ears">
                 <div id="leftEar${id}" class="left-ear">
                   <div class="inner-ear-left"></div>
@@ -110,14 +107,31 @@ function catBox(id, dna){
                 </div>
               </div>
             </div>
-            <br />
+            <br /><br>
             <div class="dnaDiv" id="catDNA">
             <b>
-                DNA:${dna}
-                
-              </b>
+        
+              Gen:${generation}
+              DNA:${dna}
+                <button class="btn btn-outline-success" id="selectSaleBtn${id}" onclick="selectCatForSale(${id})" data-toggle="modal" data-target=".bd-example-modal-lg">Sell</button>
+                <br>
+                <button class="btn btn-warning light-b-shadow" id="buyBtn${id}" onclick="selectCatForSale(${id})"><b>Buy</b></button>
+                <button class="btn btn-danger" id="cancelBtn${id}">Withdraw</button>
+            </b>
           </div>
         </div>`
 
-          $("#catsDiv").append(catDiv);
+    if(!isMarketPlace){
+      $("#catsDiv").append(catDiv);
+      $(`#buyBtn${id}`).hide();
+      $(`#cancelBtn${id}`).hide();
+      $(`#selectSaleBtn${id}`).show();
+    }
+    else {
+      $("#catsDivSale").append(catDiv);
+      $(`#buyBtn${id}`).show();
+      $(`#cancelBtn${id}`).show();
+      $(`#selectSaleBtn${id}`).hide();
+    }
+    
 }

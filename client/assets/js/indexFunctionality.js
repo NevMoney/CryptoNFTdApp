@@ -1,13 +1,11 @@
 $("#catColorTab").click(function () {
   $("#cattributesDiv").hide();
   $("#catColors").show();
-  console.log("tab clicked");
 });
 
 $("#cattributesTab").click(function () {
   $("#catColors").hide();
   $("#cattributesDiv").show();
-  console.log("tab clicked");
 });
 
 $(document).ready(function () {
@@ -17,6 +15,7 @@ $(document).ready(function () {
   $("#factoryPageBtn").show();
   $(".marketplace").hide();
   $(".catalog").hide();
+  $("#privacyBtn").hide();
 });
 
 $("#defaultBtn").click(function () {
@@ -24,7 +23,6 @@ $("#defaultBtn").click(function () {
   normaldecoration();
   normalEyes();
   resetAnimation();
-  console.log("default button clicked");
 });
 
 $("#catColorTab").click(function (e) {
@@ -52,17 +50,15 @@ $("#randomBtn").click(function () {
     lastNum: 1,
   };
   renderCat(randomDNA);
-  console.log("random button clicked");
 });
 
 //this function removes button to appear to be pressed after it's pressed
-$("#randomBtn, #defaultBtn, #catCreateBtn, #breedBtn").mouseup(function () {
+$("#randomBtn, #defaultBtn, #catCreateBtn, #breedBtn, #privacyBtn, #sellBtn, #buyBtn").mouseup(function () {
   $(this).blur()
 });
 
 $("#catCreateBtn").click(function () {
   createKitty();
-  console.log("create button clicked");
 });
 
 $("#factoryPageBtn").click(function() {
@@ -78,6 +74,7 @@ $("#factoryPage").click(function() {
   $("#factoryPageBtn").hide();
   $(".marketplace").hide();
   $(".catalog").hide();
+  $("#catCreatedMsg").hide();
 })
 
 $("#makeKittyBtn").click(function() {
@@ -102,6 +99,9 @@ $("#marketplacePage").click(function() {
   $(".marketplace").show();
   $("#factoryPageBtn").show();
   $(".catalog").hide();
+  $("#catsDivSale").empty();
+
+  getInventory();
 })
 
 $("#catalogPage").click(function() {
@@ -110,7 +110,12 @@ $("#catalogPage").click(function() {
   $(".marketplace").hide();
   $("#factoryPageBtn").show();
   $(".catalog").show();
-  
+  $("#selectMom").hide();
+  $("#selectDad").hide();
+  $("#privacyBtn").hide();
+
+  $("#catsDiv").empty();
+
   getKitties();
 })
 
@@ -130,3 +135,68 @@ $("#makeAcatBtn").click(function() {
   $(".catalog").hide();
 })
 
+/*
+the idea below is to have a person click "breed" button and message to select mom pops up
+the cursor changes to pointer above divs and first selection (mom) adds red border
+upon selecting the first div messafe to select mom disapears and dad message comes up
+selecting a div makes that particular border blue
+when both red and blue cats are chosen "breed" button disapears and it's replaced by 
+Privacy Button, which is what generates new kitten
+
+BUT IT'S NOT WORKING!
+*/
+
+$("#breedBtn").click(function(){
+  $("#selectMom").show();
+  $("#selectDad").hide();
+  $("#catsDiv").css("cursor", "pointer");
+});
+
+var momId;
+var dadId;
+
+function selectCat(id) {
+  if(momId && dadId) return;
+
+  if (typeof(momId) != "number") {
+    $(`#catalogDisplay${id}`).css("border", "5px solid red");
+    $("#selectMom").hide();
+    $("#selectDad").show();
+    momId = id;
+  }
+  else {
+    $(`#catalogDisplay${id}`).css("border", "5px solid blue");
+    $("#breedBtn").hide();
+    $("#selectDad").hide();
+    $("#privacyBtn").show();
+    dadId = id;    
+  }
+}
+
+$("#privacyBtn").click(function(){
+  breed(dadId, momId);
+  console.log(momId, dadId);
+});
+
+var saleId; 
+
+function selectCatForSale(id){
+  saleId = id;
+}
+
+$("#sellBtn").click(function(){
+  sellCat(saleId).then(() => {
+    $(".bd-example-modal-lg").modal("hide");
+    getInventory().then(() => {
+      $(".marketplace").show();
+      $("#catsDivSale").empty();
+      $(".catalog").hide();
+    });
+  });  
+});
+
+$("#buyBtn").click(function(){
+  checkOffer(id).then(() => {
+    buyKitten(id, price);
+  });
+});

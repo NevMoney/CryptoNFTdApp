@@ -4,8 +4,10 @@ var web3 = new Web3(Web3.givenProvider);
 
 //need to identify a few variables + use contract address from Ganache every time deployed
 var instance;
+var marketplaceInstance;
 var user;
-var contractAddress = "0xbB5bFd7fE5277BB0e80e63131DACb419971AD084";
+var contractAddress = "0xeb7DEc206B359160B1bb3F03e4dF6056a679c58d";
+var marketplaceAddress = "0x08fE938dD9D30c4ad648F8cB1330A4eF9192abc8";
 
 
 
@@ -15,12 +17,9 @@ var contractAddress = "0xbB5bFd7fE5277BB0e80e63131DACb419971AD084";
 //find abi under the contract in build folder, then create new file called abi.js and past the object
 $(document).ready(function(){
     window.ethereum.enable().then(function(accounts){
-        instance = new web3.eth.Contract(abi, contractAddress, {from: accounts[0]});
+        instance = new web3.eth.Contract(abi.Kittycontract, contractAddress, {from: accounts[0]});
+        marketplaceInstance = new web3.eth.Contract(abi.KittyMarketplace, marketplaceAddress, {from: accounts[0]});
         user = accounts[0];
-
-        console.log(accounts);
-
-        console.log(instance);
 
         instance.events.Birth().on("data", function(event){
             console.log(event);
@@ -29,8 +28,8 @@ $(document).ready(function(){
             let momId = event.returnValues.momId;
             let dadId = event.returnValues.dadId;
             let genes = event.returnValues.genes;
-            $("#catCreateBtn").css("display", "block");
-            $("#catCreateBtn").text("Meow For Joy! You have just created your own DigiCat! Congrats! Owner: " + owner 
+            $("#catCreatedMsg").css("display", "block");
+            $("#catCreatedMsg").text("Meow For Joy! You have just created your own DigiCat! Congrats! Owner: " + owner 
                                     + ", kittenId: " + kittenId 
                                     + ", momId: " + momId 
                                     + ", dadId: " + dadId 
@@ -38,8 +37,24 @@ $(document).ready(function(){
         })
         .on("error", console.error);
 
+        marketplaceInstance.events.MarketTransaction().on("data", (event) => {
+            console.log(event);
+            var eventType = event.returnValues["TxType"].toString();
+            var tokenId = event.returnValues["tokenId"];
+            if (eventType == "Kitty purchased"){
+                alert_msg("Successful Kitty purchase! You are the new owner of this Kitty with Token ID: " + tokenId);
+            }
+            if(eventType == "Offer created"){
+                alert_msg("Success! Offer set for Kitty ID: " + tokenId)
+            //see week 9 day 5 video 3 for additional stuff you can add   
+            }
+            if(eventType == "Offer removed"){
+                alert_msg("Successfully removed offer to sell Kitty ID: " + tokenId)
+                //again see W9 D5 Vid3 for add stuff
+            }
+        })
+        .on("error", console.error);
     });
-   
 });
 
 function createKitty(){
@@ -53,8 +68,7 @@ function createKitty(){
 }
 
 
-//displaying kitty based on user address
-//once page is loaded you run getKitties function
+//displaying kitty based on user address; once page is loaded you run getKitties function
 async function getKitties(){
 
     var arrayId;
@@ -62,16 +76,108 @@ async function getKitties(){
     
     try {
         arrayId = await instance.methods.getKittyByOwner(user).call();
-
-        console.log("arrayId", arrayId);
+        for (i = 0; i < arrayId.length; i++){
+            kitty = await instance.methods.getKitty(arrayId[i]).call();
+            appendCat(kitty.genes, arrayId[i], kitty.generation, false);
+        }
     }
     catch(err){
         console.log(err);
     }
-    for (i = 0; i < arrayId.length; i++){
-        kitty = await instance.methods.getKitty(arrayId[i]).call();
-        console.log("kitty info:", kitty);
-        appendCat(kitty.genes, i);
+    
+}
+
+//get the inventory of cats available for sale to list on marketplace
+async function getInventory() {
+    try {
+        var arrayId = await marketplaceInstance.methods.getAllTokenOnSale().call();
+        console.log("getInventory array: ", arrayId);
+        for(i = 0; i < arrayId.length; i++){
+            if(arrayId[i] != 0){
+                appendKitty(arrayId[i]);
+            }
+        }
     }
-   
+    catch(err){
+        console.log(err);
+    }
+}
+
+//appending cat to breed select
+async function breed(dadId, momId) {
+    try {
+        var newKitty = await instance.methods.breed(dadId, momId).send();
+        //WARNING: code stops working here for unknown reason
+        console.log("newKitty: ", newKitty);
+        setTimeout(() => {      
+            go_to(".catalog")
+        }, 2000);
+    } catch (err) {
+        console.log(err);
+    } 
+}
+
+//appending cats for marketplace (added "isMarketPlace = true")
+async function appendKitty(id) {
+    var kitty = await instance.methods.getKitty(id).call();
+    appendCat(kitty[0], id, kitty["generation"], true);
+}
+
+async function catOwnership(id) {
+    var address = await instance.methods.ownerOf(id).call();
+    if (address.toLowerCase() == user.toLowerCase()) {
+        return true;
+    }
+    return false;
+}
+
+async function sellCat(id) {
+    var price = $("#catPrice").val();
+    var amount = web3.utils.toWei(price, "ether");
+    const isApproved = await instance.methods.isApprovedForAll(user, marketplaceAddress).call();
+    try {
+        if(!isApproved){
+            await instance.methods.setApprovalForAll(marketplaceAddress, true).send().on("receipt", function(receipt){
+                console.log("operator approval", receipt);
+            });
+        }
+
+        await marketplaceInstance.methods.setOffer(amount, id).send();
+        getInventory();   
+    }
+    catch (err) {
+        console.log(err);
+    } 
+}
+
+async function buyKitten(id, price) {
+    var amount = web3.utils.toWei(price, "ether");
+    try {
+        await marketplaceInstance.methods.buyKitty(id).send({value: amount});
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+async function checkOffer(id) {
+    let res;
+
+    try {
+        res = await marketplaceInstance.methods.getOffer(id).call();
+        var price = res["price"];
+        var seller = res["seller"];
+        var onsale = false;
+
+        if (price > 0) {
+            onsale = true;
+        }
+        price = web3.utils.fromWei(price, "ether");
+        var offer = {seller: seller, price: price, onsale: onsale}
+        return offer;
+    }
+    catch (err) {
+        console.log(err);
+        return;
+    }
 }
