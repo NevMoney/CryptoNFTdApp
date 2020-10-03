@@ -7,7 +7,7 @@ function appendCat(dna, id, generation, isMarketPlace){
     var KittyDna = catDna(dna);
 
     //then, build the catBox div into HTML element
-    catBox(id, dna, generation);
+    catBox(id, dna, generation, isMarketPlace);
 
     //and then renter the cat CSS style depending on the string
     renderBlockchainCat(KittyDna, id);
@@ -107,24 +107,31 @@ function catBox(id, dna, generation, isMarketPlace){
                 </div>
               </div>
             </div>
-            <br />
+            <br /><br>
             <div class="dnaDiv" id="catDNA">
             <b>
-            
+        
               Gen:${generation}
               DNA:${dna}
-                <button class="btn btn-outline-success" id="sellKittyBtn" data-toggle="modal" data-target=".bd-example-modal-lg">Sell</button>
-
+                <button class="btn btn-outline-success" id="selectSaleBtn${id}" onclick="selectCatForSale(${id})" data-toggle="modal" data-target=".bd-example-modal-lg">Sell</button>
+                <br>
+                <button class="btn btn-warning light-b-shadow" id="buyBtn${id}" onclick="selectCatForSale(${id})"><b>Buy</b></button>
+                <button class="btn btn-danger" id="cancelBtn${id}">Withdraw</button>
             </b>
           </div>
         </div>`
 
     if(!isMarketPlace){
       $("#catsDiv").append(catDiv);
-      
+      $(`#buyBtn${id}`).hide();
+      $(`#cancelBtn${id}`).hide();
+      $(`#selectSaleBtn${id}`).show();
     }
     else {
       $("#catsDivSale").append(catDiv);
+      $(`#buyBtn${id}`).show();
+      $(`#cancelBtn${id}`).show();
+      $(`#selectSaleBtn${id}`).hide();
     }
     
 }

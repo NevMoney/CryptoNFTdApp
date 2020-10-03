@@ -53,7 +53,7 @@ $("#randomBtn").click(function () {
 });
 
 //this function removes button to appear to be pressed after it's pressed
-$("#randomBtn, #defaultBtn, #catCreateBtn, #breedBtn, #privacyBtn, #sellBtn").mouseup(function () {
+$("#randomBtn, #defaultBtn, #catCreateBtn, #breedBtn, #privacyBtn, #sellBtn, #buyBtn").mouseup(function () {
   $(this).blur()
 });
 
@@ -99,6 +99,9 @@ $("#marketplacePage").click(function() {
   $(".marketplace").show();
   $("#factoryPageBtn").show();
   $(".catalog").hide();
+  $("#catsDivSale").empty();
+
+  getInventory();
 })
 
 $("#catalogPage").click(function() {
@@ -175,15 +178,25 @@ $("#privacyBtn").click(function(){
   console.log(momId, dadId);
 });
 
-var id; 
+var saleId; 
+
+function selectCatForSale(id){
+  saleId = id;
+}
 
 $("#sellBtn").click(function(){
-  sellCat(id);
+  sellCat(saleId).then(() => {
+    $(".bd-example-modal-lg").modal("hide");
+    getInventory().then(() => {
+      $(".marketplace").show();
+      $("#catsDivSale").empty();
+      $(".catalog").hide();
+    });
+  });  
 });
 
-$("#confirmSaleBtn").click(function(){
-  getInventory();
-  $(".marketplace").show();
-  $(".catalog").hide();
-
-})
+$("#buyBtn").click(function(){
+  checkOffer(id).then(() => {
+    buyKitten(id, price);
+  });
+});

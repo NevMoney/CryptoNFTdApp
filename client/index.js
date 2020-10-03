@@ -40,7 +40,7 @@ $(document).ready(function(){
         marketplaceInstance.events.MarketTransaction().on("data", (event) => {
             console.log(event);
             var eventType = event.returnValues["TxType"].toString();
-            var tokenId = events.returnValues["tokenId"];
+            var tokenId = event.returnValues["tokenId"];
             if (eventType == "Kitty purchased"){
                 alert_msg("Successful Kitty purchase! You are the new owner of this Kitty with Token ID: " + tokenId);
             }
@@ -119,7 +119,7 @@ async function breed(dadId, momId) {
 
 //appending cats for marketplace (added "isMarketPlace = true")
 async function appendKitty(id) {
-    var kitty = await marketplaceInstance.methods.getKitty(id).call();
+    var kitty = await instance.methods.getKitty(id).call();
     appendCat(kitty[0], id, kitty["generation"], true);
 }
 
@@ -137,15 +137,13 @@ async function sellCat(id) {
     const isApproved = await instance.methods.isApprovedForAll(user, marketplaceAddress).call();
     try {
         if(!isApproved){
-            await instance.methods.setApprovalForAll(marketplaceAddress, true).send().on("rececipt", function(receipt){
+            await instance.methods.setApprovalForAll(marketplaceAddress, true).send().on("receipt", function(receipt){
                 console.log("operator approval", receipt);
-                getInventory();
-            })
+            });
         }
-        else {
-            await marketplaceInstance.methods.setOffer(amount, id).send();
-            getInventory();
-        }    
+
+        await marketplaceInstance.methods.setOffer(amount, id).send();
+        getInventory();   
     }
     catch (err) {
         console.log(err);

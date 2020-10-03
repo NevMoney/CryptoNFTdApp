@@ -417,11 +417,3 @@ iframe {
   padding-left: 10px;
   padding-right: 10px;
 }
-
-#sellKittyBtn {
-  transform: translate(90%, -20%);
-}
-
-#confirmSaleBtn{
-  transform: translate(700%, -25%);
-}
