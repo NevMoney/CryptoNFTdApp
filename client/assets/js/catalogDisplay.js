@@ -1,13 +1,13 @@
 //this file takes blockchain cats from buildCat file then displayes them onto the index catalog page
 
 //append cats from contract onto the catalog page
-function appendCat(dna, id, generation, isMarketPlace){
+function appendCat(dna, id, generation, isMarketPlace, price){
 
     //first find and return cat DNA into readable string
     var KittyDna = catDna(dna);
 
     //then, build the catBox div into HTML element
-    catBox(id, dna, generation, isMarketPlace);
+    catBox(id, dna, generation, isMarketPlace, price);
 
     //and then renter the cat CSS style depending on the string
     renderBlockchainCat(KittyDna, id);
@@ -49,7 +49,7 @@ function catDna(dnaStr){
 var name = "Nev";
 var string = "Hello " + name + "!";
 
-function catBox(id, dna, generation, isMarketPlace){
+function catBox(id, dna, generation, isMarketPlace, price){
     
     var catDiv = `<div class="col-lg-3 catBox m-5 light-b-shadow" id="catalogDisplay${id}">
             <div class="cat"  onclick="selectCat(${id})">
@@ -115,8 +115,8 @@ function catBox(id, dna, generation, isMarketPlace){
               DNA:${dna}
                 <button class="btn btn-outline-success" id="selectSaleBtn${id}" onclick="selectCatForSale(${id})" data-toggle="modal" data-target=".bd-example-modal-lg">Sell</button>
                 <br>
-                <button class="btn btn-warning light-b-shadow" id="buyBtn${id}" onclick="selectCatForSale(${id})"><b>Buy</b></button>
-                <button class="btn btn-danger" id="cancelBtn${id}">Withdraw</button>
+                <button class="btn btn-warning light-b-shadow" id="buyBtn${id}" onclick="selectCatToBuy(${id})"><b>Buy${price} ETH</b></button>
+                <button class="btn btn-danger" id="cancelBtn${id}" onclick="cancelSale(${id})">Withdraw</button>
             </b>
           </div>
         </div>`

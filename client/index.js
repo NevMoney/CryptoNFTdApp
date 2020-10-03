@@ -42,14 +42,14 @@ $(document).ready(function(){
             var eventType = event.returnValues["TxType"].toString();
             var tokenId = event.returnValues["tokenId"];
             if (eventType == "Kitty purchased"){
-                alert_msg("Successful Kitty purchase! You are the new owner of this Kitty with Token ID: " + tokenId);
+                alert_msg("Success! You own Kitty ID: " + tokenId);
             }
             if(eventType == "Offer created"){
-                alert_msg("Success! Offer set for Kitty ID: " + tokenId)
+                alert_msg("Offer set Kitty ID: " + tokenId)
             //see week 9 day 5 video 3 for additional stuff you can add   
             }
             if(eventType == "Offer removed"){
-                alert_msg("Successfully removed offer to sell Kitty ID: " + tokenId)
+                alert_msg("Offer removed, Kitty ID: " + tokenId)
                 //again see W9 D5 Vid3 for add stuff
             }
         })
@@ -73,12 +73,13 @@ async function getKitties(){
 
     var arrayId;
     var kitty;
+    var price;
     
     try {
         arrayId = await instance.methods.getKittyByOwner(user).call();
         for (i = 0; i < arrayId.length; i++){
             kitty = await instance.methods.getKitty(arrayId[i]).call();
-            appendCat(kitty.genes, arrayId[i], kitty.generation, false);
+            appendCat(kitty.genes, arrayId[i], kitty.generation, false, price);
         }
     }
     catch(err){
@@ -87,14 +88,17 @@ async function getKitties(){
     
 }
 
+var price;
+
 //get the inventory of cats available for sale to list on marketplace
 async function getInventory() {
+   
     try {
         var arrayId = await marketplaceInstance.methods.getAllTokenOnSale().call();
         console.log("getInventory array: ", arrayId);
         for(i = 0; i < arrayId.length; i++){
             if(arrayId[i] != 0){
-                appendKitty(arrayId[i]);
+                appendKitty(arrayId[i], price);
             }
         }
     }
@@ -120,7 +124,7 @@ async function breed(dadId, momId) {
 //appending cats for marketplace (added "isMarketPlace = true")
 async function appendKitty(id) {
     var kitty = await instance.methods.getKitty(id).call();
-    appendCat(kitty[0], id, kitty["generation"], true);
+    appendCat(kitty[0], id, kitty["generation"], true, price);
 }
 
 async function catOwnership(id) {
@@ -158,6 +162,11 @@ async function buyKitten(id, price) {
     catch (err) {
         console.log(err);
     }
+}
+
+//To cancel the sale:
+async function removeOffer(id) {
+    await marketplaceInstance.methods.removeOffer(id).send();
 }
 
 async function checkOffer(id) {

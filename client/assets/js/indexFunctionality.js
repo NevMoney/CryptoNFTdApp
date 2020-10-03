@@ -99,6 +99,7 @@ $("#marketplacePage").click(function() {
   $(".marketplace").show();
   $("#factoryPageBtn").show();
   $(".catalog").hide();
+  
   $("#catsDivSale").empty();
 
   getInventory();
@@ -157,6 +158,8 @@ var dadId;
 
 function selectCat(id) {
   if(momId && dadId) return;
+  //ensuring that momdId != dadId, my idea (not working):
+  // if(momId == dadId) return;
 
   if (typeof(momId) != "number") {
     $(`#catalogDisplay${id}`).css("border", "5px solid red");
@@ -179,6 +182,7 @@ $("#privacyBtn").click(function(){
 });
 
 var saleId; 
+var salePrice;
 
 function selectCatForSale(id){
   saleId = id;
@@ -195,8 +199,15 @@ $("#sellBtn").click(function(){
   });  
 });
 
-$("#buyBtn").click(function(){
-  checkOffer(id).then(() => {
-    buyKitten(id, price);
+function selectCatToBuy(id){
+  saleId = id;
+  salePrice = price;
+  checkOffer(saleId).then(() => {
+    buyKitten(saleId, salePrice);
   });
-});
+}
+
+function cancelSale(id){
+  saleId = id;
+  removeOffer(id);
+}
