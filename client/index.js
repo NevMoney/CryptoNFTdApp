@@ -42,15 +42,15 @@ $(document).ready(function(){
             var eventType = event.returnValues["TxType"].toString();
             var tokenId = event.returnValues["tokenId"];
             if (eventType == "Kitty purchased"){
-                alert_msg("Success! You own Kitty ID: " + tokenId);
+                alert("Success! You own Kitty ID: " + tokenId);
             }
             if(eventType == "Offer created"){
-                alert_msg("Offer set Kitty ID: " + tokenId)
-            //see week 9 day 5 video 3 for additional stuff you can add   
+                alert("Offer set Kitty ID: " + tokenId)
+            
             }
             if(eventType == "Offer removed"){
-                alert_msg("Offer removed, Kitty ID: " + tokenId)
-                //again see W9 D5 Vid3 for add stuff
+                alert("Offer removed, Kitty ID: " + tokenId)
+            
             }
         })
         .on("error", console.error);
@@ -73,13 +73,12 @@ async function getKitties(){
 
     var arrayId;
     var kitty;
-    var price;
     
     try {
         arrayId = await instance.methods.getKittyByOwner(user).call();
         for (i = 0; i < arrayId.length; i++){
             kitty = await instance.methods.getKitty(arrayId[i]).call();
-            appendCat(kitty.genes, arrayId[i], kitty.generation, false, price);
+            appendCat(kitty.genes, arrayId[i], kitty.generation, false);
         }
     }
     catch(err){
@@ -87,8 +86,6 @@ async function getKitties(){
     }
     
 }
-
-var price;
 
 //get the inventory of cats available for sale to list on marketplace
 async function getInventory() {
@@ -98,7 +95,9 @@ async function getInventory() {
         console.log("getInventory array: ", arrayId);
         for(i = 0; i < arrayId.length; i++){
             if(arrayId[i] != 0){
-                appendKitty(arrayId[i], price);
+                const offer = await checkOffer(arrayId[i]);
+
+                if(offer.onSale) appendKitty(arrayId[i], offer.price);
             }
         }
     }
@@ -122,7 +121,7 @@ async function breed(dadId, momId) {
 }
 
 //appending cats for marketplace (added "isMarketPlace = true")
-async function appendKitty(id) {
+async function appendKitty(id, price) {
     var kitty = await instance.methods.getKitty(id).call();
     appendCat(kitty[0], id, kitty["generation"], true, price);
 }
@@ -136,6 +135,9 @@ async function catOwnership(id) {
 }
 
 async function sellCat(id) {
+    const offer = await checkOffer(id);
+    if(offer.onSale) return alert("Kitty already listed for sale.")
+
     var price = $("#catPrice").val();
     var amount = web3.utils.toWei(price, "ether");
     const isApproved = await instance.methods.isApprovedForAll(user, marketplaceAddress).call();
@@ -147,7 +149,7 @@ async function sellCat(id) {
         }
 
         await marketplaceInstance.methods.setOffer(amount, id).send();
-        getInventory();   
+        await gotToInventory();   
     }
     catch (err) {
         console.log(err);
@@ -167,6 +169,7 @@ async function buyKitten(id, price) {
 //To cancel the sale:
 async function removeOffer(id) {
     await marketplaceInstance.methods.removeOffer(id).send();
+    await gotToInventory(); 
 }
 
 async function checkOffer(id) {
@@ -174,15 +177,12 @@ async function checkOffer(id) {
 
     try {
         res = await marketplaceInstance.methods.getOffer(id).call();
-        var price = res["price"];
-        var seller = res["seller"];
-        var onsale = false;
-
-        if (price > 0) {
-            onsale = true;
-        }
+        var price = res.price;
+        var seller = res.seller;
+        var onSale = res.active;
+        
         price = web3.utils.fromWei(price, "ether");
-        var offer = {seller: seller, price: price, onsale: onsale}
+        var offer = {seller: seller, price: price, onSale: onSale}
         return offer;
     }
     catch (err) {

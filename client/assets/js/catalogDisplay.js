@@ -115,7 +115,7 @@ function catBox(id, dna, generation, isMarketPlace, price){
               DNA:${dna}
                 <button class="btn btn-outline-success" id="selectSaleBtn${id}" onclick="selectCatForSale(${id})" data-toggle="modal" data-target=".bd-example-modal-lg">Sell</button>
                 <br>
-                <button class="btn btn-warning light-b-shadow" id="buyBtn${id}" onclick="selectCatToBuy(${id})"><b>Buy${price} ETH</b></button>
+                <button class="btn btn-warning light-b-shadow" id="buyBtn${id}" onclick="selectCatToBuy(${id})"><b>Buy ${price} ETH</b></button>
                 <button class="btn btn-danger" id="cancelBtn${id}" onclick="cancelSale(${id})">Withdraw</button>
             </b>
           </div>

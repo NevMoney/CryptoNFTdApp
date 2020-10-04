@@ -93,7 +93,7 @@ $("#homePage").click(function() {
   $(".catalog").hide();
 })
 
-$("#marketplacePage").click(function() {
+function gotToInventory() {
   $(".factory").hide();
   $(".home").hide();
   $(".marketplace").show();
@@ -101,9 +101,12 @@ $("#marketplacePage").click(function() {
   $(".catalog").hide();
   
   $("#catsDivSale").empty();
+  $("#catsDiv").empty();
 
   getInventory();
-})
+}
+
+$("#marketplacePage").click(gotToInventory)
 
 $("#catalogPage").click(function() {
   $(".factory").hide();
@@ -116,6 +119,7 @@ $("#catalogPage").click(function() {
   $("#privacyBtn").hide();
 
   $("#catsDiv").empty();
+  $("#catsDivSale").empty();
 
   getKitties();
 })
@@ -191,18 +195,13 @@ function selectCatForSale(id){
 $("#sellBtn").click(function(){
   sellCat(saleId).then(() => {
     $(".bd-example-modal-lg").modal("hide");
-    getInventory().then(() => {
-      $(".marketplace").show();
-      $("#catsDivSale").empty();
-      $(".catalog").hide();
-    });
   });  
 });
 
 function selectCatToBuy(id){
   saleId = id;
-  salePrice = price;
-  checkOffer(saleId).then(() => {
+  checkOffer(saleId).then((offer) => {
+    salePrice = offer.price;
     buyKitten(saleId, salePrice);
   });
 }

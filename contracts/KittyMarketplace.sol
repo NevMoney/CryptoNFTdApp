@@ -78,17 +78,17 @@ contract KittyMarketplace is Ownable, IKittyMarketPlace {
     }
 
     function removeOffer(uint256 _tokenId) public{
-        Offer memory offer = tokenIdToOffer[_tokenId]; //first access the offer
+        Offer storage offer = tokenIdToOffer[_tokenId]; //first access the offer
         require(offer.seller == msg.sender, "ERR20"); //ensure owner only can do this
 
         delete offer;
-        offers[offer.index].active == false; //access the offer inside the mapping and array and make inactive
+        offers[offer.index].active = false; //access the offer inside the mapping and array and make inactive
 
         emit MarketTransaction("Offer removed", msg.sender, _tokenId);
     }
 
     function buyKitty(uint256 _tokenId) public payable{
-        Offer memory offer = tokenIdToOffer[_tokenId]; 
+        Offer storage offer = tokenIdToOffer[_tokenId]; 
         require(msg.value == offer.price, "ERR10");
         require(offer.active == true, "ERR50");
 
