@@ -1,13 +1,14 @@
 //this is where web3.js code will be implemented here
 //first we connect to web3 and MetaMask
 var web3 = new Web3(Web3.givenProvider);
+ethereum.autoRefreshOnNetworkChange = false;
 
 //need to identify a few variables + use contract address from Ganache every time deployed
 var instance;
 var marketplaceInstance;
 var user;
-var contractAddress = "0xeb7DEc206B359160B1bb3F03e4dF6056a679c58d";
-var marketplaceAddress = "0x08fE938dD9D30c4ad648F8cB1330A4eF9192abc8";
+var contractAddress = "0xE246F5921d7383Ae8587135F92298DFee7CD07dF";
+var marketplaceAddress = "0xa5b9dC8ccE51C40F95418e7c3D4e505a0613bA72";
 
 
 
@@ -45,12 +46,10 @@ $(document).ready(function(){
                 alert("Success! You own Kitty ID: " + tokenId);
             }
             if(eventType == "Offer created"){
-                alert("Offer set Kitty ID: " + tokenId)
-            
+                alert("Offer set Kitty ID: " + tokenId);
             }
             if(eventType == "Offer removed"){
-                alert("Offer removed, Kitty ID: " + tokenId)
-            
+                alert("Offer removed, Kitty ID: " + tokenId);
             }
         })
         .on("error", console.error);
@@ -89,13 +88,15 @@ async function getKitties(){
 
 //get the inventory of cats available for sale to list on marketplace
 async function getInventory() {
-   
+    
     try {
         var arrayId = await marketplaceInstance.methods.getAllTokenOnSale().call();
         console.log("getInventory array: ", arrayId);
         for(i = 0; i < arrayId.length; i++){
             if(arrayId[i] != 0){
                 const offer = await checkOffer(arrayId[i]);
+
+                console.log(offer);
 
                 if(offer.onSale) appendKitty(arrayId[i], offer.price);
             }
@@ -113,8 +114,7 @@ async function breed(dadId, momId) {
         //WARNING: code stops working here for unknown reason
         console.log("newKitty: ", newKitty);
         setTimeout(() => {      
-            go_to(".catalog")
-        }, 2000);
+            location.reload(".catalog")}, 5000);
     } catch (err) {
         console.log(err);
     } 
@@ -136,7 +136,7 @@ async function catOwnership(id) {
 
 async function sellCat(id) {
     const offer = await checkOffer(id);
-    if(offer.onSale) return alert("Kitty already listed for sale.")
+    if(offer.onSale) return alert("Kitty already listed for sale.");
 
     var price = $("#catPrice").val();
     var amount = web3.utils.toWei(price, "ether");
@@ -149,7 +149,7 @@ async function sellCat(id) {
         }
 
         await marketplaceInstance.methods.setOffer(amount, id).send();
-        await gotToInventory();   
+        gotToInventory();   
     }
     catch (err) {
         console.log(err);
@@ -169,7 +169,7 @@ async function buyKitten(id, price) {
 //To cancel the sale:
 async function removeOffer(id) {
     await marketplaceInstance.methods.removeOffer(id).send();
-    await gotToInventory(); 
+    gotToInventory(); 
 }
 
 async function checkOffer(id) {

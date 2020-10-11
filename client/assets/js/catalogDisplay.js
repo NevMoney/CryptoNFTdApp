@@ -52,7 +52,7 @@ var string = "Hello " + name + "!";
 function catBox(id, dna, generation, isMarketPlace, price){
     
     var catDiv = `<div class="col-lg-3 catBox m-5 light-b-shadow" id="catalogDisplay${id}">
-            <div class="cat"  onclick="selectCat(${id})">
+            <div class="cat"  onclick="selectCat(${id})" style="transform: scale(1)">
               <div class="ears">
                 <div id="leftEar${id}" class="left-ear">
                   <div class="inner-ear-left"></div>

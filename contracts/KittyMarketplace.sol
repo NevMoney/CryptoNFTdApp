@@ -81,25 +81,30 @@ contract KittyMarketplace is Ownable, IKittyMarketPlace {
         Offer storage offer = tokenIdToOffer[_tokenId]; //first access the offer
         require(offer.seller == msg.sender, "ERR20"); //ensure owner only can do this
 
-        delete offer;
+        /* @DEV - challenge with above "memory" is that it's short lived and as such doesn't work.
+        putting "storage" does not compile it due to it connected with struct and "delete" operator
+        is not compatible with the struct. Idea: instead of delete "offer", go straight into the 
+        mapping with the ID and the array. */
+
+        delete tokenIdToOffer[_tokenId];
+        delete offers[offer.index];
         offers[offer.index].active = false; //access the offer inside the mapping and array and make inactive
+        offers.length--; //reduce the size of the offers array when offer is removed
 
         emit MarketTransaction("Offer removed", msg.sender, _tokenId);
     }
 
     function buyKitty(uint256 _tokenId) public payable{
-        Offer storage offer = tokenIdToOffer[_tokenId]; 
+        Offer storage offer = tokenIdToOffer[_tokenId]; //same problem encountered in removeOffer is found here
         require(msg.value == offer.price, "ERR10");
         require(offer.active == true, "ERR50");
 
         //MUST remove the kitty from mapping and array BEFORE transfer takes place to ensure there is no double sale
-        delete offer;
+        delete tokenIdToOffer[_tokenId]; //applying the same solution of removing from mapping as oppose to "offer"
         offers[offer.index].active = false;
 
-        //first transfer the funts to the seller
-        if(offer.price > 0){
-            offer.seller.transfer(offer.price);
-        }
+        //first transfer the funds to the seller
+        offer.seller.transfer(offer.price);
 
         //transfer the ownership
         _kittyContract.transferFrom(offer.seller, msg.sender, _tokenId);

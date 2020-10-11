@@ -106,7 +106,7 @@ function gotToInventory() {
   getInventory();
 }
 
-$("#marketplacePage").click(gotToInventory)
+$("#marketplacePage").click(gotToInventory);
 
 $("#catalogPage").click(function() {
   $(".factory").hide();
@@ -140,17 +140,6 @@ $("#makeAcatBtn").click(function() {
   $(".catalog").hide();
 })
 
-/*
-the idea below is to have a person click "breed" button and message to select mom pops up
-the cursor changes to pointer above divs and first selection (mom) adds red border
-upon selecting the first div messafe to select mom disapears and dad message comes up
-selecting a div makes that particular border blue
-when both red and blue cats are chosen "breed" button disapears and it's replaced by 
-Privacy Button, which is what generates new kitten
-
-BUT IT'S NOT WORKING!
-*/
-
 $("#breedBtn").click(function(){
   $("#selectMom").show();
   $("#selectDad").hide();
@@ -182,7 +171,6 @@ function selectCat(id) {
 
 $("#privacyBtn").click(function(){
   breed(dadId, momId);
-  console.log(momId, dadId);
 });
 
 var saleId; 
