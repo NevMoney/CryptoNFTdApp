@@ -47,7 +47,7 @@ contract KittyMarketplace is Ownable, IKittyMarketPlace {
                 if(offers[offerId].active == true){
                     result[offerId] = offers[offerId].tokenId;
                 }
-        return result;
+            return result;
 
         }
     }
@@ -78,30 +78,30 @@ contract KittyMarketplace is Ownable, IKittyMarketPlace {
     }
 
     function removeOffer(uint256 _tokenId) public{
-        Offer memory offer = tokenIdToOffer[_tokenId]; //first access the offer
+        Offer storage offer = tokenIdToOffer[_tokenId]; //first access the offer
         require(offer.seller == msg.sender, "ERR20"); //ensure owner only can do this
 
-        delete offer;
-        offers[offer.index].active == false; //access the offer inside the mapping and array and make inactive
+        delete offers[offer.index]; //first delete the index within the array
+        delete tokenIdToOffer[_tokenId]; //then remove the id from the mapping
 
         emit MarketTransaction("Offer removed", msg.sender, _tokenId);
     }
 
     function buyKitty(uint256 _tokenId) public payable{
-        Offer memory offer = tokenIdToOffer[_tokenId]; 
-        require(msg.value == offer.price, "ERR10");
-        require(offer.active == true, "ERR50");
+        Offer storage offer = tokenIdToOffer[_tokenId];
+        require(msg.value == offer.price, "ERR10"); //I have removed this and the error still popped up + the value passes to MetaMask
+        require(offer.active == true, "ERR50"); //I have removed this as well but error still appeared
 
-        //MUST remove the kitty from mapping and array BEFORE transfer takes place to ensure there is no double sale
-        delete offer;
+        // set the id to inactive in array then (following the same methodolory grom removeOffer - array first then mapping)
         offers[offer.index].active = false;
+        // remove the kitty from mapping BEFORE transfer takes place to ensure there is no double sale
+        delete tokenIdToOffer[_tokenId];
+        
 
-        //first transfer the funts to the seller
-        if(offer.price > 0){
-            offer.seller.transfer(offer.price);
-        }
+        //then transfer the funds to the seller
+        offer.seller.transfer(offer.price);
 
-        //transfer the ownership
+        //finalize by transfering the token/cat ownership
         _kittyContract.transferFrom(offer.seller, msg.sender, _tokenId);
 
         emit MarketTransaction("Kitty purchased", msg.sender, _tokenId);

@@ -93,16 +93,20 @@ $("#homePage").click(function() {
   $(".catalog").hide();
 })
 
-$("#marketplacePage").click(function() {
+function gotToInventory() {
   $(".factory").hide();
   $(".home").hide();
   $(".marketplace").show();
   $("#factoryPageBtn").show();
   $(".catalog").hide();
+  
   $("#catsDivSale").empty();
+  $("#catsDiv").empty();
 
   getInventory();
-})
+}
+
+$("#marketplacePage").click(gotToInventory);
 
 $("#catalogPage").click(function() {
   $(".factory").hide();
@@ -115,6 +119,7 @@ $("#catalogPage").click(function() {
   $("#privacyBtn").hide();
 
   $("#catsDiv").empty();
+  $("#catsDivSale").empty();
 
   getKitties();
 })
@@ -135,17 +140,6 @@ $("#makeAcatBtn").click(function() {
   $(".catalog").hide();
 })
 
-/*
-the idea below is to have a person click "breed" button and message to select mom pops up
-the cursor changes to pointer above divs and first selection (mom) adds red border
-upon selecting the first div messafe to select mom disapears and dad message comes up
-selecting a div makes that particular border blue
-when both red and blue cats are chosen "breed" button disapears and it's replaced by 
-Privacy Button, which is what generates new kitten
-
-BUT IT'S NOT WORKING!
-*/
-
 $("#breedBtn").click(function(){
   $("#selectMom").show();
   $("#selectDad").hide();
@@ -157,6 +151,8 @@ var dadId;
 
 function selectCat(id) {
   if(momId && dadId) return;
+  //ensuring that momdId != dadId, my idea (not working):
+  // if(momId == dadId) return;
 
   if (typeof(momId) != "number") {
     $(`#catalogDisplay${id}`).css("border", "5px solid red");
@@ -175,10 +171,10 @@ function selectCat(id) {
 
 $("#privacyBtn").click(function(){
   breed(dadId, momId);
-  console.log(momId, dadId);
 });
 
 var saleId; 
+var salePrice;
 
 function selectCatForSale(id){
   saleId = id;
@@ -187,16 +183,18 @@ function selectCatForSale(id){
 $("#sellBtn").click(function(){
   sellCat(saleId).then(() => {
     $(".bd-example-modal-lg").modal("hide");
-    getInventory().then(() => {
-      $(".marketplace").show();
-      $("#catsDivSale").empty();
-      $(".catalog").hide();
-    });
   });  
 });
 
-$("#buyBtn").click(function(){
-  checkOffer(id).then(() => {
-    buyKitten(id, price);
+function selectCatToBuy(id){
+  saleId = id;
+  checkOffer(saleId).then((offer) => {
+    salePrice = offer.price;
+    buyKitten(saleId, salePrice);
   });
-});
+}
+
+function cancelSale(id){
+  saleId = id;
+  removeOffer(id);
+}

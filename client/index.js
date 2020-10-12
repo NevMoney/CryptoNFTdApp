@@ -1,13 +1,14 @@
 //this is where web3.js code will be implemented here
 //first we connect to web3 and MetaMask
 var web3 = new Web3(Web3.givenProvider);
+ethereum.autoRefreshOnNetworkChange = false;
 
 //need to identify a few variables + use contract address from Ganache every time deployed
 var instance;
 var marketplaceInstance;
 var user;
-var contractAddress = "0xeb7DEc206B359160B1bb3F03e4dF6056a679c58d";
-var marketplaceAddress = "0x08fE938dD9D30c4ad648F8cB1330A4eF9192abc8";
+var contractAddress = "0x73A49BdA631C8E9A3e9dbF98a2a16b644Fc280FD";
+var marketplaceAddress = "0xD21e5B96edB0a1BF1291333D44a4b0c20e0B672F";
 
 
 
@@ -22,7 +23,7 @@ $(document).ready(function(){
         user = accounts[0];
 
         instance.events.Birth().on("data", function(event){
-            console.log(event);
+            
             let owner = event.returnValues.owner;
             let kittenId = event.returnValues.kittenId;
             let momId = event.returnValues.momId;
@@ -38,19 +39,17 @@ $(document).ready(function(){
         .on("error", console.error);
 
         marketplaceInstance.events.MarketTransaction().on("data", (event) => {
-            console.log(event);
+            
             var eventType = event.returnValues["TxType"].toString();
             var tokenId = event.returnValues["tokenId"];
             if (eventType == "Kitty purchased"){
-                alert_msg("Successful Kitty purchase! You are the new owner of this Kitty with Token ID: " + tokenId);
+                alert("Success! You own Kitty ID: " + tokenId);
             }
             if(eventType == "Offer created"){
-                alert_msg("Success! Offer set for Kitty ID: " + tokenId)
-            //see week 9 day 5 video 3 for additional stuff you can add   
+                alert("Offer set Kitty ID: " + tokenId);
             }
             if(eventType == "Offer removed"){
-                alert_msg("Successfully removed offer to sell Kitty ID: " + tokenId)
-                //again see W9 D5 Vid3 for add stuff
+                alert("Offer removed, Kitty ID: " + tokenId);
             }
         })
         .on("error", console.error);
@@ -89,12 +88,17 @@ async function getKitties(){
 
 //get the inventory of cats available for sale to list on marketplace
 async function getInventory() {
+    
     try {
         var arrayId = await marketplaceInstance.methods.getAllTokenOnSale().call();
         console.log("getInventory array: ", arrayId);
         for(i = 0; i < arrayId.length; i++){
             if(arrayId[i] != 0){
-                appendKitty(arrayId[i]);
+                const offer = await checkOffer(arrayId[i]);
+
+                console.log(offer, arrayId[i]);
+
+                if(offer.onSale) appendKitty(arrayId[i], offer.price);
             }
         }
     }
@@ -110,28 +114,30 @@ async function breed(dadId, momId) {
         //WARNING: code stops working here for unknown reason
         console.log("newKitty: ", newKitty);
         setTimeout(() => {      
-            go_to(".catalog")
-        }, 2000);
+            location.reload(".catalog")}, 5000);
     } catch (err) {
         console.log(err);
     } 
 }
 
 //appending cats for marketplace (added "isMarketPlace = true")
-async function appendKitty(id) {
+async function appendKitty(id, price) {
     var kitty = await instance.methods.getKitty(id).call();
-    appendCat(kitty[0], id, kitty["generation"], true);
+    appendCat(kitty[0], id, kitty["generation"], true, price);
 }
 
-async function catOwnership(id) {
-    var address = await instance.methods.ownerOf(id).call();
-    if (address.toLowerCase() == user.toLowerCase()) {
-        return true;
-    }
-    return false;
-}
+// async function catOwnership(id) {
+//     var address = await instance.methods.ownerOf(id).call();
+//     if (address.toLowerCase() == user.toLowerCase()) {
+//         return true;
+//     }
+//     return false;
+// }
 
 async function sellCat(id) {
+    const offer = await checkOffer(id);
+    if(offer.onSale) return alert("Kitty already listed for sale.");
+
     var price = $("#catPrice").val();
     var amount = web3.utils.toWei(price, "ether");
     const isApproved = await instance.methods.isApprovedForAll(user, marketplaceAddress).call();
@@ -143,7 +149,7 @@ async function sellCat(id) {
         }
 
         await marketplaceInstance.methods.setOffer(amount, id).send();
-        getInventory();   
+        gotToInventory();   
     }
     catch (err) {
         console.log(err);
@@ -151,13 +157,24 @@ async function sellCat(id) {
 }
 
 async function buyKitten(id, price) {
+    console.log(id); //checked id and it matches & getInventory also confirms what's available
+    await checkOffer(id); 
+    console.log(checkOffer()); //function throws an error (pulls line 193)
+    // the error is coming from MetaMask throwing the error
     var amount = web3.utils.toWei(price, "ether");
     try {
         await marketplaceInstance.methods.buyKitty(id).send({value: amount});
+        console.log("buy cat ", id, offer); //never get this far in the function
     }
     catch (err) {
         console.log(err);
     }
+}
+
+//To cancel the sale:
+async function removeOffer(id) {
+    await marketplaceInstance.methods.removeOffer(id).send();
+    gotToInventory(); 
 }
 
 async function checkOffer(id) {
@@ -165,15 +182,12 @@ async function checkOffer(id) {
 
     try {
         res = await marketplaceInstance.methods.getOffer(id).call();
-        var price = res["price"];
-        var seller = res["seller"];
-        var onsale = false;
-
-        if (price > 0) {
-            onsale = true;
-        }
+        var price = res.price;
+        var seller = res.seller;
+        var onSale = res.active;
+        
         price = web3.utils.fromWei(price, "ether");
-        var offer = {seller: seller, price: price, onsale: onsale}
+        var offer = {seller: seller, price: price, onSale: onSale};
         return offer;
     }
     catch (err) {

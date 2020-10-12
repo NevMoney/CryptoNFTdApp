@@ -32,6 +32,11 @@ h3 {
   margin-bottom: 20%;
 }
 
+/* 
+a great tool to use to make kitties smaller and fit on page
+is with THIS: transform: scale(.75);
+*/
+
 .head {
   background-color: #a565f7;
   width: 200px;
