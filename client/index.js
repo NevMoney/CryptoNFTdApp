@@ -7,8 +7,8 @@ ethereum.autoRefreshOnNetworkChange = false;
 var instance;
 var marketplaceInstance;
 var user;
-var contractAddress = "0xE246F5921d7383Ae8587135F92298DFee7CD07dF";
-var marketplaceAddress = "0xa5b9dC8ccE51C40F95418e7c3D4e505a0613bA72";
+var contractAddress = "0x73A49BdA631C8E9A3e9dbF98a2a16b644Fc280FD";
+var marketplaceAddress = "0xD21e5B96edB0a1BF1291333D44a4b0c20e0B672F";
 
 
 
@@ -23,7 +23,7 @@ $(document).ready(function(){
         user = accounts[0];
 
         instance.events.Birth().on("data", function(event){
-            console.log(event);
+            
             let owner = event.returnValues.owner;
             let kittenId = event.returnValues.kittenId;
             let momId = event.returnValues.momId;
@@ -39,7 +39,7 @@ $(document).ready(function(){
         .on("error", console.error);
 
         marketplaceInstance.events.MarketTransaction().on("data", (event) => {
-            console.log(event);
+            
             var eventType = event.returnValues["TxType"].toString();
             var tokenId = event.returnValues["tokenId"];
             if (eventType == "Kitty purchased"){
@@ -96,7 +96,7 @@ async function getInventory() {
             if(arrayId[i] != 0){
                 const offer = await checkOffer(arrayId[i]);
 
-                console.log(offer);
+                console.log(offer, arrayId[i]);
 
                 if(offer.onSale) appendKitty(arrayId[i], offer.price);
             }
@@ -126,13 +126,13 @@ async function appendKitty(id, price) {
     appendCat(kitty[0], id, kitty["generation"], true, price);
 }
 
-async function catOwnership(id) {
-    var address = await instance.methods.ownerOf(id).call();
-    if (address.toLowerCase() == user.toLowerCase()) {
-        return true;
-    }
-    return false;
-}
+// async function catOwnership(id) {
+//     var address = await instance.methods.ownerOf(id).call();
+//     if (address.toLowerCase() == user.toLowerCase()) {
+//         return true;
+//     }
+//     return false;
+// }
 
 async function sellCat(id) {
     const offer = await checkOffer(id);
@@ -157,9 +157,14 @@ async function sellCat(id) {
 }
 
 async function buyKitten(id, price) {
+    console.log(id); //checked id and it matches & getInventory also confirms what's available
+    await checkOffer(id); 
+    console.log(checkOffer()); //function throws an error (pulls line 193)
+    // the error is coming from MetaMask throwing the error
     var amount = web3.utils.toWei(price, "ether");
     try {
         await marketplaceInstance.methods.buyKitty(id).send({value: amount});
+        console.log("buy cat ", id, offer); //never get this far in the function
     }
     catch (err) {
         console.log(err);
@@ -182,7 +187,7 @@ async function checkOffer(id) {
         var onSale = res.active;
         
         price = web3.utils.fromWei(price, "ether");
-        var offer = {seller: seller, price: price, onSale: onSale}
+        var offer = {seller: seller, price: price, onSale: onSale};
         return offer;
     }
     catch (err) {

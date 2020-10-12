@@ -47,7 +47,7 @@ contract KittyMarketplace is Ownable, IKittyMarketPlace {
                 if(offers[offerId].active == true){
                     result[offerId] = offers[offerId].tokenId;
                 }
-        return result;
+            return result;
 
         }
     }
@@ -81,32 +81,27 @@ contract KittyMarketplace is Ownable, IKittyMarketPlace {
         Offer storage offer = tokenIdToOffer[_tokenId]; //first access the offer
         require(offer.seller == msg.sender, "ERR20"); //ensure owner only can do this
 
-        /* @DEV - challenge with above "memory" is that it's short lived and as such doesn't work.
-        putting "storage" does not compile it due to it connected with struct and "delete" operator
-        is not compatible with the struct. Idea: instead of delete "offer", go straight into the 
-        mapping with the ID and the array. */
-
-        delete tokenIdToOffer[_tokenId];
-        delete offers[offer.index];
-        offers[offer.index].active = false; //access the offer inside the mapping and array and make inactive
-        offers.length--; //reduce the size of the offers array when offer is removed
+        delete offers[offer.index]; //first delete the index within the array
+        delete tokenIdToOffer[_tokenId]; //then remove the id from the mapping
 
         emit MarketTransaction("Offer removed", msg.sender, _tokenId);
     }
 
     function buyKitty(uint256 _tokenId) public payable{
-        Offer storage offer = tokenIdToOffer[_tokenId]; //same problem encountered in removeOffer is found here
-        require(msg.value == offer.price, "ERR10");
-        require(offer.active == true, "ERR50");
+        Offer storage offer = tokenIdToOffer[_tokenId];
+        require(msg.value == offer.price, "ERR10"); //I have removed this and the error still popped up + the value passes to MetaMask
+        require(offer.active == true, "ERR50"); //I have removed this as well but error still appeared
 
-        //MUST remove the kitty from mapping and array BEFORE transfer takes place to ensure there is no double sale
-        delete tokenIdToOffer[_tokenId]; //applying the same solution of removing from mapping as oppose to "offer"
+        // set the id to inactive in array then (following the same methodolory grom removeOffer - array first then mapping)
         offers[offer.index].active = false;
+        // remove the kitty from mapping BEFORE transfer takes place to ensure there is no double sale
+        delete tokenIdToOffer[_tokenId];
+        
 
-        //first transfer the funds to the seller
+        //then transfer the funds to the seller
         offer.seller.transfer(offer.price);
 
-        //transfer the ownership
+        //finalize by transfering the token/cat ownership
         _kittyContract.transferFrom(offer.seller, msg.sender, _tokenId);
 
         emit MarketTransaction("Kitty purchased", msg.sender, _tokenId);
