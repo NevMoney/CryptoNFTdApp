@@ -7,8 +7,8 @@ ethereum.autoRefreshOnNetworkChange = false;
 var instance;
 var marketplaceInstance;
 var user;
-var contractAddress = "0x73A49BdA631C8E9A3e9dbF98a2a16b644Fc280FD";
-var marketplaceAddress = "0xD21e5B96edB0a1BF1291333D44a4b0c20e0B672F";
+var contractAddress = "0x1D1179A7914AF5039fE7438882585708A571BacA";
+var marketplaceAddress = "0xDE7050C4715bB3860689f3D1854aeF96D982f171";
 
 
 
