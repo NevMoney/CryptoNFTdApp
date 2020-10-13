@@ -7,8 +7,8 @@ ethereum.autoRefreshOnNetworkChange = false;
 var instance;
 var marketplaceInstance;
 var user;
-var contractAddress = "0x1D1179A7914AF5039fE7438882585708A571BacA";
-var marketplaceAddress = "0xDE7050C4715bB3860689f3D1854aeF96D982f171";
+var contractAddress = "0xEABF90e60FC63512868089145AD1DdDFE776f0E1";
+var marketplaceAddress = "0xec1f4Cc207aB7a38239F9b25B3910b40bBe9a139";
 
 
 
@@ -20,7 +20,11 @@ $(document).ready(function(){
     window.ethereum.enable().then(function(accounts){
         instance = new web3.eth.Contract(abi.Kittycontract, contractAddress, {from: accounts[0]});
         marketplaceInstance = new web3.eth.Contract(abi.KittyMarketplace, marketplaceAddress, {from: accounts[0]});
-        user = accounts[0];
+        user = web3.utils.toChecksumAddress(accounts[0]);
+
+        window.ethereum.on('accountsChanged', function () {
+            location.reload();
+          });
 
         instance.events.Birth().on("data", function(event){
             
@@ -44,12 +48,15 @@ $(document).ready(function(){
             var tokenId = event.returnValues["tokenId"];
             if (eventType == "Kitty purchased"){
                 alert("Success! You own Kitty ID: " + tokenId);
+                alert("Thank you for your patience as the transaction is appended onto the blockchain. Please note, wait time could vary from a few seconds to approximately 30 minutes.")
             }
             if(eventType == "Offer created"){
                 alert("Offer set Kitty ID: " + tokenId);
+                alert("Thank you for your patience as the transaction is appended onto the blockchain. Please note, wait time could vary from a few seconds to approximately 30 minutes.")
             }
             if(eventType == "Offer removed"){
                 alert("Offer removed, Kitty ID: " + tokenId);
+                alert("Thank you for your patience as the transaction is appended onto the blockchain. Please note, wait time could vary from a few seconds to approximately 30 minutes.")
             }
         })
         .on("error", console.error);
@@ -98,7 +105,7 @@ async function getInventory() {
 
                 console.log(offer, arrayId[i]);
 
-                if(offer.onSale) appendKitty(arrayId[i], offer.price);
+                if(offer.onSale) appendKitty(arrayId[i], offer.price, offer.seller);
             }
         }
     }
@@ -121,18 +128,10 @@ async function breed(dadId, momId) {
 }
 
 //appending cats for marketplace (added "isMarketPlace = true")
-async function appendKitty(id, price) {
+async function appendKitty(id, price, seller) {
     var kitty = await instance.methods.getKitty(id).call();
-    appendCat(kitty[0], id, kitty["generation"], true, price);
+    appendCat(kitty[0], id, kitty["generation"], true, price, seller);
 }
-
-// async function catOwnership(id) {
-//     var address = await instance.methods.ownerOf(id).call();
-//     if (address.toLowerCase() == user.toLowerCase()) {
-//         return true;
-//     }
-//     return false;
-// }
 
 async function sellCat(id) {
     const offer = await checkOffer(id);
@@ -157,14 +156,12 @@ async function sellCat(id) {
 }
 
 async function buyKitten(id, price) {
-    console.log(id); //checked id and it matches & getInventory also confirms what's available
     await checkOffer(id); 
-    console.log(checkOffer()); //function throws an error (pulls line 193)
-    // the error is coming from MetaMask throwing the error
     var amount = web3.utils.toWei(price, "ether");
+
     try {
         await marketplaceInstance.methods.buyKitty(id).send({value: amount});
-        console.log("buy cat ", id, offer); //never get this far in the function
+        
     }
     catch (err) {
         console.log(err);
