@@ -89,20 +89,19 @@ contract KittyMarketplace is Ownable, IKittyMarketPlace {
 
     function buyKitty(uint256 _tokenId) public payable{
         Offer storage offer = tokenIdToOffer[_tokenId];
-        require(msg.value == offer.price, "ERR10"); //I have removed this and the error still popped up + the value passes to MetaMask
-        require(offer.active == true, "ERR50"); //I have removed this as well but error still appeared
+        require(msg.value == offer.price, "ERR10"); 
+        require(offer.active == true, "ERR50"); 
 
-        // set the id to inactive in array then (following the same methodolory grom removeOffer - array first then mapping)
+        // transfer the funds to the seller
+        offer.seller.transfer(offer.price);
+        //finalize by transfering the token/cat ownership
+        _kittyContract.transferFrom(offer.seller, msg.sender, _tokenId);
+
+        // set the id to inactive
         offers[offer.index].active = false;
         // remove the kitty from mapping BEFORE transfer takes place to ensure there is no double sale
         delete tokenIdToOffer[_tokenId];
         
-
-        //then transfer the funds to the seller
-        offer.seller.transfer(offer.price);
-
-        //finalize by transfering the token/cat ownership
-        _kittyContract.transferFrom(offer.seller, msg.sender, _tokenId);
 
         emit MarketTransaction("Kitty purchased", msg.sender, _tokenId);
     }
