@@ -265,39 +265,13 @@ contract Kittycontract is IERC721, Ownable {
     }
 
     function _mixDna(uint256 _dadDna, uint256 _momDna) internal view returns (uint256){
-        /*
-        this was an old and very simplistic way to get randomness, but it's not random enough
-        //take two DNA strings and take first half of 16 digits from dad and second from mom
-        uint256 dadsHalf = _dadDna / 100000000;
-        uint256 momsHalf = _momDna % 100000000;
-        //then add dad dna to mom dna to create kid dna
-        uint256 kidDna = (dadsHalf * 100000000) + momsHalf;
-        return kidDna;
-        */
-
-        //new way to add more randomness to the new gen of kitties
+        
         uint256[8] memory geneArray;
-        //create pseudo random number - can't be used for betting, etc but works here
-        //for real random numbers in solidity we would use oracles
-        uint8 random = uint8(now % 255); 
-        /*
-        this would give us number from 0-255 or in binary: 00000000-11111111
-        now we need a loop to check the numbers 8 times and need a bitwise operator
-        bitwise operator & will give us a new binary as it compares two numbers while going through the loop
-        binary representation of 1 is 00000001. When multiplied by 2 it becomes 00000010, 4 becomes 00000100, etc.
-        00000001
-        00000010
-        00000100
-        00001000
-        00010000...
-        bitwise take random 11001011 & 00000001 -> 1 (true bc both last digits are 1 - the same)
-        then 11001011 & 00000010 -> 1 (for the same reason above)
-        then 11001011 & 00000100 -> 0 (false because first has 0 and second has 1) and so on
-        this gives us a bran new 8-bit binary number
-        */
+        
         uint256 i = 1;
         uint256 index = 7;
         for(i = 1; i <= 128; i = i * 2){
+            uint8 random =  uint8(uint(keccak256(abi.encodePacked(block.difficulty, now))) % 255);
             if(random & i != 0){
                 geneArray[index] = uint8(_momDna % 100);
             }
