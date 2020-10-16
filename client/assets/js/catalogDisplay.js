@@ -129,8 +129,6 @@ function catBox(id, dna, generation, isMarketPlace, price, owner){
     }
     else {
       $("#catsDivSale").append(catDiv);
-      // $(`#buyBtn${id}`).show();
-      // $(`#cancelBtn${id}`).show();
       $(`#selectSaleBtn${id}`).hide();
 
       if(owner === user){
