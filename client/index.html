@@ -40,6 +40,9 @@
           <li class="nav-item">
             <a class="nav-link" id="factoryPage">Factory</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" id="modalBtn" data-toggle="modal" data-target="#eduModal">How to use this site?</a>
+          </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
           <a type="button" id="factoryPageBtn" style="color: white;" class="btn btn-danger my-2 my-sm-3 light-b-shadow">Kitty Factory</a>
@@ -90,6 +93,35 @@
         </div>
       </div>
     </div>
+
+    <!--education modal: how to use the app-->
+    <div class="modal fade" id="eduModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Are you a crypto newbie?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>This site much more fun if you have a crypto wallet as it unlocks the kitties. 
+              If you are brand new to the whole crypto thing, watch the quick tutorial videos below.
+            </p>
+            <hr>
+            <h5>How To Video Tutorials:</h5>
+            <p><a href="https://youtu.be/AaCTh1lH5M0" class="tooltip-test" title="Tooltip" target="_blank" rel="noopener noreferrer">How To Download Crypto Wallet</a></p>
+            <p><a href="https://youtu.be/z9uXGHU84Mk" class="tooltip-test" title="Tooltip" target="_blank" rel="noopener noreferrer">How TO Get Test Ether</a> (or your play money)</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      
+
 
     <!--market page display-->
     <div class="marketplace" align="center">
@@ -420,6 +452,11 @@
       <p>
         &copy; Copyright 2020 DigiCat Crypto. Nev K. in colaboration with Ivan
         on Tech Academy.
+      </p>
+      <p>
+        <a href="https://github.com/NevMoney/CryptoNFTdApp" target="_blank" rel="noopener noreferrer">Inspect the code</a>
+        &#9679;
+        <a href="https://rinkeby.etherscan.io/token/0x0dc232030a36c276f411bd4d9c02a770f5237c07" target="_blank" rel="noopener noreferrer">Review the blockchain</a>
       </p>
     </footer>
   </body>

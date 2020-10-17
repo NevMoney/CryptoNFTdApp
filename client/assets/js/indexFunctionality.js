@@ -199,4 +199,5 @@ function cancelSale(id){
   removeOffer(id);
 }
 
+
 // connect the cat to this URL: https://rinkeby.etherscan.io/token/0x0dc232030a36c276f411bd4d9c02a770f5237c07?a=1
