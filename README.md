@@ -36,9 +36,7 @@ possible.
 Of course, if you have been in the space for a while, you likely know and understand the whole thing. But if
 you are brand new, the concept might be completely foreign to you and you may have many questions about it. 
 If so, I invite you to learn. There are many blogs, books, and videos out there available for free or low cost.
-All of those are great ways to learn. Additionally, if you'd like to have a deep understanding into the space
-and instead of bouncing around from blog to blog or short video to short video trying to peace it all together
-on your own, I have created a FREE course called Crypto 101 which is available on my website: 1DealAway.com
+All of those are great ways to learn.
 
 What makes DigiCats interesting and unique?
 Because it's deployed on the test net it means you get to interact with it for free. I believe this is a great
